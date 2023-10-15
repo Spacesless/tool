@@ -1,0 +1,35 @@
+{
+  "name": "tiny-tool",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@element-plus/nuxt": "^1.0.6",
+    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/google-adsense": "^3.0.0",
+    "element-plus": "^2.3.14",
+    "nuxt": "^3.7.4",
+    "nuxt-icon": "^0.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/i18n": "^8.0.0-rc.5",
+    "@nuxtjs/stylelint-module": "^5.1.0",
+    "eslint": "^8.51.0",
+    "postcss-html": "^1.5.0",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.69.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3"
+  }
+}

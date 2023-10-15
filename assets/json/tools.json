@@ -1,0 +1,50 @@
+[
+  {
+    "name": "文本工具",
+    "path": "/text",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "数字工具",
+    "path": "/number",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "图片工具",
+    "path": "/image",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "办公辅助",
+    "path": "/office",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "数据换算",
+    "path": "/conversion",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "生活工具",
+    "path": "/life",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "编码工具",
+    "path": "/code",
+    "description": "",
+    "children": []
+  },
+  {
+    "name": "编程开发",
+    "path": "/program",
+    "description": "",
+    "children": []
+  }
+]
