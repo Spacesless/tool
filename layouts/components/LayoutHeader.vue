@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header-left">
-      <el-input v-model="keyword" class="header-left-search" :suffix-icon="Search" />
+      <GlobalSearch />
     </div>
 
     <div class="header-right">
@@ -15,11 +15,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Search } from '@element-plus/icons-vue'
+import GlobalSearch from './GlobalSearch.vue'
 
 const colorMode = useColorMode()
-
-const keyword = ref<string>('')
 
 const isDark = computed(() => colorMode.value === 'dark')
 
@@ -35,12 +33,6 @@ const toggleColorMode = () => {
   justify-content: space-between;
   height: 60px;
   line-height: 60px;
-
-  &-left {
-    &-search {
-      width: 300px;
-    }
-  }
 
   &-right {
     &__icon {
