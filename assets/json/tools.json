@@ -27,7 +27,13 @@
     "name": "数据换算",
     "path": "/conversion",
     "description": "",
-    "children": []
+    "children": [
+      {
+        "name": "进制转换",
+        "description": "",
+        "path": ""
+      }
+    ]
   },
   {
     "name": "生活工具",

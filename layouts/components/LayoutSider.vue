@@ -50,11 +50,11 @@
 </template>
 
 <script lang="ts" setup>
-import tools from '@/assets/json/tools.json'
+import { ToolCategory } from '@/interfaces/tool'
+
+const toolList = useState('tools', (): ToolCategory => [])
 
 const isCollapse = useState('collapse', () => false)
-
-const toolList = ref(tools)
 
 const toggleCollapse = () => {
   isCollapse.value = !isCollapse.value
