@@ -1,12 +1,14 @@
 export interface ToolItem {
   'name': string,
   'path': string
-  'description': string
+  'description'?: string
 }
 
-export type ToolCategory = Array<{
+export interface CategoryItem {
   'name': string,
   'path': string
-  'description': string
+  'description'?: string
   'children': Array<ToolItem>
-}>
+}
+
+export type ToolCategory = Array<CategoryItem>

@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <ToolList v-for="item in toolRef" :key="item.path" :category-name="item.name" />
+  <div class="home">
+    <ToolList v-for="item in toolRef" :key="item.path" :tool="item" />
   </div>
 </template>
 

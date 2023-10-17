@@ -24,7 +24,7 @@
 .footer {
   height: 45px;
   padding: 0 16px;
-  color: #1f1f1f;
+  color: var(--el-text-color-secondary);
   font-size: 14px;
   line-height: 45px;
   text-align: center;
@@ -36,7 +36,7 @@
 
   &__link {
     margin-left: 10px;
-    color: #1890ff;
+    color: var(--el-color-primary);
   }
 }
 </style>

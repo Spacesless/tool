@@ -11,7 +11,7 @@
     </div>
   </header>
 
-  <el-alert title="本站所有工具免费使用无需登录，且数据处理都在客户端完成，不上传服务端。" type="success" show-icon />
+  <el-alert class="header-alart" title="本站所有工具免费使用无需登录，且数据处理都在客户端完成，不上传服务端。" type="success" show-icon />
 </template>
 
 <script lang="ts" setup>
@@ -38,6 +38,10 @@ const toggleColorMode = () => {
     &__icon {
       font-size: 20px;
     }
+  }
+
+  &-alart {
+    margin-bottom: 24px;
   }
 }
 </style>

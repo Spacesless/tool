@@ -16,7 +16,6 @@
   >
     <div class="search-dialog-wrapper">
       <el-select-v2
-        :ref="selectRef"
         v-model="keyword"
         class="search-dialog-select"
         clearable
@@ -52,13 +51,11 @@
 
 <script lang="ts" setup>
 import { Search } from '@element-plus/icons-vue'
-import { VNodeRef } from 'vue'
 import { ToolItem } from '@/interfaces/tool'
 
 const allTools = useState('allTools', (): Array<ToolItem> => [])
 
 const keyword = ref<string>()
-const selectRef = ref<VNodeRef>()
 
 const options = computed(() => allTools.value.map(item => ({
   value: item.path,
@@ -76,8 +73,8 @@ const handleSearch = () => {
   dialogVisible.value = true
 }
 const keyDownHandler = (e: KeyboardEvent) => {
-  e.preventDefault()
   if (e.ctrlKey && e.key.toLowerCase() === 'k') {
+    e.preventDefault()
     handleSearch()
   }
 }

@@ -13,6 +13,7 @@ dist-ssr
 *.local
 coverage
 .nuxt
+package-lock.json
 
 # Editor directories and files
 .vscode/*

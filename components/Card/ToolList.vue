@@ -1,15 +1,23 @@
 <template>
   <h2 class="card__title">
-    {{ categoryName }}
+    {{ tool.name }}
   </h2>
   <el-row :gutter="24">
-    <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-      <NuxtLink class="card">
+    <el-col
+      v-for="item in tool.children"
+      :key="item.path"
+      :xs="24"
+      :sm="12"
+      :md="8"
+      :lg="6"
+      :xl="4"
+    >
+      <NuxtLink class="card" :to="getAbsolutePath(tool.path, item.path)">
         <img class="card__icon" src="/image/cbbcd90fe4086a24.png" alt="文本工具">
         <div class="card-info">
-          <strong class="card-info__title">文本工具</strong>
+          <strong class="card-info__title">{{ item.name }}</strong>
           <p class="card-info__description">
-            在线中文简体一键转繁体工具。纯浏览器实现不上传服务器
+            {{ item.description }}
           </p>
         </div>
       </NuxtLink>
@@ -18,17 +26,24 @@
 </template>
 
 <script lang="ts" setup>
+import { CategoryItem } from '@/interfaces/tool'
+
 interface Props {
-  categoryName: string
-  toolList: []
+  tool: CategoryItem
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  categoryName: '',
-  toolList: () => []
+const { tool } = withDefaults(defineProps<Props>(), {
+  tool: () => ({
+    name: '',
+    path: '',
+    description: '',
+    children: []
+  })
 })
 
-console.log(props)
+const getAbsolutePath = (parentPath: string, path: string) : string => {
+  return `/${parentPath}/${path}`
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +53,8 @@ console.log(props)
   height: 75px;
   margin-bottom: 24px;
   padding: 16px;
-  background-color: var(--el-color-white);
+  text-decoration: none;
+  background-color: var(--el-bg-color);
   border-radius: 10px;
 
   &__title {
@@ -74,8 +90,15 @@ console.log(props)
     }
 
     &__description {
+      display: -webkit-box;
+      height: 40px;
+      overflow: hidden;
       color: var(--el-text-color-regular);
       font-size: 14px;
+      line-height: 20px;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
 }

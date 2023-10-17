@@ -1,26 +1,13 @@
-body,
-h1,
-h2,
-p,
-strong,
-ul,
-li {
-  margin: 0;
+// normalize
+@import url('./generic/normalize.scss');
+
+html {
+  background: var(--el-bg-color-page);
 }
 
-ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-.main {
-  min-height: calc(100vh - 105px);
-}
-
-.light-mode {
-  background-color: #f5f5fb;
-}
-
-.dark-mode {
-  background-color: #1f1f1f;
+.section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: var(--el-bg-color);
+  border-radius: 10px;
 }

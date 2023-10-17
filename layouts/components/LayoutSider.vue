@@ -23,7 +23,7 @@
             <span class="sider-menu__name">类别</span>
           </template>
           <el-menu-item v-for="item in toolList" :key="item.path">
-            <NuxtLink class="sider-menu-link" :to="item.path">
+            <NuxtLink class="sider-menu-link" :to="'/' + item.path">
               {{ item.name }}
             </NuxtLink>
           </el-menu-item>
@@ -69,11 +69,12 @@ const toggleCollapse = () => {
   z-index: 1;
   width: 208px;
   height: 100%;
-  background-color: #ffffff;
+  background-color: var(--el-bg-color);
   transition: width .3s;
 
   &-logo {
     height: 60px;
+    overflow: hidden;
     line-height: 60px;
     text-align: center;
 
