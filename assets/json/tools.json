@@ -41,9 +41,24 @@
     "description": "",
     "children": [
       {
-        "name": "MD5哈希",
+        "name": "MD5编码",
         "path": "hash-hex",
-        "description": "MD5在线加密"
+        "description": "MD5在线编码，16位、32位大小写"
+      },
+      {
+        "name": "SHA编码",
+        "path": "hash-sha",
+        "description": "SHA-1、SHA-256、SHA-512编码"
+      },
+      {
+        "name": "加密解密",
+        "path": "encrypt-decrypt",
+        "description": "AES、DES、TripleDES、Rabbit、RC4、RC4Drop加密解密"
+      },
+      {
+        "name": "编码解码",
+        "path": "encoders",
+        "description": "Base64、Utf8、Utf16、Utf16LE、URL编码解码"
       }
     ]
   },

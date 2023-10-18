@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import ToolList from '@/components/Card/ToolList.vue'
+import ToolList from '@/components/common/ToolList.vue'
 
 import tools from '@/assets/json/tools.json'
 

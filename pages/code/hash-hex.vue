@@ -40,11 +40,13 @@
       </el-descriptions-item>
     </el-descriptions>
   </section>
+  <WalineComment />
 </template>
 
 <script lang="ts" setup>
 import MD5 from 'crypto-js/md5'
-import enc from 'crypto-js/enc-hex'
+
+import WalineComment from '@/components/comment/WalineComment.vue'
 
 import { useToolData } from '@/hooks/tool'
 
@@ -69,6 +71,6 @@ const result = computed(() => {
 const handleHash = () => {
   const { content } = form
 
-  hash.value = MD5(content).toString(enc.Hex)
+  hash.value = MD5(content).toString()
 }
 </script>
