@@ -32,5 +32,7 @@ export default defineNuxtConfig({
   elementPlus: {
     themes: ['dark']
   },
-  googleAdsense: {}
+  googleAdsense: {
+    id: 'ca-pub-1379822583295856'
+  }
 })
