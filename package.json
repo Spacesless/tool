@@ -13,7 +13,7 @@
     "@element-plus/nuxt": "^1.0.6",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/google-adsense": "^3.0.0",
-    "@waline/client": "^2.15.8",
+    "dayjs": "^1.11.10",
     "element-plus": "^2.3.14",
     "nuxt": "^3.7.4",
     "nuxt-icon": "^0.5.0"
@@ -25,9 +25,13 @@
     "@nuxtjs/i18n": "^8.0.0-rc.5",
     "@nuxtjs/stylelint-module": "^5.1.0",
     "@types/crypto-js": "^4.1.2",
+    "@types/opencc-js": "^1.0.2",
     "@types/qrcode": "^1.5.0",
     "crypto-js": "^4.1.1",
     "eslint": "^8.51.0",
+    "lunar-typescript": "^1.6.10",
+    "opencc-js": "^1.0.5",
+    "pinyin": "^3.0.0-alpha.4",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.9",
     "qrcode": "^1.5.0",
@@ -35,6 +39,8 @@
     "stylelint": "^15.10.3",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^34.0.0",
-    "stylelint-order": "^6.0.3"
+    "stylelint-order": "^6.0.3",
+    "tesseract.js": "^5.0.2",
+    "tui-image-editor": "^3.15.3"
   }
 }

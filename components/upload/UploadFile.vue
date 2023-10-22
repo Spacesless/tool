@@ -35,17 +35,21 @@ withDefaults(defineProps<Props>(), {
 })
 
 onMounted(() => {
-  document.addEventListener('paste', function (event: ClipboardEvent) {
-    const items = event.clipboardData?.items || []
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i]
-      if (item.kind === 'file') {
-        const file = item.getAsFile()
-        console.log('粘贴的文件:', file)
-      }
-    }
-  })
+  document.addEventListener('paste', pasteHandler)
 })
+onUnmounted(() => {
+  document.removeEventListener('paste', pasteHandler)
+})
+const pasteHandler = (event: ClipboardEvent) => {
+  const items = event.clipboardData?.items || []
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+    if (item.kind === 'file') {
+      const file = item.getAsFile()
+      console.log('粘贴的文件:', file)
+    }
+  }
+}
 
 const onFileChange = () => {}
 </script>

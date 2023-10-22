@@ -40,13 +40,10 @@
       </el-descriptions-item>
     </el-descriptions>
   </section>
-  <WalineComment />
 </template>
 
 <script lang="ts" setup>
 import MD5 from 'crypto-js/md5'
-
-import WalineComment from '@/components/comment/WalineComment.vue'
 
 import { useToolData } from '@/hooks/tool'
 
