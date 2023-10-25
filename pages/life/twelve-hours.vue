@@ -1,52 +1,40 @@
 <template>
-  <el-row class="section">
-    <el-form :model="form" label-width="80px">
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.content"
-            :rows="3"
-            type="textarea"
-            @change="handleConvert"
-          />
-        </el-form-item>
-        <el-form-item label="">
-          <el-radio-group v-model="form.type">
-            <el-radio label="cn">
-              简体
-            </el-radio>
-            <el-radio label="hk">
-              繁体
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-col>
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.result"
-            :rows="5"
-            type="textarea"
-            :readonly="true"
-          />
-        </el-form-item>
-      </el-col>
-    </el-form>
-  </el-row>
+  <section class="section">
+    <el-data-picker v-model="dateTime" @change="handleSearch" />
+
+    <el-table :data="tableData">
+      <el-table-column prop="hours" label="时段" />
+      <el-table-column prop="hour" label="时辰" />
+      <el-table-column prop="yi" label="宜" />
+      <el-table-column prop="ji" label="忌" />
+      <el-table-column prop="chong" label="冲" />
+      <el-table-column prop="sha" label="煞" />
+      <el-table-column prop="nayin" label="纳音" />
+      <el-table-column prop="jiuxing" label="九星" />
+    </el-table>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { Solar, Lunar, LunarUtil } from 'lunar-typescript'
 
-const form = reactive({
-  content: '',
-  type: 'cn',
-  result: ''
-})
+type TableData = Array<{
+  date: string
+  hours: string
+  hour: string
+  yi: string
+  ji: string
+  chong: string
+  sha: string
+  nayin: string
+  jiuxing: string
+}>
 
-function handleConvert () {
-  const calcTime = date ? new Date(date) : new Date()
-  const solarInstance = Solar.fromDate(calcTime)
+const dateTime = ref(new Date())
+const tableData = ref<TableData>([])
+
+function handleSearch () {
+  const solarInstance = Solar.fromDate(dateTime.value)
   const lunarInstance = solarInstance.getLunar()
 
   // 公历
@@ -77,7 +65,12 @@ function handleConvert () {
     result.push(row)
   }
 
-  result.unshift(result.pop()) // 将子时提前
+  const last = result.pop()
+  if (last) {
+    result.unshift(last) // 将子时提前
+  }
+
+  tableData.value = result
 }
 
 /**

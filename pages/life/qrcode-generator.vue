@@ -40,16 +40,13 @@
       </el-form>
     </el-col>
     <el-col :sm="24" :md="12">
-      <el-image
-        :src="url"
-        :preview-src-list="[url]"
-      />
+      <canvas id="qrcode" />
     </el-col>
   </el-row>
 </template>
 
 <script setup lang="ts">
-import QRCode from 'qrcode'
+import { toCanvas, QRCodeRenderersOptions } from 'qrcode'
 
 const form = reactive({
   content: '',
@@ -63,13 +60,14 @@ const url = ref('')
 
 watch(form, () => generateQR)
 
-const generateQR = async () => {
+const generateQR = () => {
   try {
     const { content, width, margin, errorCorrectionLevel, fgColor, bgColor } = form
     const decodeText = decodeURIComponent(content)
 
     const opts = {
-      errorCorrectionLevel,
+      type: 'image/png',
+      errorCorrectionLevel: errorCorrectionLevel || 'M',
       margin: margin || 1,
       width: width || 256,
       color: {
@@ -78,9 +76,13 @@ const generateQR = async () => {
       }
     }
 
-    url.value = await QRCode.toDataURL(decodeText, opts)
+    const canvasElement = document.getElementById('qrcode') as HTMLCanvasElement
+    if (canvasElement) {
+      toCanvas(canvasElement, decodeText, opts as QRCodeRenderersOptions).then((res: any) => {
+        url.value = res || ''
+      })
+    }
   } catch (err) {
-    console.error(err)
     url.value = ''
   }
 }

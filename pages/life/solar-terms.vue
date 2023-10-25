@@ -1,52 +1,27 @@
 <template>
-  <el-row class="section">
-    <el-form :model="form" label-width="80px">
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.content"
-            :rows="3"
-            type="textarea"
-            @change="handleConvert"
-          />
-        </el-form-item>
-        <el-form-item label="">
-          <el-radio-group v-model="form.type">
-            <el-radio label="cn">
-              简体
-            </el-radio>
-            <el-radio label="hk">
-              繁体
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-col>
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.result"
-            :rows="5"
-            type="textarea"
-            :readonly="true"
-          />
-        </el-form-item>
-      </el-col>
-    </el-form>
-  </el-row>
+  <section class="section">
+    <el-datetime-picker v-model="dateTime" @change="handleSearch" />
+
+    <el-table :data="tableData">
+      <el-table-column prop="name" label="名称" />
+      <el-table-column prop="time" label="时间" />
+    </el-table>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { Solar } from 'lunar-typescript'
 
-const form = reactive({
-  content: '',
-  type: 'cn',
-  result: ''
-})
+type TableData = Array<{
+  name: string
+  time: string
+}>
 
-function handleConvert () {
-  const calcTime = year ? new Date(`${year}-01-01`) : new Date()
-  const solarInstance = Solar.fromDate(calcTime)
+const dateTime = ref(new Date())
+const tableData = ref<TableData>([])
+
+function handleSearch () {
+  const solarInstance = Solar.fromDate(dateTime.value)
   const lunarInstance = solarInstance.getLunar()
 
   const result = []
@@ -65,5 +40,7 @@ function handleConvert () {
       result.push({ name, time })
     }
   }
+
+  tableData.value = result
 }
 </script>

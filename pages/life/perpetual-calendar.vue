@@ -1,54 +1,73 @@
 <template>
-  <el-row class="section">
-    <el-form :model="form" label-width="80px">
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.content"
-            :rows="3"
-            type="textarea"
-            @change="handleConvert"
-          />
-        </el-form-item>
-        <el-form-item label="">
-          <el-radio-group v-model="form.type">
-            <el-radio label="cn">
-              简体
-            </el-radio>
-            <el-radio label="hk">
-              繁体
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-col>
-      <el-col :sm="24" :md="12">
-        <el-form-item label="">
-          <el-input
-            v-model="form.result"
-            :rows="5"
-            type="textarea"
-            :readonly="true"
-          />
-        </el-form-item>
-      </el-col>
-    </el-form>
-  </el-row>
+  <section class="section">
+    <el-calendar ref="calendar" v-model="dateTime">
+      <template #header>
+        <a-date-picker v-model="dateTime" size="small" type="year" format="YYYY" />
+        <a-date-picker v-model="dateTime" size="small" type="month" format="MM" />
+        <el-button-group>
+          <el-button size="small" @click="selectDate('prev-year')">
+            <el-icon><ArrowLeft /></el-icon>
+          </el-button>
+          <el-button size="small" @click="selectDate('prev-month')">
+            <el-icon><ArrowRight /></el-icon>
+          </el-button>
+          <el-button size="small" @click="selectDate('today')">
+            今
+          </el-button>
+        </el-button-group>
+      </template>
+      <template #date-cell="{ date, data = getDayOverview(date) }">
+        <div class="calender-item" :class="{'calender-item--holiday': data.isHoliday, 'canlender-item--work': data.isWork, 'canlender-item--weekend': data.isWeekend}">
+          {{ data }}{{ date }}
+        </div>
+      </template>
+    </el-calendar>
+
+    <div class="detail">
+      {{ getDayDetail(new Date()) }}
+      <p />
+      <p class="detail-day" />
+      <p />
+      <p />
+      <p />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { Solar, SolarWeek, SolarUtil, LunarUtil, LunarYear } from 'lunar-typescript'
+import { Solar, SolarWeek, SolarUtil, LunarUtil, LunarYear, HolidayUtil } from 'lunar-typescript'
+import type { CalendarDateType, CalendarInstance } from 'element-plus'
+import dayjs from 'dayjs'
 
-const form = reactive({
-  content: '',
-  type: 'cn',
-  result: ''
-})
+const dateTime = ref(new Date())
+const calendar = ref<CalendarInstance>()
+const selectDate = (val: CalendarDateType) => {
+  if (!calendar.value) { return }
+  calendar.value.selectDate(val)
+}
 
 const monthEnEnum = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const weekCnEnum = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
 const weekEnEnum = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-function handleConvert () {
+function getDayOverview (datetime: Date) {
+  const solarInstance = Solar.fromDate(datetime)
+  const lunarInstance = solarInstance.getLunar()
+  const solarWeek = solarInstance.getWeek()
+  const holiday = HolidayUtil.getHoliday(dayjs(datetime).format('YYYY-MM-DD'))
+
+  return {
+    isHoliday: !!holiday?.getName(),
+    isWork: holiday?.isWork(),
+    isWeekend: solarWeek === 0 || solarWeek === 6,
+    festivals: [
+      ...solarInstance.getFestivals(),
+      ...lunarInstance.getFestivals()
+    ]
+  }
+}
+
+function getDayDetail (datetime: Date) {
   const calcTime = datetime ? new Date(datetime) : new Date()
   const solarInstance = Solar.fromDate(calcTime)
   const solarWeekInstance = SolarWeek.fromDate(calcTime, 1)
@@ -83,7 +102,9 @@ function handleConvert () {
       ...lunarInstance.getFestivals(),
       ...solarInstance.getOtherFestivals(),
       ...lunarInstance.getOtherFestivals()
-    ] // 节日
+    ], // 节日
+    lunar: {},
+    almanac: {}
   }
 
   // 农历
@@ -110,15 +131,15 @@ function handleConvert () {
     year: lunarYear, // 农历年
     month: lunarMonth, // 农历月
     day: lunarInstance.getDay(), // 农历日
-    cnYear: cnYear ? cnYear.replace(new RegExp('〇', 'g'), '零') : '', // 农历年（中文）
+    cnYear: cnYear ? cnYear.replace(/〇/g, '零') : '', // 农历年（中文）
     cnMonth: lunarInstance.getMonthInChinese() + '月', // 农历月（中文）
     cnDay: lunarInstance.getDayInChinese(), // 农历日（中文）
     cyclicalYear: lunarInstance.getYearInGanZhi(), // 干支纪年
     cyclicalMonth: lunarInstance.getMonthInGanZhi(), // 干支纪月
     cyclicalDay: lunarInstance.getDayInGanZhi(), // 干支纪日
     hour: LunarUtil.convertTime(`${formatTwoDigit(hour)}:${formatTwoDigit(minute)}`) + '时', // 时辰
-    maxDayInMonth: lunarYearInstance.getMonth(lunarMonth)._p.dayCount, // 农历当月天数
-    leapMonth: lunarYearInstance.getLeapMonth(lunarYear), // 当年闰几月
+    maxDayInMonth: lunarYearInstance?.getMonth(lunarMonth)?.getDayCount(), // 农历当月天数
+    leapMonth: lunarYearInstance.getLeapMonth(), // 当年闰几月
     yuexiang: lunarInstance.getYueXiang(), // 月相
     wuhou: lunarInstance.getWuHou(), // 物候
     shujiu: shujiu ? shujiu.getName() : '', // 数九
@@ -159,6 +180,6 @@ function handleConvert () {
  * @returns {String}
  */
 function formatTwoDigit (val: number) {
-  return val.toString().padEnd(2, '0')
+  return val.toString().padStart(2, '0')
 }
 </script>

@@ -45,9 +45,9 @@ const form = reactive({
 })
 
 function handleConvert () {
-  const { content, type, result } = from
+  const { content, type } = form
 
-  const converter = OpenCC.Converter({ from: type, to: type === 'cn' ? 'hk' : 'cn' })
+  const converter = OpenCC.Converter({ from: type === 'cn' ? 'cn' : 'hk', to: type === 'cn' ? 'hk' : 'cn' })
 
   form.result = converter(content)
 }
