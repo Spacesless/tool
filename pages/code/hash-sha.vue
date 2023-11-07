@@ -3,15 +3,15 @@
     <el-form :model="form" label-width="80px">
       <el-form-item label="哈希算法">
         <el-radio-group v-model="form.algorithm">
-          <el-radio :label="1">
+          <el-radio-button :label="1">
             SHA-1
-          </el-radio>
-          <el-radio :label="256">
+          </el-radio-button>
+          <el-radio-button :label="256">
             SHA-256
-          </el-radio>
-          <el-radio :label="512">
+          </el-radio-button>
+          <el-radio-button :label="512">
             SHA-512
-          </el-radio>
+          </el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="输出格式">

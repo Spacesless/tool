@@ -1,9 +1,13 @@
 <template>
   <section class="md5 section">
-    <el-tabs v-model="algorithm" type="border-card">
-      <el-tab-pane v-for="item in algorithmOptions" :key="item" :label="item" />
-    </el-tabs>
     <el-form :model="form" label-width="80px">
+      <el-form-item label="处理算法">
+        <el-radio-group v-model="algorithm">
+          <el-radio-button v-for="item in algorithmOptions" :key="item" :label="item">
+            {{ item }}
+          </el-radio-button>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="处理方式">
         <el-radio-group v-model="form.method">
           <el-radio label="encrypt">

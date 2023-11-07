@@ -2,8 +2,8 @@
   <section class="section">
     <el-input v-model="keyword" @change="handleSearch" />
 
-    <el-table :data="tableData">
-      <el-table-column prop="categroy" label="类别" width="200" />
+    <el-table :data="tableData" border>
+      <el-table-column prop="categroy" label="类别" />
       <el-table-column prop="name" label="垃圾名称" />
     </el-table>
   </section>
@@ -36,14 +36,16 @@ function handleSearch () {
     let isEqualCategroy = true
     let includeKeyword = true
 
-    if (categroy) {
+    if (categroy.value) {
       const keys = Object.keys(categroysEnum)
       const values = Object.values(categroysEnum)
       const findIndex = values.findIndex(item => item === categroy.value)
       const categroyId = keys[findIndex]
       isEqualCategroy = item.categroy === +categroyId
     }
-    if (keyword.value) { includeKeyword = item.name.includes(keyword.value) }
+    if (keyword.value) {
+      includeKeyword = item.name.includes(keyword.value)
+    }
 
     return isEqualCategroy && includeKeyword
   })

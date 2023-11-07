@@ -168,7 +168,7 @@ onMounted(() => {
     usageStatistics: false,
     includeUI: {
       loadImage: {
-        path: 'bg.png',
+        path: '',
         name: 'image'
       },
       initMenu: 'resize', // 默认打开的菜单项

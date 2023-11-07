@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <el-data-picker v-model="dateTime" @change="handleSearch" />
+    <el-date-picker v-model="dateTime" @change="handleSearch" />
 
     <el-table :data="tableData">
       <el-table-column prop="hours" label="时段" />

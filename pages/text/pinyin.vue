@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import pinyin from 'pinyin'
+import { pinyin } from 'pinyin-pro'
 
 const form = reactive({
   text: '',

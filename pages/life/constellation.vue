@@ -2,9 +2,9 @@
   <section class="section">
     <el-form label-width="80px">
       <el-form-item label="">
-        <el-radio-group v-model="type" size="large">
+        <el-radio-group v-model="type">
           <el-radio-button label="date">
-            >按日期搜索
+            按日期搜索
           </el-radio-button>
           <el-radio-button label="string">
             按关键字搜索
@@ -24,7 +24,7 @@
       size="large"
       border
     >
-      <el-descriptions-item label="星座名称">
+      <el-descriptions-item label="星座名称" width="200">
         {{ result.name }}
       </el-descriptions-item>
       <el-descriptions-item label="公历范围">

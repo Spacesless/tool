@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <el-datetime-picker v-model="dateTime" @change="handleSearch" />
+    <el-date-picker v-model="dateTime" @change="handleSearch" />
 
     <el-table :data="tableData">
       <el-table-column prop="name" label="名称" />
@@ -32,11 +32,11 @@ function handleSearch () {
     const time = jieQi[name].toYmdHms()
     if (month) { // 查询指定月份的节气
       if (jieQi[name].getYear() === year && jieQi[name].getMonth() === +month) {
-        name = this.solarTermEnum[name] || name
+        name = solarTermEnum[name] || name
         result.push({ name, time })
       }
     } else { // 查询全部的节气
-      name = this.solarTermEnum[name] || name
+      name = solarTermEnum[name] || name
       result.push({ name, time })
     }
   }

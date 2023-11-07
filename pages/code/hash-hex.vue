@@ -53,7 +53,7 @@ const { currentTool } = useToolData(route.path)
 const form = reactive({
   content: ''
 })
-const hash = ref('d41d8cd98f00b204e9800998ecf8427e')
+const hash = ref('')
 
 const result = computed(() => {
   const cutHash = hash.value.substring(8, 24) || ''

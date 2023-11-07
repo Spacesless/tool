@@ -2,7 +2,7 @@
   <section class="section">
     <el-input v-model="keyword" @change="handleSearch" />
 
-    <el-table :data="tableData">
+    <el-table :data="tableData" border>
       <el-table-column prop="name" label="成语" width="200" />
       <el-table-column prop="jbsy" label="基本释义" />
       <el-table-column prop="jyc" label="近义词" />

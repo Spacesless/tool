@@ -2,7 +2,7 @@
   <section class="section">
     <el-input v-model="keyword" @change="handleSearch" />
 
-    <el-table :data="tableData">
+    <el-table :data="tableData" border>
       <el-table-column prop="province" label="省" />
       <el-table-column prop="city" label="市" />
       <el-table-column prop="code" label="简称" />
