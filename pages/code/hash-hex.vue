@@ -1,6 +1,8 @@
 <template>
   <section class="section">
-    <h1>{{ currentTool.name }}</h1>
+    <h1 class="section__title">
+      {{ currentTool.name }}
+    </h1>
     <p>{{ currentTool.description }}</p>
   </section>
 

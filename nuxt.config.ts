@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Tiny Tool - 在线免费的工具箱',
+      title: 'Toolbox - 一个安全免费的工具箱',
       meta: [
         { name: 'keywords', content: '工具箱|在线工具|免费工具|办公辅助' },
         { name: 'description', content: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。' }

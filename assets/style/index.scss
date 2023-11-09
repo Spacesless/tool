@@ -10,4 +10,33 @@ html {
   padding: 16px;
   background-color: var(--el-bg-color);
   border-radius: 10px;
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: normal;
+    font-size: 26px;
+  }
+}
+
+.banner {
+  padding: 24px 0;
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 46px;
+    line-height: 60px;
+    background: linear-gradient(to right, #1852E8 0%, #17E4C4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    ::selection {
+      background: #ffffff;
+    }
+  }
+
+  &__description {
+    font-size: 32px;
+  }
 }

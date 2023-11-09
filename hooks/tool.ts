@@ -1,4 +1,4 @@
-import { ToolItem } from '@/interfaces/tool'
+import { ToolItem } from '@/types/tool'
 
 export function useToolData (path: string) {
   const toolPath = path.split('/').pop()

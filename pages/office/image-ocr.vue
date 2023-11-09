@@ -1,7 +1,11 @@
 <template>
   <el-row class="section">
     <el-form :model="form" label-width="80px">
-      <el-col :sm="24" :md="12" @change="handleConvert" />
+      <el-col :sm="24" :md="12">
+        <el-button @click="handleConvert">
+          处理
+        </el-button>
+      </el-col>
       <el-col :sm="24" :md="12">
         <el-form-item label="">
           <el-input

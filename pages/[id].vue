@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import ToolList from '@/components/common/ToolList.vue'
-import { ToolCategory } from '@/interfaces/tool'
+import { ToolCategory } from '@/types/tool'
 
 const route = useRoute()
 const toolList = useState('tools', (): ToolCategory => [])

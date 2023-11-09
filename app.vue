@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ToolItem } from '@/interfaces/tool'
+import { ToolItem } from '@/types/tool'
 
-import tools from '@/assets/json/tools.json'
+import tools from '@/router'
 
 useState('tools', () => tools)
 useState('allTools', () => {

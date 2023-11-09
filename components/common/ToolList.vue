@@ -12,21 +12,18 @@
       :lg="6"
       :xl="4"
     >
-      <NuxtLink class="card" :to="getAbsolutePath(tool.path, item.path)">
-        <img class="card__icon" src="/image/cbbcd90fe4086a24.png" alt="文本工具">
-        <div class="card-info">
-          <strong class="card-info__title">{{ item.name }}</strong>
-          <p class="card-info__description">
-            {{ item.description }}
-          </p>
-        </div>
+      <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, item.path)">
+        <strong class="card-item__title">{{ item.name }}</strong>
+        <p class="card-item__description">
+          {{ item.description }}
+        </p>
       </NuxtLink>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
-import { CategoryItem } from '@/interfaces/tool'
+import { CategoryItem } from '@/types/tool'
 
 interface Props {
   tool: CategoryItem
@@ -36,6 +33,7 @@ const { tool } = withDefaults(defineProps<Props>(), {
   tool: () => ({
     name: '',
     path: '',
+    icon: '',
     description: '',
     children: []
   })
@@ -48,15 +46,6 @@ const getAbsolutePath = (parentPath: string, path: string) : string => {
 
 <style lang="scss" scoped>
 .card {
-  display: flex;
-  align-items: center;
-  height: 75px;
-  margin-bottom: 24px;
-  padding: 16px;
-  text-decoration: none;
-  background-color: var(--el-bg-color);
-  border-radius: 10px;
-
   &__title {
     position: relative;
     padding: 32px 0;
@@ -76,11 +65,15 @@ const getAbsolutePath = (parentPath: string, path: string) : string => {
     }
   }
 
-  &__icon {
-    margin-right: 16px;
-  }
+  &-item {
+    display: block;
+    height: 55px;
+    margin-bottom: 24px;
+    padding: 16px;
+    text-decoration: none;
+    background-color: var(--el-bg-color);
+    border-radius: 10px;
 
-  &-info {
     &__title {
       display: block;
       margin-bottom: 8px;
@@ -90,15 +83,13 @@ const getAbsolutePath = (parentPath: string, path: string) : string => {
     }
 
     &__description {
-      display: -webkit-box;
-      height: 40px;
+      height: 20px;
       overflow: hidden;
       color: var(--el-text-color-regular);
       font-size: 14px;
       line-height: 20px;
+      white-space: nowrap;
       text-overflow: ellipsis;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
     }
   }
 }

@@ -9,7 +9,7 @@
 
   <el-dialog
     v-model="dialogVisible"
-    width="550px"
+    width="600px"
     class="search-dialog"
     :show-close="false"
     :append-to-body="true"
@@ -21,6 +21,7 @@
         clearable
         filterable
         :options="options"
+        :height="232"
         placeholder="输入关键字查找工具，如图片压缩"
         size="large"
       >
@@ -51,7 +52,7 @@
 
 <script lang="ts" setup>
 import { Search } from '@element-plus/icons-vue'
-import { ToolItem } from '@/interfaces/tool'
+import { ToolItem } from '@/types/tool'
 
 const allTools = useState('allTools', (): Array<ToolItem> => [])
 
@@ -119,7 +120,7 @@ const keyDownHandler = (e: KeyboardEvent) => {
   &-dialog {
     &-wrapper {
       position: relative;
-      height: 250px;
+      height: 356px;
       padding-top: 16px;
       overflow: hidden;
       background-color: var(--el-fill-color-light);
@@ -157,7 +158,7 @@ const keyDownHandler = (e: KeyboardEvent) => {
 
 <style lang="scss">
 .search-dialog {
-  margin-top: 10vh;
+  margin-top: 60px;
   overflow: hidden;
   border-radius: 8px;
 

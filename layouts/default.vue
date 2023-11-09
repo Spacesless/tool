@@ -20,7 +20,7 @@ const isCollapse = useState('collapse', () => false)
 <style lang="scss" scoped>
 .container {
   margin-left: 208px;
-  padding: 0 24px;
+  padding: 0 32px;
   transition: margin-left 0.3s;
 
   &--collapse {
