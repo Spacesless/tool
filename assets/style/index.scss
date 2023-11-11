@@ -16,13 +16,23 @@ html {
     font-weight: normal;
     font-size: 26px;
   }
+
+  &-header {
+    margin-bottom: 16px;
+
+    &__label {
+      margin-bottom: 8px;
+      color: var(--el-text-color-regular);
+    }
+  }
 }
 
 .banner {
-  padding: 24px 0;
+  padding: 24px 0 32px;
+  font-family: poppins,-apple-system,BlinkMacSystemFont,"Microsoft YaHei",Arial,system-ui,sans-serif;
 
   &__title {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 500;
     font-size: 46px;
     line-height: 60px;
@@ -38,5 +48,19 @@ html {
 
   &__description {
     font-size: 32px;
+    white-space: pre;
+  }
+}
+
+.content {
+  line-height: 1.7;
+
+  p {
+    color: var(--el-text-color-primary);
+    font-size: 16px;
+  }
+
+  h2 {
+    font-weight: normal;
   }
 }

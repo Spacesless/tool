@@ -70,53 +70,36 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertTemperature(content, sourceType, targetType)
+  convertTemperature(content, sourceType)
 }
 
-function convertTemperature (temperature: number, sourceUnit: string, targetUnit: string) {
-  const units = ['C', 'K', 'F', 'R']
+function convertTemperature (temp: number, sourceUnit: string) {
+  const units = ['C', 'F', 'K', 'R', 'Re']
+  const conversions = {
+    C: (temp: number) => temp,
+    F: (temp: number) => (temp - 32) * 5 / 9,
+    K: (temp: number) => temp - 273.15,
+    R: (temp: number) => (temp - 491.67) * 5 / 9,
+    Re: (temp: number) => temp * 5 / 4
+  }
   const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex < 0) {
+    throw new Error('Invalid source unit')
   }
 
-  // 转换成摄氏度
-  let celsiusTemperature = temperature
-
-  switch (sourceUnit) {
-    case 'K':
-      celsiusTemperature = temperature - 273.15
-      break
-    case 'F':
-      celsiusTemperature = (temperature - 32) * 5 / 9
-      break
-    case 'R':
-      celsiusTemperature = (temperature - 491.67) * 5 / 9
-      break
+  if (isNaN(temp)) {
+    throw new TypeError('Invalid temperature')
   }
 
-  // 根据目标单位转换
-  let convertedTemperature = 0
+  const results: {[key: string]: string} = {}
 
-  switch (targetUnit) {
-    case 'C':
-      convertedTemperature = celsiusTemperature
-      break
-    case 'K':
-      convertedTemperature = celsiusTemperature + 273.15
-      break
-    case 'F':
-      convertedTemperature = celsiusTemperature * 9 / 5 + 32
-      break
-    case 'R':
-      convertedTemperature = (celsiusTemperature + 273.15) * 9 / 5
-      break
+  for (let i = 0; i < units.length; i++) {
+    results[units[i]] = conversions[units[i]](temp).toFixed(2) + ' ' + units[i]
   }
 
-  return convertedTemperature.toFixed(2) + ' ' + targetUnit
+  return results
 }
 </script>

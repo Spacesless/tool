@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import ToolList from '@/components/common/ToolList.vue'
+import ToolList from '@/components/tool/ToolList.vue'
 import { ToolCategory } from '@/types/tool'
 
 const route = useRoute()

@@ -1,15 +1,19 @@
 import { ToolItem } from '@/types/tool'
 
-export function useToolData (path: string) {
-  const toolPath = path.split('/').pop()
+export function useToolData (path?: string) {
+  const route = useRoute()
+  if (!path) {
+    path = route.path
+  }
+
   const allTools = useState('allTools', (): Array<ToolItem> => [])
 
-  const currentTool = ref<ToolItem>({
-    name: ''
+  const currentTool = ref<ToolItem | {}>({
+    name: '',
+    path: ''
   })
   const sameTools = reactive([])
-
-  currentTool.value = allTools.value.find(element => element.path === toolPath)
+  currentTool.value = allTools.value.find(element => element.path === path) || {}
 
   return {
     currentTool,

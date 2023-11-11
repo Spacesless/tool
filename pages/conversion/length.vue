@@ -86,35 +86,30 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertLength(content, sourceType, targetType)
+  convertLength(content, sourceType)
 }
 
-function convertLength (length: number, sourceUnit: string, targetUnit: string) {
-  const units = ['mm', 'cm', 'm', 'km', 'in', 'yd', 'ft', 'mi']
-  const factors = [1, 10, 1000, 1000000, 25.4, 914.4, 304.8, 1609.344]
-  const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
+function convertLength (length: number, sourceUnit: string): Record<string, string> {
+  const units: string[] = ['km', 'm', 'dm', 'cm', 'mm', 'um', 'nm', 'nmi', 'mi', 'yd', 'ft', 'in', 'li', 'zhang', 'chi', 'cun', 'fen', 'li', 'hao']
+  const factors: number[] = [1e3, 1, 1e-1, 1e-2, 1e-3, 1e-6, 1e-9, 1852, 1609.344, 0.9144, 0.3048, 0.0254, 500, 3.33, 0.333, 0.03, 0.003, 0.0003, 0.00003]
+  const sourceIndex: number = units.indexOf(sourceUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex === -1) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedLength = length
+  const convertedValues: Record<string, string> = {} // 用于存储转换后的值
 
-  if (sourceIndex < 4) { // 源单位为米以内的单位
-    convertedLength /= factors[sourceIndex]
-  } else { // 源单位为英里
-    convertedLength *= 1609.344 // 英里和米之间的转换关系
+  // 转换到米单位
+  const lengthMeter: number = length * factors[sourceIndex]
+
+  // 计算其他单位对应的值
+  for (let i = 0; i < units.length; i++) {
+    convertedValues[units[i]] = (lengthMeter / factors[i]).toFixed(2)
   }
 
-  if (targetIndex < 4) { // 目标单位为米以内的单位
-    convertedLength *= factors[targetIndex]
-  } else { // 目标单位为英里
-    convertedLength /= 1609.344 // 英里和米之间的转换关系
-  }
-
-  return convertedLength.toFixed(2) + ' ' + units[targetIndex]
+  return convertedValues
 }
 </script>

@@ -24,6 +24,7 @@
         :height="232"
         placeholder="输入关键字查找工具，如图片压缩"
         size="large"
+        @change="onSelectChange"
       >
         <template #default="{ item }">
           <p>{{ item.label }}</p>
@@ -54,9 +55,10 @@
 import { Search } from '@element-plus/icons-vue'
 import { ToolItem } from '@/types/tool'
 
+const router = useRouter()
 const allTools = useState('allTools', (): Array<ToolItem> => [])
 
-const keyword = ref<string>()
+const keyword = ref('')
 
 const options = computed(() => allTools.value.map(item => ({
   value: item.path,
@@ -78,6 +80,11 @@ const keyDownHandler = (e: KeyboardEvent) => {
     e.preventDefault()
     handleSearch()
   }
+}
+
+const onSelectChange = () => {
+  router.push({ path: keyword.value })
+  dialogVisible.value = false
 }
 </script>
 

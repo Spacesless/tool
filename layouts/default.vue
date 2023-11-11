@@ -2,7 +2,9 @@
   <LayoutSider />
   <section class="container" :class="{'container--collapse': isCollapse}">
     <LayoutHeader />
-    <slot />
+    <main class="main">
+      <slot />
+    </main>
     <FixedBar />
     <LayoutFooter />
   </section>
@@ -18,6 +20,10 @@ const isCollapse = useState('collapse', () => false)
 </script>
 
 <style lang="scss" scoped>
+.main {
+  min-height: calc(100vh - 105px);
+}
+
 .container {
   margin-left: 208px;
   padding: 0 32px;

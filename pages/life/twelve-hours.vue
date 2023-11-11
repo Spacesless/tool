@@ -1,8 +1,12 @@
 <template>
-  <section class="section">
-    <el-date-picker v-model="dateTime" @change="handleSearch" />
+  <ToolBanner :current-tool="currentTool" />
 
-    <el-table :data="tableData">
+  <section class="section">
+    <div class="section-header">
+      <el-date-picker v-model="dateTime" @change="handleSearch" />
+    </div>
+
+    <el-table :data="tableData" border>
       <el-table-column prop="hours" label="时段" />
       <el-table-column prop="hour" label="时辰" />
       <el-table-column prop="yi" label="宜" />
@@ -18,6 +22,10 @@
 <script setup lang="ts">
 import { Solar, Lunar, LunarUtil } from 'lunar-typescript'
 
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
+
 type TableData = Array<{
   date: string
   hours: string
@@ -32,6 +40,10 @@ type TableData = Array<{
 
 const dateTime = ref(new Date())
 const tableData = ref<TableData>([])
+
+onMounted(() => {
+  handleSearch()
+})
 
 function handleSearch () {
   const solarInstance = Solar.fromDate(dateTime.value)

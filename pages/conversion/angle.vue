@@ -74,33 +74,30 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertAngle(content, sourceType, targetType)
+  convertAngle(content, sourceType)
 }
 
-function convertAngle (angle: number, sourceUnit: string, targetUnit: string) {
-  const units = ['rad', 'deg', 'grad', 'arcmin', 'arcsec']
-  const factors = [1, 180 / Math.PI, 200 / Math.PI, 180 * 60 / Math.PI, 180 * 3600 / Math.PI]
-  const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
+function convertAngle (angle: number, sourceUnit: string): Record<string, string> {
+  const units: string[] = ['rad', 'deg', 'grad', 'arcmin', 'arcsec']
+  const factors: number[] = [1, 180 / Math.PI, 200 / Math.PI, 180 * 60 / Math.PI, 180 * 3600 / Math.PI]
+  const sourceIndex: number = units.indexOf(sourceUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex === -1) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedAngle = angle
+  const convertedValues: Record<string, string> = {} // 用于存储转换后的值
 
   // 转换到弧度单位
-  for (let i = 0; i < sourceIndex; i++) {
-    convertedAngle /= factors[i]
+  const angleRad: number = angle / factors[sourceIndex]
+
+  // 计算其他单位对应的值
+  for (let i = 0; i < units.length; i++) {
+    convertedValues[units[i]] = (angleRad * factors[i]).toFixed(2)
   }
 
-  // 从弧度单位转换到目标单位
-  for (let i = 0; i < targetIndex; i++) {
-    convertedAngle *= factors[i]
-  }
-
-  return convertedAngle.toFixed(2) + ' ' + units[targetIndex]
+  return convertedValues
 }
 </script>

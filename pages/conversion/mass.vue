@@ -86,33 +86,30 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertMass(content, sourceType, targetType)
+  convertMass(content, sourceType)
 }
 
-function convertMass (mass: number, sourceUnit: string, targetUnit: string) {
-  const units = ['mcg', 'mg', 'g', 'kg', 'mt', 'oz', 'lb', 't']
-  const factors = [1, 1000, 1000, 1000, 1000, 35.27396, 2.204623, 0.001]
+function convertMass (weight: number, sourceUnit: string) {
+  const units = ['t', 'kg', 'g', 'mg', 'q', 'lb', 'oz', 'ct', 'gr', 'cwt', 'jin', 'tael', 'liang']
+  const conversionFactors = [1000000, 1000, 1, 0.001, 10000, 453.592, 28.3495, 0.2, 0.0648, 50000, 500, 50, 10]
   const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex < 0) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedMass = mass
-
-  // 转换到克单位
-  for (let i = 0; i < sourceIndex; i++) {
-    convertedMass /= factors[i]
+  if (isNaN(weight) || weight < 0) {
+    throw new Error('Invalid weight')
   }
 
-  // 从克单位转换到目标单位
-  for (let i = 0; i < targetIndex; i++) {
-    convertedMass *= factors[i]
+  const results: {[key: string]: string} = {}
+
+  for (let i = 0; i < units.length; i++) {
+    results[units[i]] = (weight * conversionFactors[sourceIndex] / conversionFactors[i]).toFixed(2) + ' ' + units[i]
   }
 
-  return convertedMass.toFixed(2) + ' ' + units[targetIndex]
+  return results
 }
 </script>

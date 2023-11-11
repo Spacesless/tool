@@ -1,6 +1,13 @@
 <template>
+  <ToolBanner :current-tool="currentTool" />
+
   <section class="section">
-    <el-input v-model="keyword" @change="handleSearch" />
+    <div class="section-header">
+      <p class="section-header__label">
+        请输入省/市/区/邮政编码：
+      </p>
+      <el-input v-model="keyword" @change="handleSearch" />
+    </div>
 
     <el-table :data="tableData" border>
       <el-table-column prop="province" label="省" />
@@ -13,6 +20,9 @@
 
 <script setup lang="ts">
 import postalcodes from '@/assets/json/postalcode.json'
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
 
 type TableData = Array<{
   province: string
@@ -21,8 +31,12 @@ type TableData = Array<{
   post_code: string
 }>
 
-const keyword = ref('')
+const keyword = ref('广州市')
 const tableData = ref<TableData>([])
+
+onBeforeMount(() => {
+  handleSearch()
+})
 
 function handleSearch () {
   tableData.value = postalcodes.filter(item => item.province.includes(keyword.value) || item.city.includes(keyword.value) || item.area.includes(keyword.value))

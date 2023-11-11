@@ -23,7 +23,6 @@
 <style lang="scss" scoped>
 .footer {
   height: 45px;
-  padding: 0 16px;
   color: var(--el-text-color-secondary);
   font-size: 14px;
   line-height: 45px;

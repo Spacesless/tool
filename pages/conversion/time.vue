@@ -94,33 +94,30 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertTime(content, sourceType, targetType)
+  convertTime(content, sourceType)
 }
 
-function convertTime (time: number, sourceUnit: string, targetUnit: string) {
+function convertTime (time: number, sourceUnit: string) {
   const units = ['ns', 'mu', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year']
-  const factors = [1, 1000, 1000, 1000, 60, 60, 24, 7, 30, 12]
+  const conversionFactors = [1e-9, 1e-6, 1e-3, 1, 60, 3600, 86400, 604800, 2628000, 31536000]
   const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex < 0) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedTime = time
-
-  // 转换到秒单位
-  for (let i = 0; i < sourceIndex; i++) {
-    convertedTime /= factors[i]
+  if (isNaN(time) || time < 0) {
+    throw new Error('Invalid time')
   }
 
-  // 从秒单位转换到目标单位
-  for (let i = 0; i < targetIndex; i++) {
-    convertedTime *= factors[i]
+  const results: {[key: string]: string} = {}
+
+  for (let i = 0; i < units.length; i++) {
+    results[units[i]] = (time * conversionFactors[sourceIndex] / conversionFactors[i]).toFixed(2) + ' ' + units[i]
   }
 
-  return convertedTime.toFixed(2) + ' ' + units[targetIndex]
+  return results
 }
 </script>

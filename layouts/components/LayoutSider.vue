@@ -101,9 +101,12 @@ const toggleCollapse = () => {
     }
 
     &__name {
+      height: 34px;
+      overflow: hidden;
       font-weight: bold;
       font-size: 30px;
       font-family: Bega, sans-serif;
+      transition: height 0.3s;
     }
   }
 
@@ -160,7 +163,7 @@ const toggleCollapse = () => {
         }
 
         &__name {
-          display: none;
+          height: 0;
         }
       }
 

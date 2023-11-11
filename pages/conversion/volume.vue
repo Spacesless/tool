@@ -154,33 +154,30 @@ const options = reactive([
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertVolume(content, sourceType, targetType)
+  convertVolume(content, sourceType)
 }
 
-function convertVolume (volume: number, sourceUnit: string, targetUnit: string) {
-  const units = ['mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'krm', 'tsk', 'msk', 'kkp', 'glas', 'kanna', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3']
-  const factors = [1, 1000, 1000, 100, 100, 1, 0.001, 0.000001, 1e-18, 0.1, 5, 15, 150, 200, 800, 4.92892, 14.7868, 16387.064, 283.4952, 236.5882, 473.1765, 946.3529, 3785.412, 0.02831685, 0.7645549]
+function convertVolume (volume: number, sourceUnit: string) {
+  const units = ['m3', 'dm3', 'cm3', 'mm3', 'st', 'l', 'dl', 'cl', 'ml', 'in3', 'yd3', 'gallon']
+  const conversionFactors = [1, 0.001, 0.000001, 1e-9, 0.1, 0.001, 0.0001, 0.00001, 0.000001, 0.0000163871, 0.00454609]
   const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex < 0) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedVolume = volume
-
-  // 转换到升单位
-  for (let i = 0; i < sourceIndex; i++) {
-    convertedVolume /= factors[i]
+  if (isNaN(volume) || volume < 0) {
+    throw new Error('Invalid volume')
   }
 
-  // 从升单位转换到目标单位
-  for (let i = 0; i < targetIndex; i++) {
-    convertedVolume *= factors[i]
+  const results: {[key: string]: string} = {}
+
+  for (let i = 0; i < units.length; i++) {
+    results[units[i]] = (volume * conversionFactors[sourceIndex] / conversionFactors[i]).toFixed(2) + ' ' + units[i]
   }
 
-  return convertedVolume.toFixed(2) + ' ' + units[targetIndex]
+  return results
 }
 </script>

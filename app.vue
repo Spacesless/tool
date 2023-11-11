@@ -1,10 +1,14 @@
 <template>
-  <NuxtLayout name="default">
-    <NuxtPage />
-  </NuxtLayout>
+  <el-config-provider :locale="zhCn" size="large">
+    <NuxtLayout name="default">
+      <NuxtPage />
+    </NuxtLayout>
+  </el-config-provider>
 </template>
 
 <script lang="ts" setup>
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+
 import { ToolItem } from '@/types/tool'
 
 import tools from '@/router'
@@ -13,7 +17,11 @@ useState('tools', () => tools)
 useState('allTools', () => {
   const result: Array<ToolItem> = []
   tools.forEach((item) => {
-    result.push(...item.children)
+    const children = item.children.map(child => ({
+      ...child,
+      path: `/${item.path}/${child.path}`
+    }))
+    result.push(...children)
   })
   return result
 })

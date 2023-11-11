@@ -90,57 +90,53 @@ const options = reactive([
   {
     value: 'TB',
     label: '太字节'
-  },
-  {
-    value: 'PB',
-    label: '拍字节'
-  },
-  {
-    value: 'EB',
-    label: '艾字节'
   }
 ])
 
 function handleConvert () {
-  const { content, sourceType, targetType } = form
+  const { content, sourceType } = form
 
-  form.result = convertStorage(content, sourceType, targetType)
+  convertStorage(content, sourceType)
 }
 
-function convertStorage (size: number, sourceUnit: string, targetUnit: string) {
-  const units = ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB']
+function convertStorage (size: number, sourceUnit: string) {
+  const units = ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'B', 'KB', 'MB', 'GB', 'TB']
   const base = 1024
   const sourceIndex = units.indexOf(sourceUnit)
-  const targetIndex = units.indexOf(targetUnit)
 
-  if (sourceIndex === -1 || targetIndex === -1) {
-    throw new Error('Invalid source or target unit')
+  if (sourceIndex < 0) {
+    throw new Error('Invalid source unit')
   }
 
-  let convertedSize = size
-
-  if (sourceIndex < 5) { // 原始单位为比特
-    for (let i = 0; i < sourceIndex; i++) {
-      convertedSize /= base
-    }
-    convertedSize *= 8 // 比特与字节的转换关系
-  } else { // 原始单位为字节
-    for (let i = 5; i < sourceIndex; i++) {
-      convertedSize /= base
-    }
+  if (isNaN(size) || size < 0) {
+    throw new Error('Invalid size')
   }
 
-  if (targetIndex < 5) { // 目标单位为比特
-    convertedSize /= 8 // 比特与字节的转换关系
-    for (let i = 0; i < targetIndex; i++) {
-      convertedSize *= base
+  const results: {[key: string]: string} = {} // 用于存储所有单位的转换结果
+
+  for (let i = 0; i < units.length; i++) {
+    let tempSize = size
+
+    if (i >= 5) { // 如果是字节单位，先转换为比特
+      tempSize *= 8
+      i -= 5
     }
-  } else { // 目标单位为字节
-    for (let i = 5; i < targetIndex; i++) {
-      convertedSize *= base
+
+    const diff = i - sourceIndex
+
+    if (diff > 0) {
+      for (let j = 0; j < diff; j++) {
+        tempSize *= base
+      }
+    } else if (diff < 0) {
+      for (let j = 0; j < -diff; j++) {
+        tempSize /= base
+      }
     }
+
+    results[units[i]] = tempSize.toString()
   }
 
-  return convertedSize.toString()
+  return results
 }
 </script>

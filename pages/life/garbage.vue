@@ -1,6 +1,13 @@
 <template>
+  <ToolBanner :current-tool="currentTool" />
+
   <section class="section">
-    <el-input v-model="keyword" @change="handleSearch" />
+    <div class="section-header">
+      <p class="section-header__label">
+        请输入生活垃圾：
+      </p>
+      <el-input v-model="keyword" clearable @change="handleSearch" />
+    </div>
 
     <el-table :data="tableData" border>
       <el-table-column prop="categroy" label="类别" />
@@ -11,6 +18,9 @@
 
 <script setup lang="ts">
 import garbages from '@/assets/json/garbage.json'
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
 
 interface GarbageItem {
   name: string
@@ -27,9 +37,13 @@ const categroysEnum: {[key: number]: string} = {
   16: '大件垃圾'
 }
 
-const keyword = ref('')
+const keyword = ref('牛奶')
 const categroy = ref('')
 const tableData = ref<TableData>([])
+
+onBeforeMount(() => {
+  handleSearch()
+})
 
 function handleSearch () {
   const filterGarbages: Array<GarbageItem> = garbages.filter((item) => {

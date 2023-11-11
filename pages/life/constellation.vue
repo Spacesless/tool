@@ -1,7 +1,9 @@
 <template>
+  <ToolBanner :current-tool="currentTool" />
+
   <section class="section">
     <el-form label-width="80px">
-      <el-form-item label="">
+      <el-form-item>
         <el-radio-group v-model="type">
           <el-radio-button label="date">
             按日期搜索
@@ -12,19 +14,20 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="type === 'date'" label="日期">
-        <el-date-picker v-model="keyword" @change="handleSearch" />
+        <el-date-picker v-model="dateTime" @change="handleSearch" />
       </el-form-item>
       <el-form-item v-else label="关键字">
-        <el-input v-model="keyword" @change="handleSearch" />
+        <el-input v-model="keyword" @input="handleSearch" />
       </el-form-item>
     </el-form>
 
     <el-descriptions
+      v-if="result.name"
       :column="1"
       size="large"
       border
     >
-      <el-descriptions-item label="星座名称" width="200">
+      <el-descriptions-item label="星座名称" min-width="120">
         {{ result.name }}
       </el-descriptions-item>
       <el-descriptions-item label="公历范围">
@@ -91,6 +94,9 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import constellation from '@/assets/json/xing-zuo.json'
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
 
 interface RoleItem {
   name: string
@@ -126,6 +132,7 @@ type MonthRange = Array<{
 }>
 
 const type = ref('date')
+const dateTime = ref(new Date())
 const keyword = ref('')
 const result = ref({
   name: '',
@@ -150,13 +157,16 @@ const result = ref({
   zj: ''
 })
 
+onBeforeMount(() => {
+  handleSearch()
+})
+
 function handleSearch () {
   const { role, monthRange }: { role: Role, monthRange: MonthRange } = constellation
 
   let key = ''
-  const isTime = !isNaN(Date.parse(keyword.value))
-  if (isTime) {
-    const momentTime = dayjs(keyword.value)
+  if (type.value === 'date') {
+    const momentTime = dayjs(dateTime.value)
     const year = momentTime.year()
     const findRange = monthRange.find((item) => {
       return momentTime.isAfter(`${year}-${item.start}`) && momentTime.isAfter(`${year}-${item.end}`)
@@ -166,6 +176,6 @@ function handleSearch () {
     key = keyword.value.replace('座', '')
   }
 
-  result.value = role[key]
+  result.value = role[key] || {}
 }
 </script>

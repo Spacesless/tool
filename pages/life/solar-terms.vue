@@ -1,6 +1,13 @@
 <template>
+  <ToolBanner :current-tool="currentTool" />
+
   <section class="section">
-    <el-date-picker v-model="dateTime" @change="handleSearch" />
+    <div class="section-header">
+      <p class="section-header__label">
+        请选择年份：
+      </p>
+      <el-date-picker v-model="dateTime" type="year" @change="handleSearch" />
+    </div>
 
     <el-table :data="tableData" border>
       <el-table-column prop="name" label="名称" />
@@ -11,6 +18,10 @@
 
 <script setup lang="ts">
 import { Solar } from 'lunar-typescript'
+
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
 
 type TableData = Array<{
   name: string
@@ -30,7 +41,7 @@ const solarTermEnum: Record<string, string> = {
 const dateTime = ref(new Date())
 const tableData = ref<TableData>([])
 
-onMounted(() => {
+onBeforeMount(() => {
   handleSearch()
 })
 

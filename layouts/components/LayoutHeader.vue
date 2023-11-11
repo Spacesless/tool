@@ -35,6 +35,7 @@ const toggleColorMode = () => {
   &-right {
     &__icon {
       font-size: 20px;
+      outline: none;
     }
   }
 
