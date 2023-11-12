@@ -1,7 +1,7 @@
 import { saveAs } from 'file-saver'
 import JSZip from 'jszip'
 
-export function useDownload(fileList: any[], filename: string) {
+export default function downloadFile (fileList: any[], filename: string) {
   if (fileList.length === 1) {
     saveAs(fileList[0].file, filename)
   }

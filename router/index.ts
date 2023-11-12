@@ -99,7 +99,7 @@ const routes = [
       {
         name: '二维码生成',
         path: 'qrcode-generator',
-        description: ''
+        description: 'QRcode生成器是一种用于生成文本二维码的工具。\n用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。'
       },
       {
         name: '二十四节气',
