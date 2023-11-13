@@ -8,11 +8,12 @@
 import Cropper from 'cropperjs'
 
 onMounted(() => {
-  const image = document.getElementById('app')
+  const image = document.getElementById('app') as HTMLImageElement
   const cropper = new Cropper(image, {
 
   })
 
+  // eslint-disable-next-line no-console
   console.log(cropper)
 })
 </script>

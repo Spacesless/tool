@@ -29,6 +29,11 @@ const routes = [
         description: ''
       },
       {
+        name: '面积换算',
+        path: 'area',
+        description: ''
+      },
+      {
         name: '字节换算',
         path: 'byte',
         description: ''
@@ -41,6 +46,11 @@ const routes = [
       {
         name: '质量换算',
         path: 'mass',
+        description: ''
+      },
+      {
+        name: '速度换算',
+        path: 'speed',
         description: ''
       },
       {
