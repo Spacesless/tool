@@ -12,14 +12,18 @@
       </p>
     </div>
 
-    <ToolList v-for="item in toolRef" :key="item.path" :tool="item" />
+    <ToolList v-for="item in toolList" :key="item.path" :tool="item" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import ToolList from '@/components/tool/ToolList.vue'
-
 import tools from '@/router'
+import { ToolCategory } from '@/types/tool'
 
-const toolRef = ref(tools)
+const toolList = computed((): ToolCategory => {
+  return tools.map(item => ({
+    ...item,
+    children: item.children.slice(0, 12)
+  }))
+})
 </script>

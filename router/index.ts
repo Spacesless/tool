@@ -18,59 +18,6 @@ const routes = [
     ]
   },
   {
-    name: '数据换算',
-    path: 'conversion',
-    icon: 'fluent:convert-range-24-regular',
-    description: '',
-    children: [
-      {
-        name: '角度换算',
-        path: 'angle',
-        description: ''
-      },
-      {
-        name: '面积换算',
-        path: 'area',
-        description: ''
-      },
-      {
-        name: '字节换算',
-        path: 'byte',
-        description: ''
-      },
-      {
-        name: '长度换算',
-        path: 'length',
-        description: ''
-      },
-      {
-        name: '质量换算',
-        path: 'mass',
-        description: ''
-      },
-      {
-        name: '速度换算',
-        path: 'speed',
-        description: ''
-      },
-      {
-        name: '温度换算',
-        path: 'temperature',
-        description: ''
-      },
-      {
-        name: '时间换算',
-        path: 'time',
-        description: ''
-      },
-      {
-        name: '体积换算',
-        path: 'volume',
-        description: ''
-      }
-    ]
-  },
-  {
     name: '生活工具',
     path: 'life',
     icon: 'ph:calendar',
@@ -124,6 +71,104 @@ const routes = [
     ]
   },
   {
+    name: '数据换算',
+    path: 'conversion',
+    icon: 'fluent:convert-range-24-regular',
+    description: '',
+    children: [
+      {
+        name: '角度换算',
+        path: 'angle',
+        description: 'deg、rad、grad、arcmin、arcsec换算'
+      },
+      {
+        name: '面积换算',
+        path: 'area',
+        description: 'mm2、cm2、m2、ha、km2、in2、ft2、ac、mi2换算'
+      },
+      {
+        name: '字节换算',
+        path: 'byte',
+        description: 'b、Kb、Mb、Gb、Tb、B、KB、MB、GB、TB换算'
+      },
+      {
+        name: '长度换算',
+        path: 'length',
+        description: 'mm、cm、m、in、ft-us、ft、mi换算'
+      },
+      {
+        name: '质量换算',
+        path: 'mass',
+        description: 'mcg、mg、g、kg、lb、oz、mt、t换算'
+      },
+      {
+        name: '速度换算',
+        path: 'speed',
+        description: 'm/s、km/h、m/h、knot、ft/s换算'
+      },
+      {
+        name: '温度换算',
+        path: 'temperature',
+        description: '摄氏度、华氏度、开尔文、兰氏度换算'
+      },
+      {
+        name: '时间换算',
+        path: 'time',
+        description: 'ns、mu、ms、s、min、h、d、week、month、year换算'
+      },
+      {
+        name: '体积换算',
+        path: 'volume',
+        description: '立方毫米、立方厘米、毫升、升、千升、立方米、立方千米、茶匙、立方英寸、液量盎司、杯子、品脱、夸特、加仑、立方码、立方英尺换算'
+      },
+      {
+        name: '频率换算',
+        path: 'frequency',
+        description: 'Hz、mHz、kHz、MHz、GHz、THz、rpm、deg/s、rad/s换算'
+      },
+      {
+        name: '电流换算',
+        path: 'current',
+        description: 'A、mA、kA换算'
+      },
+      {
+        name: '电压换算',
+        path: 'voltage',
+        description: 'V、mV、kV换算'
+      },
+      {
+        name: '体积流量换算',
+        path: 'volume-flow-rate',
+        description: 'mm3/s、cm3/s、ml/s、cl/s、dl/s、l/s、l/min、l/h、kl/s、kl/min、kl/h、m3/s、m3/min、m3/h、km3/s换算'
+      },
+      {
+        name: '能量换算',
+        path: 'energy',
+        description: 'Wh、mWh、kWh、MWh、GWh、J、kJ换算'
+      },
+      {
+        name: '配速换算',
+        path: 'pace',
+        description: 's/m、min/km、s/ft、min/mi换算'
+      },
+      {
+        name: '视在功率换算',
+        path: 'apparent-power',
+        description: 'VA、mVA、kVA、MVA、GVA换算'
+      },
+      {
+        name: '无功能量换算',
+        path: 'reactive-energy',
+        description: 'VARh、mVARh、kVARh、MVARh、GVARh换算'
+      },
+      {
+        name: '无功功率换算',
+        path: 'reactive-power',
+        description: 'VAR、mVAR、kVAR、MVAR、GVAR换算'
+      }
+    ]
+  },
+  {
     name: '编码工具',
     path: 'code',
     icon: 'ph:code',
@@ -140,8 +185,33 @@ const routes = [
         description: 'SHA安全哈希算法主要适用于数字签名标准里面定义的数字签名。\n包括SHA-1、SHA-256、SHA-384、SHA-512。'
       },
       {
-        name: '加密解密',
-        path: 'encrypt-decrypt',
+        name: 'AES加密解密',
+        path: 'aes-cipher',
+        description: ''
+      },
+      {
+        name: 'DES加密解密',
+        path: 'des-cipher',
+        description: ''
+      },
+      {
+        name: 'TripleDES加密解密',
+        path: 'triple-des-cipher',
+        description: ''
+      },
+      {
+        name: 'Rabbit加密解密',
+        path: 'rabbit-cipher',
+        description: ''
+      },
+      {
+        name: 'RC4加密解密',
+        path: 'rc4-cipher',
+        description: ''
+      },
+      {
+        name: 'RC4Drop加密解密',
+        path: 'rc4-drop-cipher',
         description: ''
       },
       {
