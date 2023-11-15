@@ -89,6 +89,8 @@
       </el-descriptions-item>
     </el-descriptions>
   </section>
+
+  <GitalkComment />
 </template>
 
 <script setup lang="ts">

@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@nuxtjs/color-mode',
     '@nuxtjs/eslint-module',
-    '@nuxtjs/google-adsense',
+    // '@nuxtjs/google-adsense',
     // '@nuxtjs/i18n',
     '@nuxtjs/stylelint-module',
     'nuxt-icon'
@@ -31,8 +31,8 @@ export default defineNuxtConfig({
   },
   elementPlus: {
     themes: ['dark']
-  },
-  googleAdsense: {
-    id: 'ca-pub-1379822583295856'
   }
+  // googleAdsense: {
+  //   id: 'ca-pub-1379822583295856'
+  // }
 })

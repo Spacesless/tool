@@ -1,32 +1,39 @@
 <template>
+  <ToolBanner :current-tool="currentTool" />
+
   <section class="section">
     <el-calendar ref="calendar" v-model="dateTime">
       <template #header>
         <a-date-picker v-model="dateTime" size="small" type="year" format="YYYY" />
         <a-date-picker v-model="dateTime" size="small" type="month" format="MM" />
-        <el-button-group>
-          <el-button size="small" @click="selectDate('prev-year')">
-            <el-icon><ArrowLeft /></el-icon>
-          </el-button>
-          <el-button size="small" @click="selectDate('prev-month')">
-            <el-icon><ArrowRight /></el-icon>
-          </el-button>
-          <el-button size="small" @click="selectDate('today')">
-            今
-          </el-button>
-        </el-button-group>
+        <el-icon @click="selectDate('prev-year')">
+          <ArrowLeft />
+        </el-icon>
+        <el-icon @click="selectDate('prev-month')">
+          <ArrowRight />
+        </el-icon>
+        <span @click="selectDate('today')">今</span>
       </template>
-      <template #date-cell="{ date, data = getDayOverview(date) }">
-        <div class="calender-item" :class="{'calender-item--holiday': data.isHoliday, 'canlender-item--work': data.isWork, 'canlender-item--weekend': data.isWeekend}">
-          {{ data }}{{ date }}
+      <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
+        <div
+          class="calender-item"
+          :class="{
+            'calender-item--holiday': data.isHoliday,
+            'canlender-item--work': data.isWork,
+            'canlender-item--weekend': data.isWeekend,
+            'canlender-item--selected': data.isSelected
+          }"
+        >
+          <p>{{ lunar.solarDay }}</p>
+          <p>{{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}</p>
         </div>
       </template>
     </el-calendar>
 
     <div class="detail">
-      {{ getDayDetail(new Date()) }}
-      <p />
+      {{ dayData }}
       <p class="detail-day" />
+      <p />
       <p />
       <p />
       <p />
@@ -35,9 +42,14 @@
 </template>
 
 <script setup lang="ts">
-import { Solar, SolarWeek, SolarUtil, LunarUtil, LunarYear, HolidayUtil } from 'lunar-typescript'
+import { Solar, SolarWeek, SolarUtil, LunarYear, HolidayUtil } from 'lunar-typescript'
 import type { CalendarDateType, CalendarInstance } from 'element-plus'
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
+
+import { useToolData } from '@/hooks/tool'
+
+const { currentTool } = useToolData()
 
 const dateTime = ref(new Date())
 const calendar = ref<CalendarInstance>()
@@ -46,27 +58,34 @@ const selectDate = (val: CalendarDateType) => {
   calendar.value.selectDate(val)
 }
 
-const monthEnEnum = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-const weekCnEnum = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-const weekEnEnum = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
 function getDayOverview (datetime: Date) {
   const solarInstance = Solar.fromDate(datetime)
   const lunarInstance = solarInstance.getLunar()
   const solarWeek = solarInstance.getWeek()
   const holiday = HolidayUtil.getHoliday(dayjs(datetime).format('YYYY-MM-DD'))
 
+  const solarDay = solarInstance.getDay()
+  const jieQi = lunarInstance.getCurrentJieQi()
+
+  const festivals = [
+    ...solarInstance.getFestivals(),
+    ...lunarInstance.getFestivals()
+  ]
+
   return {
     isHoliday: !!holiday?.getName(),
     isWork: holiday?.isWork(),
     isWeekend: solarWeek === 0 || solarWeek === 6,
-    festivals: [
-      ...solarInstance.getFestivals(),
-      ...lunarInstance.getFestivals()
-    ]
+    solarDay,
+    festivals: festivals[0],
+    solarTerms: jieQi?.getName(),
+    lunarDay: lunarInstance.getDayInChinese()
   }
 }
 
+const dayData = computed(() => getDayDetail(dateTime.value))
+
+const weekCnEnum = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
 function getDayDetail (datetime: Date) {
   const calcTime = datetime ? new Date(datetime) : new Date()
   const solarInstance = Solar.fromDate(calcTime)
@@ -78,25 +97,18 @@ function getDayDetail (datetime: Date) {
   const solarMonth = solarInstance.getMonth()
   const solarWeek = solarInstance.getWeek()
   const solarDay = solarInstance.getDay()
-  const hour = calcTime.getHours()
-  const minute = calcTime.getMinutes()
 
   const result = {
     year: solarYear, // 公历年
     leapYear: solarInstance.isLeapYear(), // 是否为闰年
     month: solarMonth, // 公历月
     maxDayInMonth: SolarUtil.getDaysOfMonth(solarYear, solarMonth), // 公历当月天数
-    enMonth: monthEnEnum[solarMonth - 1], // 公历月（英文）
     astro: solarInstance.getXingZuo() + '座', // 星座
     cnWeek: weekCnEnum[solarWeek], // 星期（中文）
-    enWeek: weekEnEnum[solarWeek], // 星期（英文）
     weekInYear: solarWeekInstance.getIndexInYear(),
     day: solarDay, // 公历日
     dayInYear: SolarUtil.getDaysInYear(solarYear, solarMonth, solarDay),
     julianDay: solarInstance.getJulianDay(),
-    hour,
-    minute,
-    second: calcTime.getSeconds(),
     festivals: [
       ...solarInstance.getFestivals(),
       ...lunarInstance.getFestivals(),
@@ -137,7 +149,6 @@ function getDayDetail (datetime: Date) {
     cyclicalYear: lunarInstance.getYearInGanZhi(), // 干支纪年
     cyclicalMonth: lunarInstance.getMonthInGanZhi(), // 干支纪月
     cyclicalDay: lunarInstance.getDayInGanZhi(), // 干支纪日
-    hour: LunarUtil.convertTime(`${formatTwoDigit(hour)}:${formatTwoDigit(minute)}`) + '时', // 时辰
     maxDayInMonth: lunarYearInstance?.getMonth(lunarMonth)?.getDayCount(), // 农历当月天数
     leapMonth: lunarYearInstance.getLeapMonth(), // 当年闰几月
     yuexiang: lunarInstance.getYueXiang(), // 月相
@@ -172,14 +183,7 @@ function getDayDetail (datetime: Date) {
     jiuxing: jiuxing ? jiuxing.toString() : '',
     taisui: lunarInstance.getDayPositionTaiSui() + '-' + lunarInstance.getDayPositionTaiSuiDesc()
   }
-}
 
-/**
- * 格式化成两位数
- * @param {Number} val
- * @returns {String}
- */
-function formatTwoDigit (val: number) {
-  return val.toString().padStart(2, '0')
+  return result
 }
 </script>

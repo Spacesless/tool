@@ -36,6 +36,10 @@ const tableData = ref<TableData>([])
 watch(() => pending.value, handleSearch)
 
 function handleSearch () {
-  tableData.value = data.value.filter(item => item.name.includes(keyword.value))
+  if (keyword.value) {
+    tableData.value = data.value.filter(item => item.name.includes(keyword.value))
+  } else {
+    tableData.value = []
+  }
 }
 </script>

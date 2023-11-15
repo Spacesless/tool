@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import ConvertContent from './components/ConvertContent.vue'
+import ConvertContent from '@/components/tool/ConvertContent.vue'
 import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
