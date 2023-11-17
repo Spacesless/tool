@@ -45,8 +45,7 @@ const pasteHandler = (event: ClipboardEvent) => {
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
     if (item.kind === 'file') {
-      const file = item.getAsFile()
-      console.log('粘贴的文件:', file)
+      // const file = item.getAsFile()
     }
   }
 }

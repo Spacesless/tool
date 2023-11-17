@@ -9,13 +9,13 @@ const routes = [
         id: '0f1fa773-eca1-4034-93ae-0eb590bee9c6',
         name: '简繁转换',
         path: 'chinese-convert',
-        description: ''
+        description: '用于将汉字从简体转换为繁体或从繁体转换为简体的工具。'
       },
       {
         id: '04a0400f-c13c-4e34-a41e-5c1ae695eac1',
         name: '拼音',
         path: 'pinyin',
-        description: ''
+        description: '可以快速轻松地将汉字转换为拼音。\n支持多音字、姓氏、声母、韵母等'
       }
     ]
   },
@@ -53,7 +53,7 @@ const routes = [
         id: '220714c8-741b-4242-aa37-7e4ddefc32d8',
         name: '万年历',
         path: 'perpetual-calendar',
-        description: ''
+        description: '从1900年到2099年的万年历日历表，包括阳历、农历、节日、节气、五行等信息。'
       },
       {
         id: 'f8063ccc-7825-4e57-9916-da03b2bf5dcd',
@@ -219,49 +219,49 @@ const routes = [
         id: 'f222e614-5d59-48ac-89c8-8f51e1e5cde5',
         name: 'AES加密解密',
         path: 'aes-cipher',
-        description: ''
+        description: '使用AES算法来加密和解密文本，并支持多种加密模式和填充方法。'
       },
       {
         id: 'eaba16be-59f2-44a8-92f4-db85e1500d68',
         name: 'DES加密解密',
         path: 'des-cipher',
-        description: ''
+        description: '使用DES算法来加密和解密文本，并支持多种加密模式和填充方法。'
       },
       {
         id: 'd9e2131a-c35f-450d-b48e-428f2d71e3a0',
         name: 'TripleDES加密解密',
         path: 'triple-des-cipher',
-        description: ''
+        description: '使用TripleDES算法来加密和解密数据。'
       },
       {
         id: 'ca8c9a8f-b7d7-4a37-977f-cd49960f7786',
         name: 'Rabbit加密解密',
         path: 'rabbit-cipher',
-        description: ''
+        description: '对称加密工具，使用Rabbit流密码算法加密数据。'
       },
       {
         id: '2ad37441-1128-4968-88f7-d056ffbcc760',
         name: 'RC4加密解密',
         path: 'rc4-cipher',
-        description: ''
+        description: '使用RC4算法来加密输入的文本，并提供一些选项来定制加密过程。'
       },
       {
         id: 'bf664bca-07ba-4e48-9cb5-a48638b59184',
         name: 'RC4Drop加密解密',
         path: 'rc4-drop-cipher',
-        description: ''
+        description: '改进的RC4算法，它通过在加密过程中丢弃一定数量的密钥流，从而提高了RC4算法的安全性。'
       },
       {
         id: 'abf7bb65-3cb8-472c-80e5-4eb1df1aa487',
         name: '编码解码',
         path: 'format-coder',
-        description: ''
+        description: '支持Base64、Utf8、Latin1、Utf16、Utf16LE编码解码'
       },
       {
         id: 'cbdb0d7b-12e3-4fca-af4b-104a32e6390a',
         name: 'URL编码解码',
         path: 'url-coder',
-        description: ''
+        description: '对URL地址进行编码、解码。'
       }
     ]
   }

@@ -20,7 +20,6 @@
 
 <script setup lang="ts">
 import postalcodes from '@/assets/json/postalcode.json'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

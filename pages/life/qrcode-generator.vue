@@ -62,7 +62,6 @@
 import { toCanvas, QRCodeRenderersOptions } from 'qrcode'
 
 import downloadFile from '@/utils/download'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

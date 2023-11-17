@@ -4,18 +4,23 @@
   </h2>
   <el-row :gutter="24">
     <el-col
-      v-for="item in tool.children"
-      :key="item.path"
+      v-for="({ path, name, id, description }) in tool.children"
+      :key="path"
       :xs="24"
       :sm="12"
       :md="8"
       :lg="6"
       :xl="4"
     >
-      <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, item.path)">
-        <strong class="card-item__title">{{ item.name }}</strong>
-        <p class="card-item__description" :title="item.description">
-          {{ item.description }}
+      <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
+        <strong class="card-item__title">{{ name }}</strong>
+        <Icon
+          class="card-item__icon"
+          :name="calcFavorite(id) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
+          @click.stop.prevent="toggleFavorite(id)"
+        />
+        <p class="card-item__description" :title="description">
+          {{ description }}
         </p>
       </NuxtLink>
     </el-col>
@@ -23,24 +28,31 @@
 </template>
 
 <script lang="ts" setup>
-import { CategoryItem } from '@/types/tool'
-
-interface Props {
-  tool: CategoryItem
-}
-
-const { tool } = withDefaults(defineProps<Props>(), {
-  tool: () => ({
-    name: '',
-    path: '',
-    icon: '',
-    description: '',
-    children: []
-  })
+const { tool } = defineProps({
+  tool: {
+    type: Object,
+    default: () => {}
+  }
 })
 
 const getAbsolutePath = (parentPath: string, path: string) : string => {
   return `/${parentPath}/${path}`
+}
+
+const favoriteTools = useState('favoriteTools', (): string[] => [])
+const calcFavorite = (id: string) => {
+  return favoriteTools.value.includes(id)
+}
+const toggleFavorite = (id: string) => {
+  const isFavorite = calcFavorite(id)
+  if (isFavorite) {
+    const findIndex = favoriteTools.value.findIndex(item => item === id)
+    favoriteTools.value.splice(findIndex, 1)
+  } else {
+    favoriteTools.value.push(id)
+  }
+
+  localStorage.setItem('favoriteTools', favoriteTools.value.toString())
 }
 </script>
 
@@ -66,6 +78,7 @@ const getAbsolutePath = (parentPath: string, path: string) : string => {
   }
 
   &-item {
+    position: relative;
     display: block;
     height: 55px;
     margin-bottom: 24px;
@@ -77,9 +90,25 @@ const getAbsolutePath = (parentPath: string, path: string) : string => {
     &__title {
       display: block;
       margin-bottom: 8px;
+      padding-right: 24px;
+      overflow: hidden;
       color: var(--el-text-color-primary);
       font-weight: normal;
       font-size: 20px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      color: var(--el-text-color-primary);
+      font-size: 24px;
+
+      &:hover {
+        color: var(--el-color-primary);
+      }
     }
 
     &__description {

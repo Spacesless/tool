@@ -20,7 +20,6 @@
 
 <script setup lang="ts">
 import licenses from '@/assets/json/license.json'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

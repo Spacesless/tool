@@ -25,6 +25,13 @@ useState('allTools', () => {
   })
   return result
 })
+const favoriteTools = useState('favoriteTools', (): string[] => [])
+
+onBeforeMount(() => {
+  const storeTools = localStorage.getItem('favoriteTools')
+
+  favoriteTools.value = storeTools?.split(',') || []
+})
 </script>
 
 <style lang="scss">

@@ -22,8 +22,6 @@
 <script setup lang="ts">
 import { Solar, Lunar, LunarUtil } from 'lunar-typescript'
 
-import { useToolData } from '@/hooks/tool'
-
 const { currentTool } = useToolData()
 
 type TableData = Array<{

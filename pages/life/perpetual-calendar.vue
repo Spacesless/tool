@@ -1,44 +1,55 @@
 <template>
   <ToolBanner :current-tool="currentTool" />
 
-  <section class="section">
-    <el-calendar ref="calendar" v-model="dateTime">
-      <template #header>
-        <a-date-picker v-model="dateTime" size="small" type="year" format="YYYY" />
-        <a-date-picker v-model="dateTime" size="small" type="month" format="MM" />
-        <el-icon @click="selectDate('prev-year')">
-          <ArrowLeft />
-        </el-icon>
-        <el-icon @click="selectDate('prev-month')">
-          <ArrowRight />
-        </el-icon>
-        <span @click="selectDate('today')">今</span>
-      </template>
-      <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
-        <div
-          class="calender-item"
-          :class="{
-            'calender-item--holiday': data.isHoliday,
-            'canlender-item--work': data.isWork,
-            'canlender-item--weekend': data.isWeekend,
-            'canlender-item--selected': data.isSelected
-          }"
-        >
-          <p>{{ lunar.solarDay }}</p>
-          <p>{{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}</p>
-        </div>
-      </template>
-    </el-calendar>
+  <el-row class="section" tag="section">
+    <el-col :sm="24" :md="16">
+      <el-calendar ref="calendar" v-model="dateTime">
+        <template #header="{ date }">
+          <div class="calendar-header">
+            <div class="calendar-header__title">
+              {{ date }}
+            </div>
+            <div class="calendar-header-menu">
+              <el-date-picker v-model="dateTime" size="small" type="month" />
+              <el-icon @click="selectDate('prev-year')">
+                <ArrowLeft />
+              </el-icon>
+              <el-icon @click="selectDate('prev-month')">
+                <ArrowRight />
+              </el-icon>
+              <span v-show="isToday" @click="selectDate('today')">今</span>
+            </div>
+          </div>
+        </template>
+        <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
+          <div
+            class="calender-item"
+            :class="{
+              'calender-item--holiday': data.isHoliday,
+              'canlender-item--work': data.isWork,
+              'canlender-item--weekend': data.isWeekend,
+              'canlender-item--selected': data.isSelected
+            }"
+          >
+            <p>{{ lunar.solarDay }}</p>
+            <p>{{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}</p>
+          </div>
+        </template>
+      </el-calendar>
+    </el-col>
 
-    <div class="detail">
-      {{ dayData }}
-      <p class="detail-day" />
-      <p />
-      <p />
-      <p />
-      <p />
-    </div>
-  </section>
+    <el-col :sm="24" :md="8">
+      <div class="detail">
+        <p class="detail-day">
+          {{ dayData.day }}
+        </p>
+        <p>{{ dayData.date }} {{ dayData.cnWeek }}</p>
+        <p />
+        <p />
+        <p />
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup lang="ts">
@@ -46,8 +57,6 @@ import { Solar, SolarWeek, SolarUtil, LunarYear, HolidayUtil } from 'lunar-types
 import type { CalendarDateType, CalendarInstance } from 'element-plus'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
-
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 
@@ -84,6 +93,7 @@ function getDayOverview (datetime: Date) {
 }
 
 const dayData = computed(() => getDayDetail(dateTime.value))
+const isToday = computed(() => dayjs().isSame(dayjs(dateTime.value), 'day'))
 
 const weekCnEnum = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
 function getDayDetail (datetime: Date) {
@@ -99,9 +109,8 @@ function getDayDetail (datetime: Date) {
   const solarDay = solarInstance.getDay()
 
   const result = {
-    year: solarYear, // 公历年
+    date: `${solarYear}-${solarMonth}-${solarDay}`,
     leapYear: solarInstance.isLeapYear(), // 是否为闰年
-    month: solarMonth, // 公历月
     maxDayInMonth: SolarUtil.getDaysOfMonth(solarYear, solarMonth), // 公历当月天数
     astro: solarInstance.getXingZuo() + '座', // 星座
     cnWeek: weekCnEnum[solarWeek], // 星期（中文）
@@ -139,13 +148,8 @@ function getDayDetail (datetime: Date) {
   const shujiu = lunarInstance.getShuJiu()
 
   result.lunar = {
+    date: `${cnYear}${lunarInstance.getMonthInChinese() + '月'}${lunarInstance.getDayInChinese()}`,
     zodiac: lunarInstance.getYearShengXiao(), // 生肖
-    year: lunarYear, // 农历年
-    month: lunarMonth, // 农历月
-    day: lunarInstance.getDay(), // 农历日
-    cnYear: cnYear ? cnYear.replace(/〇/g, '零') : '', // 农历年（中文）
-    cnMonth: lunarInstance.getMonthInChinese() + '月', // 农历月（中文）
-    cnDay: lunarInstance.getDayInChinese(), // 农历日（中文）
     cyclicalYear: lunarInstance.getYearInGanZhi(), // 干支纪年
     cyclicalMonth: lunarInstance.getMonthInGanZhi(), // 干支纪月
     cyclicalDay: lunarInstance.getDayInGanZhi(), // 干支纪日
@@ -162,8 +166,8 @@ function getDayDetail (datetime: Date) {
 
   // 老黄历
   result.almanac = {
-    yi: lunarInstance.getDayYi().join(' '), // 宜,
-    ji: lunarInstance.getDayJi().join(' '), // 忌,
+    yi: lunarInstance.getDayYi().join('、'), // 宜,
+    ji: lunarInstance.getDayJi().join('、'), // 忌,
     chong: '生肖冲' + lunarInstance.getDayChongDesc(), // 冲,
     sha: '煞' + lunarInstance.getDaySha(), // 煞,
     nayin: lunarInstance.getDayNaYin(), // 纳音

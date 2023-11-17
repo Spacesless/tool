@@ -52,7 +52,6 @@
 
 <script setup lang="ts">
 import { pinyin } from 'pinyin-pro'
-import { useToolData } from '@/hooks/tool'
 
 interface BasicOptions {
   type: 'string' | 'array' | 'all';

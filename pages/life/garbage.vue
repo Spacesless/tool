@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import garbages from '@/assets/json/garbage.json'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

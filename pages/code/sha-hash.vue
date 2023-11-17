@@ -69,8 +69,6 @@
 import SHA1 from 'crypto-js/sha1'
 import SHA3 from 'crypto-js/sha3'
 
-import { useToolData } from '@/hooks/tool'
-
 const { currentTool } = useToolData()
 
 const form = reactive({

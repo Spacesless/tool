@@ -28,14 +28,15 @@ const { pending, data }: { pending: Ref<boolean>; data: Ref<any[]> } = await use
 
 type TableData = Array<{ name: string, jbsy: string, jyc: string, fyc: string }>
 
-const keyword = ref('一心')
+const keyword = ref('为所欲为')
 const tableData = ref<TableData>([])
 
 watch(() => pending.value, handleSearch)
 
 function handleSearch () {
   if (keyword.value) {
-    tableData.value = data.value.filter(item => item.name.includes(keyword.value))
+    const lastChar = keyword.value.slice(-1)
+    tableData.value = data.value.filter(item => item.name.endsWith(lastChar))
   } else {
     tableData.value = []
   }

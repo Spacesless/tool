@@ -80,6 +80,11 @@ const toggleCollapse = () => {
 </script>
 
 <style lang="scss" scoped>
+@font-face {
+  font-family: Bega;
+  src: url('@/assets/font/Bega-Light.otf');
+}
+
 .sider {
   position: fixed;
   top: 0;

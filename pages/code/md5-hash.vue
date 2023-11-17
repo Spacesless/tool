@@ -46,8 +46,6 @@
 <script lang="ts" setup>
 import MD5 from 'crypto-js/md5'
 
-import { useToolData } from '@/hooks/tool'
-
 const { currentTool } = useToolData()
 
 const form = reactive({

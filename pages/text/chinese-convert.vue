@@ -35,7 +35,6 @@
 
 <script setup lang="ts">
 import * as OpenCC from 'opencc-js'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

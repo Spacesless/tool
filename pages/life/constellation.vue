@@ -96,7 +96,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import constellation from '@/assets/json/xing-zuo.json'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

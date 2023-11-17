@@ -41,7 +41,6 @@
 
 <script lang="ts" setup>
 import CryptoJS from 'crypto-js'
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 

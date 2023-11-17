@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useToolData } from '@/hooks/tool'
 
 const { currentTool } = useToolData()
 
