@@ -23,7 +23,6 @@
       <el-descriptions
         v-if="result.name"
         :column="1"
-        size="large"
         border
       >
         <el-descriptions-item label="星座名称" min-width="120">
