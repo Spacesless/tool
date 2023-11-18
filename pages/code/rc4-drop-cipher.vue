@@ -1,11 +1,9 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
-
-  <EncryptDecrypt algorithm="RC4Drop" />
+  <ToolLayout>
+    <EncryptDecrypt algorithm="RC4Drop" />
+  </ToolLayout>>
 </template>
 
 <script lang="ts" setup>
 import EncryptDecrypt from '@/components/tool/EncryptDecrypt.vue'
-
-const { currentTool } = useToolData()
 </script>

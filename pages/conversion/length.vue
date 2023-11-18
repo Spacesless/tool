@@ -1,13 +1,11 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
-
-  <ConvertContent :options="options" default-unit="m" />
+  <ToolLayout>
+    <ConvertContent :options="options" default-unit="m" />
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
-
-const { currentTool } = useToolData()
 
 const options = reactive([
   {

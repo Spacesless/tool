@@ -1,103 +1,99 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
+  <ToolLayout>
+    <section class="section">
+      <el-form label-width="80px">
+        <el-form-item>
+          <el-radio-group v-model="type">
+            <el-radio-button label="date">
+              按日期搜索
+            </el-radio-button>
+            <el-radio-button label="string">
+              按关键字搜索
+            </el-radio-button>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item v-if="type === 'date'" label="日期">
+          <el-date-picker v-model="dateTime" @change="handleSearch" />
+        </el-form-item>
+        <el-form-item v-else label="关键字">
+          <el-input v-model="keyword" @input="handleSearch" />
+        </el-form-item>
+      </el-form>
 
-  <section class="section">
-    <el-form label-width="80px">
-      <el-form-item>
-        <el-radio-group v-model="type">
-          <el-radio-button label="date">
-            按日期搜索
-          </el-radio-button>
-          <el-radio-button label="string">
-            按关键字搜索
-          </el-radio-button>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item v-if="type === 'date'" label="日期">
-        <el-date-picker v-model="dateTime" @change="handleSearch" />
-      </el-form-item>
-      <el-form-item v-else label="关键字">
-        <el-input v-model="keyword" @input="handleSearch" />
-      </el-form-item>
-    </el-form>
-
-    <el-descriptions
-      v-if="result.name"
-      :column="1"
-      size="large"
-      border
-    >
-      <el-descriptions-item label="星座名称" min-width="120">
-        {{ result.name }}
-      </el-descriptions-item>
-      <el-descriptions-item label="公历范围">
-        {{ result.range }}
-      </el-descriptions-item>
-      <el-descriptions-item label="特点">
-        {{ result.zxtd }}
-      </el-descriptions-item>
-      <el-descriptions-item label="属性">
-        {{ result.sssx }}
-      </el-descriptions-item>
-      <el-descriptions-item label="掌管宫位">
-        {{ result.zggw }}
-      </el-descriptions-item>
-      <el-descriptions-item label="阴阳性">
-        {{ result.yysx }}
-      </el-descriptions-item>
-      <el-descriptions-item label="最大特征">
-        {{ result.zdtz }}
-      </el-descriptions-item>
-      <el-descriptions-item label="主管星">
-        {{ result.zgxx }}
-      </el-descriptions-item>
-      <el-descriptions-item label="颜色">
-        {{ result.xyys }}
-      </el-descriptions-item>
-      <el-descriptions-item label="珠宝">
-        {{ result.jssw }}
-      </el-descriptions-item>
-      <el-descriptions-item label="幸运号码">
-        {{ result.xyhm }}
-      </el-descriptions-item>
-      <el-descriptions-item label="金属">
-        {{ result.kyjs }}
-      </el-descriptions-item>
-      <el-descriptions-item label="基本表现">
-        {{ result.bx }}
-      </el-descriptions-item>
-      <el-descriptions-item label="优点">
-        {{ result.yd }}
-      </el-descriptions-item>
-      <el-descriptions-item label="缺点">
-        {{ result.qd }}
-      </el-descriptions-item>
-      <el-descriptions-item label="基本特质">
-        {{ result.jbtz }}
-      </el-descriptions-item>
-      <el-descriptions-item label="具体特质">
-        {{ result.jttz }}
-      </el-descriptions-item>
-      <el-descriptions-item label="行事风格">
-        {{ result.xsfg }}
-      </el-descriptions-item>
-      <el-descriptions-item label="个性缺点">
-        {{ result.gxmd }}
-      </el-descriptions-item>
-      <el-descriptions-item label="总体评价">
-        {{ result.zj }}
-      </el-descriptions-item>
-    </el-descriptions>
-  </section>
-
-  <GitalkComment />
+      <el-descriptions
+        v-if="result.name"
+        :column="1"
+        size="large"
+        border
+      >
+        <el-descriptions-item label="星座名称" min-width="120">
+          {{ result.name }}
+        </el-descriptions-item>
+        <el-descriptions-item label="公历范围">
+          {{ result.range }}
+        </el-descriptions-item>
+        <el-descriptions-item label="特点">
+          {{ result.zxtd }}
+        </el-descriptions-item>
+        <el-descriptions-item label="属性">
+          {{ result.sssx }}
+        </el-descriptions-item>
+        <el-descriptions-item label="掌管宫位">
+          {{ result.zggw }}
+        </el-descriptions-item>
+        <el-descriptions-item label="阴阳性">
+          {{ result.yysx }}
+        </el-descriptions-item>
+        <el-descriptions-item label="最大特征">
+          {{ result.zdtz }}
+        </el-descriptions-item>
+        <el-descriptions-item label="主管星">
+          {{ result.zgxx }}
+        </el-descriptions-item>
+        <el-descriptions-item label="颜色">
+          {{ result.xyys }}
+        </el-descriptions-item>
+        <el-descriptions-item label="珠宝">
+          {{ result.jssw }}
+        </el-descriptions-item>
+        <el-descriptions-item label="幸运号码">
+          {{ result.xyhm }}
+        </el-descriptions-item>
+        <el-descriptions-item label="金属">
+          {{ result.kyjs }}
+        </el-descriptions-item>
+        <el-descriptions-item label="基本表现">
+          {{ result.bx }}
+        </el-descriptions-item>
+        <el-descriptions-item label="优点">
+          {{ result.yd }}
+        </el-descriptions-item>
+        <el-descriptions-item label="缺点">
+          {{ result.qd }}
+        </el-descriptions-item>
+        <el-descriptions-item label="基本特质">
+          {{ result.jbtz }}
+        </el-descriptions-item>
+        <el-descriptions-item label="具体特质">
+          {{ result.jttz }}
+        </el-descriptions-item>
+        <el-descriptions-item label="行事风格">
+          {{ result.xsfg }}
+        </el-descriptions-item>
+        <el-descriptions-item label="个性缺点">
+          {{ result.gxmd }}
+        </el-descriptions-item>
+        <el-descriptions-item label="总体评价">
+          {{ result.zj }}
+        </el-descriptions-item>
+      </el-descriptions>
+    </section>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import constellation from '@/assets/json/xing-zuo.json'
-
-const { currentTool } = useToolData()
 
 interface RoleItem {
   name: string

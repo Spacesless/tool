@@ -1,25 +1,23 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
+  <ToolLayout>
+    <section class="section">
+      <div class="section-header">
+        <p class="section-header__label">
+          请输入生活垃圾：
+        </p>
+        <el-input v-model="keyword" clearable @change="handleSearch" />
+      </div>
 
-  <section class="section">
-    <div class="section-header">
-      <p class="section-header__label">
-        请输入生活垃圾：
-      </p>
-      <el-input v-model="keyword" clearable @change="handleSearch" />
-    </div>
-
-    <el-table :data="tableData" border>
-      <el-table-column prop="categroy" label="类别" />
-      <el-table-column prop="name" label="垃圾名称" />
-    </el-table>
-  </section>
+      <el-table :data="tableData" border>
+        <el-table-column prop="categroy" label="类别" />
+        <el-table-column prop="name" label="垃圾名称" />
+      </el-table>
+    </section>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import garbages from '@/assets/json/garbage.json'
-
-const { currentTool } = useToolData()
 
 interface GarbageItem {
   name: string

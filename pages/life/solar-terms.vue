@@ -1,25 +1,23 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
+  <ToolLayout>
+    <section class="section">
+      <div class="section-header">
+        <p class="section-header__label">
+          请选择年份：
+        </p>
+        <el-date-picker v-model="dateTime" type="year" @change="handleSearch" />
+      </div>
 
-  <section class="section">
-    <div class="section-header">
-      <p class="section-header__label">
-        请选择年份：
-      </p>
-      <el-date-picker v-model="dateTime" type="year" @change="handleSearch" />
-    </div>
-
-    <el-table :data="tableData" border>
-      <el-table-column prop="name" label="名称" />
-      <el-table-column prop="time" label="时间" />
-    </el-table>
-  </section>
+      <el-table :data="tableData" border>
+        <el-table-column prop="name" label="名称" />
+        <el-table-column prop="time" label="时间" />
+      </el-table>
+    </section>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import { Solar } from 'lunar-typescript'
-
-const { currentTool } = useToolData()
 
 type TableData = Array<{
   name: string

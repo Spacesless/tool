@@ -1,26 +1,24 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
+  <ToolLayout>
+    <section v-loading="pending" class="section">
+      <div class="section-header">
+        <p class="section-header__label">
+          请输入成语后缀：
+        </p>
+        <el-input v-model="keyword" clearable @change="handleSearch" />
+      </div>
 
-  <section v-loading="pending" class="section">
-    <div class="section-header">
-      <p class="section-header__label">
-        请输入成语：
-      </p>
-      <el-input v-model="keyword" clearable @change="handleSearch" />
-    </div>
-
-    <el-table :data="tableData" border :height="600">
-      <el-table-column prop="name" label="成语" width="120" />
-      <el-table-column prop="jbsy" label="基本释义" />
-      <el-table-column prop="jyc" label="近义词" />
-      <el-table-column prop="fyc" label="反义词" />
-    </el-table>
-  </section>
+      <el-table :data="tableData" border :height="600">
+        <el-table-column prop="name" label="成语" width="120" />
+        <el-table-column prop="jbsy" label="基本释义" />
+        <el-table-column prop="jyc" label="近义词" />
+        <el-table-column prop="fyc" label="反义词" />
+      </el-table>
+    </section>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
-const { currentTool } = useToolData()
-
 const { pending, data }: { pending: Ref<boolean>; data: Ref<any[]> } = await useFetch('/assets/json/idiom.json', {
   lazy: true,
   server: false

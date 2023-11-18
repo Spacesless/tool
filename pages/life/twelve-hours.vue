@@ -1,28 +1,26 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
+  <ToolLayout>
+    <section class="section">
+      <div class="section-header">
+        <el-date-picker v-model="dateTime" @change="handleSearch" />
+      </div>
 
-  <section class="section">
-    <div class="section-header">
-      <el-date-picker v-model="dateTime" @change="handleSearch" />
-    </div>
-
-    <el-table :data="tableData" border>
-      <el-table-column prop="hours" label="时段" />
-      <el-table-column prop="hour" label="时辰" />
-      <el-table-column prop="yi" label="宜" />
-      <el-table-column prop="ji" label="忌" />
-      <el-table-column prop="chong" label="冲" />
-      <el-table-column prop="sha" label="煞" />
-      <el-table-column prop="nayin" label="纳音" />
-      <el-table-column prop="jiuxing" label="九星" />
-    </el-table>
-  </section>
+      <el-table :data="tableData" border>
+        <el-table-column prop="hours" label="时段" />
+        <el-table-column prop="hour" label="时辰" />
+        <el-table-column prop="yi" label="宜" />
+        <el-table-column prop="ji" label="忌" />
+        <el-table-column prop="chong" label="冲" />
+        <el-table-column prop="sha" label="煞" />
+        <el-table-column prop="nayin" label="纳音" />
+        <el-table-column prop="jiuxing" label="九星" />
+      </el-table>
+    </section>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import { Solar, Lunar, LunarUtil } from 'lunar-typescript'
-
-const { currentTool } = useToolData()
 
 type TableData = Array<{
   date: string

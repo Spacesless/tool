@@ -1,55 +1,55 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
-
-  <el-row class="section" tag="section">
-    <el-col :sm="24" :md="16">
-      <el-calendar ref="calendar" v-model="dateTime">
-        <template #header="{ date }">
-          <div class="calendar-header">
-            <div class="calendar-header__title">
-              {{ date }}
+  <ToolLayout>
+    <el-row class="section" tag="section">
+      <el-col :sm="24" :md="16">
+        <el-calendar ref="calendar" v-model="dateTime">
+          <template #header="{ date }">
+            <div class="calendar-header">
+              <div class="calendar-header__title">
+                {{ date }}
+              </div>
+              <div class="calendar-header-menu">
+                <el-date-picker v-model="dateTime" size="small" type="month" />
+                <el-icon @click="selectDate('prev-year')">
+                  <ArrowLeft />
+                </el-icon>
+                <el-icon @click="selectDate('prev-month')">
+                  <ArrowRight />
+                </el-icon>
+                <span v-show="isToday" @click="selectDate('today')">今</span>
+              </div>
             </div>
-            <div class="calendar-header-menu">
-              <el-date-picker v-model="dateTime" size="small" type="month" />
-              <el-icon @click="selectDate('prev-year')">
-                <ArrowLeft />
-              </el-icon>
-              <el-icon @click="selectDate('prev-month')">
-                <ArrowRight />
-              </el-icon>
-              <span v-show="isToday" @click="selectDate('today')">今</span>
+          </template>
+          <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
+            <div
+              class="calender-item"
+              :class="{
+                'calender-item--holiday': data.isHoliday,
+                'canlender-item--work': data.isWork,
+                'canlender-item--weekend': data.isWeekend,
+                'canlender-item--selected': data.isSelected
+              }"
+            >
+              <p>{{ lunar.solarDay }}</p>
+              <p>{{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}</p>
             </div>
-          </div>
-        </template>
-        <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
-          <div
-            class="calender-item"
-            :class="{
-              'calender-item--holiday': data.isHoliday,
-              'canlender-item--work': data.isWork,
-              'canlender-item--weekend': data.isWeekend,
-              'canlender-item--selected': data.isSelected
-            }"
-          >
-            <p>{{ lunar.solarDay }}</p>
-            <p>{{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}</p>
-          </div>
-        </template>
-      </el-calendar>
-    </el-col>
+          </template>
+        </el-calendar>
+      </el-col>
 
-    <el-col :sm="24" :md="8">
-      <div class="detail">
-        <p class="detail-day">
-          {{ dayData.day }}
-        </p>
-        <p>{{ dayData.date }} {{ dayData.cnWeek }}</p>
-        <p />
-        <p />
-        <p />
-      </div>
-    </el-col>
-  </el-row>
+      <el-col :sm="24" :md="8">
+        <div class="detail">
+          <p class="detail-day">
+            {{ dayData.day }}
+          </p>
+          <p>{{ dayData.date }} {{ dayData.cnWeek }}</p>
+          <p />
+          <p />
+          <p />
+        </div>
+      </el-col>
+    </el-row>
+  </ToolLayout>
 </template>
 
 <script setup lang="ts">
@@ -57,8 +57,6 @@ import { Solar, SolarWeek, SolarUtil, LunarYear, HolidayUtil } from 'lunar-types
 import type { CalendarDateType, CalendarInstance } from 'element-plus'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
-
-const { currentTool } = useToolData()
 
 const dateTime = ref(new Date())
 const calendar = ref<CalendarInstance>()

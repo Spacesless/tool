@@ -1,11 +1,9 @@
 <template>
-  <ToolBanner :current-tool="currentTool" />
-
-  <EncryptDecrypt algorithm="Rabbit" />
+  <ToolLayout>
+    <EncryptDecrypt algorithm="Rabbit" />
+  </ToolLayout>>
 </template>
 
 <script lang="ts" setup>
 import EncryptDecrypt from '@/components/tool/EncryptDecrypt.vue'
-
-const { currentTool } = useToolData()
 </script>
