@@ -44,6 +44,12 @@ const routes = [
         description: '根据成语查询详细信息，如：详解、同义词、反义词、读音等信息；\n目前总计约收录4.5万组成语。'
       },
       {
+        id: '0bd170e9-67ad-4336-b9df-5f4293003467',
+        name: '成语接龙',
+        path: 'idiom-jielong',
+        description: '支持输入整个成语，或只输入成语中的末尾一个字，返回符合接龙条件的成语；\n目前总计约收录4.5万组成语。'
+      },
+      {
         id: 'e11519b0-015f-4ded-8b51-1d55db6f63f6',
         name: '车牌归属地',
         path: 'license-plate-territory',

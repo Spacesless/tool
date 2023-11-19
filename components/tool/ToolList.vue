@@ -36,7 +36,7 @@ const { tool } = defineProps({
 })
 
 const getAbsolutePath = (parentPath: string, path: string) : string => {
-  return `/${parentPath}/${path}`
+  return parentPath ? `/${parentPath}/${path}` : path
 }
 
 const favoriteTools = useState('favoriteTools', (): string[] => [])

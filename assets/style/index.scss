@@ -61,6 +61,46 @@ html {
   }
 
   h2 {
+    padding: 6px 0 8px;
     font-weight: normal;
   }
+
+  ul {
+    li {
+      position: relative;
+      padding-left: 24px;
+
+      &::before {
+        position: absolute;
+        top: 13px;
+        left: 6px;
+        width: 6px;
+        height: 6px;
+        background-color: var(--el-color-primary);
+        border-radius: 50%;
+        content: '';
+      }
+    }
+  }
+
+  blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    background: var(--el-bg-color-page);;
+    border-left: 3px solid var(--el-color-primary);
+    border-radius: 4px;
+  }
+
+  a {
+    color: var(--el-color-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pagination {
+  padding-top: 16px;
 }

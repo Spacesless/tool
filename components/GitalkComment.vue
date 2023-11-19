@@ -26,4 +26,10 @@ onMounted(() => {
 .section {
   padding-top: 0;
 }
+
+:deep(.gt-container) {
+  .gt-header-textarea {
+    background-color: var(--el-bg-color-page);
+  }
+}
 </style>
