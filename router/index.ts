@@ -20,6 +20,34 @@ const routes = [
     ]
   },
   {
+    name: '办公辅助',
+    path: 'office',
+    icon: 'solar:document-text-outline',
+    description: '',
+    children: [
+      {
+        id: '82ea5afa-937b-4899-8569-7d38cc88c853',
+        name: '图像识别',
+        path: 'image-ocr',
+        description: ''
+      }
+    ]
+  },
+  {
+    name: '编程开发',
+    path: 'program',
+    icon: 'solar:programming-outline',
+    description: '',
+    children: [
+      {
+        id: '78f1db8d-7fec-45e9-b98c-4872b442c918',
+        name: 'UUID/ULID/NANOID生成器',
+        path: 'uuid-generator',
+        description: ''
+      }
+    ]
+  },
+  {
     name: '生活工具',
     path: 'life',
     icon: 'ph:calendar',
@@ -84,6 +112,20 @@ const routes = [
         name: '十二时辰',
         path: 'twelve-hours',
         description: '12个时辰的时段、宜忌黄历等信息'
+      }
+    ]
+  },
+  {
+    name: '图片工具',
+    path: 'image',
+    icon: 'carbon:image',
+    description: '',
+    children: [
+      {
+        id: '630eb68f-e0fa-5ecc-887a-7c7a62614681',
+        name: '图像裁剪/翻转/旋转',
+        path: 'image-cropper',
+        description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分'
       }
     ]
   },
