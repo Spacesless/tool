@@ -65,14 +65,14 @@ export default {
   }
 
   &-item {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     margin-top: 16px;
     color: var(--el-text-color-regular);
     font-size: 20px;
-    line-height: 40px;
+    line-height: 42px;
     text-align: center;
-    background-color: var(--el-color-white);
+    background-color: var(--el-bg-color);
     border-radius: 50%;
     outline: none;
     box-shadow: var(--el-box-shadow-light);

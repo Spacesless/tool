@@ -22,11 +22,12 @@
     <el-scrollbar class="sider-scrollbar">
       <el-menu
         class="sider-menu"
+        :default-active="activeMenu"
         :collapse="isCollapse"
         :default-openeds="['category']"
       >
         <NuxtLink class="sider-menu-link" to="/">
-          <el-menu-item index="home">
+          <el-menu-item index="">
             <Icon class="sider-menu__icon" name="iconamoon:home-light" />
             <template #title>
               首页
@@ -69,10 +70,16 @@
 <script lang="ts" setup>
 import { ToolCategory } from '@/types/tool'
 
+const route = useRoute()
 const colorMode = useColorMode()
 const toolList = useState('tools', (): ToolCategory => [])
 
 const isCollapse = useState('collapse', () => false)
+
+const activeMenu = computed(() => {
+  const fullPath = route.path
+  return fullPath.replace('/', '').split('/').shift()
+})
 
 const toggleCollapse = () => {
   isCollapse.value = !isCollapse.value

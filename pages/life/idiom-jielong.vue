@@ -53,7 +53,7 @@ watch(() => pending.value, handleSearch)
 function handleSearch () {
   if (keyword.value) {
     const lastChar = keyword.value.slice(-1)
-    tableData.value = data.value.filter(item => item.name.endsWith(lastChar))
+    tableData.value = data.value.filter(item => item.name.startsWith(lastChar))
   } else {
     tableData.value = []
   }
