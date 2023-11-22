@@ -1,54 +1,48 @@
 <template>
   <el-upload
-    class="upload-demo"
-    drag
     action=""
     :auto-upload="false"
-    multiple
-    @on-change="onFileChange"
+    :accept="accept"
+    :drag="drag"
+    :multiple="multiple"
+    :show-file-list="false"
+    :on-change="handleChange"
   >
-    <el-icon class="el-icon--upload">
-      <upload-filled />
-    </el-icon>
-    <div class="el-upload__text">
-      Drop file here or <em>click to upload</em>
-    </div>
-    <template #tip>
-      <div class="el-upload__tip">
-        jpg/png files with a size less than 500kb
+    <template v-if="drag">
+      <el-icon class="el-icon--upload">
+        <upload-filled />
+      </el-icon>
+      <div class="el-upload__text">
+        Drop file here or <em>click to upload</em>
       </div>
     </template>
+    <el-button v-else type="primary">
+      上传文件
+    </el-button>
   </el-upload>
 </template>
 
 <script lang="ts" setup>
 import { UploadFilled } from '@element-plus/icons-vue'
+import type { UploadProps } from 'element-plus'
 
-interface Props {
-  accept: string
-  multiple: boolean
-}
-
-withDefaults(defineProps<Props>(), {
-  accept: '',
-  multiple: false
-})
-
-onMounted(() => {
-  document.addEventListener('paste', pasteHandler)
-})
-onUnmounted(() => {
-  document.removeEventListener('paste', pasteHandler)
-})
-const pasteHandler = (event: ClipboardEvent) => {
-  const items = event.clipboardData?.items || []
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    if (item.kind === 'file') {
-      // const file = item.getAsFile()
-    }
+const { accept, drag, multiple } = defineProps({
+  accept: {
+    type: String,
+    default: ''
+  },
+  drag: {
+    type: Boolean,
+    default: false
+  },
+  multiple: {
+    type: Boolean,
+    default: false
   }
-}
+})
+const emit = defineEmits(['changeFile'])
 
-const onFileChange = () => {}
+const handleChange: UploadProps['onChange'] = (uploadFile, uploadFiles) => {
+  emit('changeFile', { uploadFile, uploadFiles })
+}
 </script>

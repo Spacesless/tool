@@ -15,7 +15,8 @@ onMounted(() => {
     owner: 'Spacesless',
     admin: ['Spacesless'],
     id: location.pathname, // Ensure uniqueness and length less than 50
-    distractionFreeMode: false // Facebook-like distraction free mode
+    distractionFreeMode: false, // Facebook-like distraction free mode
+    proxy: 'https://proxy.timelessq.workers.dev/?https://github.com/login/oauth/access_token'
   })
 
   gitalk.render('gitalk-container')

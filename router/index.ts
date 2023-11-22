@@ -41,9 +41,9 @@ const routes = [
     children: [
       {
         id: '78f1db8d-7fec-45e9-b98c-4872b442c918',
-        name: 'UUID/ULID/NANOID生成器',
+        name: 'UUID/NANOID生成器',
         path: 'uuid-generator',
-        description: ''
+        description: '支持生成指定数量的UUID、NANOID；\n支持生成不同版本的UUID，包括V1、V3、V4和V5。'
       }
     ]
   },

@@ -13,6 +13,7 @@
     "@element-plus/nuxt": "^1.0.6",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/google-adsense": "^3.0.0",
+    "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.10",
     "element-plus": "^2.3.14",
     "file-saver": "^2.0.5",
@@ -32,11 +33,13 @@
     "@types/file-saver": "^2.0.7",
     "@types/opencc-js": "^1.0.2",
     "@types/qrcode": "^1.5.0",
+    "@types/uuid": "^9.0.7",
     "convert-units": "^2.3.4",
     "cropperjs": "^1.6.1",
     "crypto-js": "^4.1.1",
     "eslint": "^8.51.0",
     "lunar-typescript": "^1.6.10",
+    "nanoid": "^5.0.3",
     "opencc-js": "^1.0.5",
     "pinyin-pro": "^3.17.0",
     "postcss-html": "^1.5.0",
@@ -47,6 +50,7 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
-    "tesseract.js": "^5.0.2"
+    "tesseract.js": "^5.0.2",
+    "uuid": "^9.0.1"
   }
 }

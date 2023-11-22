@@ -2,6 +2,13 @@
   <ToolLayout>
     <section class="section">
       <el-form :model="form" label-width="80px">
+        <el-form-item label="输入内容">
+          <el-input
+            v-model="form.content"
+            :rows="6"
+            type="textarea"
+          />
+        </el-form-item>
         <el-form-item label="哈希算法">
           <el-radio-group v-model="form.algorithm">
             <el-radio-button :label="1">
@@ -27,19 +34,6 @@
               大写
             </el-radio>
           </el-radio-group>
-        </el-form-item>
-        <el-form-item label="输入内容">
-          <el-input
-            v-model="form.content"
-            :rows="6"
-            type="textarea"
-            @keyup.enter="handleHash"
-          />
-        </el-form-item>
-        <el-form-item label=" ">
-          <el-button type="primary" @click="handleHash">
-            处理
-          </el-button>
         </el-form-item>
         <el-form-item label="输入内容">
           <el-input
@@ -69,11 +63,16 @@ import SHA3 from 'crypto-js/sha3'
 const form = reactive({
   algorithm: 1,
   textCase: 'lower',
-  content: ''
+  content: '666'
 })
 const result = ref('')
 
-const handleHash = () => {
+watch(() => form, handleHash, {
+  deep: true,
+  immediate: true
+})
+
+function handleHash () {
   const { algorithm, textCase, content } = form
 
   let hash = ''

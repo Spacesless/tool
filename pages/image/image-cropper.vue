@@ -1,7 +1,14 @@
 <template>
   <ToolLayout>
     <section class="section">
-      <div>
+      <el-space class="section-header" :size="16">
+        <UploadFile @change-file="onFileChange" />
+        <el-button @click="handleSave">
+          保存
+        </el-button>
+      </el-space>
+
+      <div class="cropper-wrapper">
         <canvas id="cropper" />
       </div>
     </section>
@@ -11,16 +18,32 @@
 <script setup lang="ts">
 import 'cropperjs/dist/cropper.css'
 import Cropper from 'cropperjs'
+import type { UploadFile } from 'element-plus'
 
+import downloadFile from '@/utils/download'
+
+let cropper: Cropper
 onMounted(() => {
   const image = document.getElementById('cropper') as HTMLImageElement
-  const cropper = new Cropper(image, {
+  cropper = new Cropper(image, {
 
   })
-
-  // eslint-disable-next-line no-console
-  console.log(cropper)
 })
+
+const onFileChange = ({ uploadFile }: { uploadFile: UploadFile }) => {
+  if (uploadFile.raw) {
+    const fileUrl = URL.createObjectURL(uploadFile.raw)
+
+    cropper.replace(fileUrl)
+  }
+}
+
+const handleSave = () => {
+  const croppedCanvas = cropper.getCroppedCanvas()
+  const imageData = croppedCanvas.toDataURL('image/png')
+
+  downloadFile([{ file: imageData }], 'cropper.png')
+}
 </script>
 
 <style lang="scss" scoped>

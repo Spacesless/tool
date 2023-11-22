@@ -11,10 +11,10 @@
             />
           </el-form-item>
           <el-form-item label="宽度">
-            <el-input-number v-model="form.width" :min="10" :max="4096" />
+            <el-input-number v-model="form.width" :min="10" :max="4096" controls-position="right" />
           </el-form-item>
           <el-form-item label="外部间距">
-            <el-input-number v-model="form.margin" :min="0" :max="form.width" />
+            <el-input-number v-model="form.margin" :min="0" :max="form.width" controls-position="right" />
           </el-form-item>
           <el-form-item label="纠错级别">
             <el-radio-group v-model="form.errorCorrectionLevel">
