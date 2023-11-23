@@ -89,7 +89,7 @@ const toggleCollapse = () => {
 <style lang="scss" scoped>
 @font-face {
   font-family: Bega;
-  src: url('@/assets/font/Bega-Light.otf');
+  src: url('@/assets/font/Bega-Light.ttf');
 }
 
 .sider {
