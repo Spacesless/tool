@@ -16,125 +16,39 @@ const routes = [
         name: '拼音',
         path: 'pinyin',
         description: '可以快速轻松地将汉字转换为拼音。\n支持多音字、姓氏、声母、韵母等'
+      },
+      {
+        id: '3712b442-20ef-414d-bb66-b6076186cfbb',
+        name: '随机字符串',
+        path: 'random-string',
+        description: '生成随机字符串，支持设置数量和字典。'
       }
     ]
   },
   {
-    name: '办公辅助',
-    path: 'office',
-    icon: 'solar:document-text-outline',
+    name: '数学计算',
+    path: 'number',
+    icon: 'octicon:number-24',
     description: '',
     children: [
       {
-        id: '82ea5afa-937b-4899-8569-7d38cc88c853',
-        name: '图像识别',
-        path: 'image-ocr',
-        description: ''
-      }
-    ]
-  },
-  {
-    name: '编程开发',
-    path: 'program',
-    icon: 'solar:programming-outline',
-    description: '',
-    children: [
-      {
-        id: '78f1db8d-7fec-45e9-b98c-4872b442c918',
-        name: 'UUID/NANOID生成器',
-        path: 'uuid-generator',
-        description: '支持生成指定数量的UUID、NANOID；\n支持生成不同版本的UUID，包括V1、V3、V4和V5。'
-      }
-    ]
-  },
-  {
-    name: '生活工具',
-    path: 'life',
-    icon: 'ph:calendar',
-    description: '',
-    children: [
-      {
-        id: '0f01528e-5a20-4e01-b241-7b5db2058719',
-        name: '星座运势',
-        path: 'constellation',
-        description: '十二星座每日、每月、每年运势；\n根据日期或星座名称，查询星座详细信息。'
+        id: '9603dd29-1d56-4b98-92eb-986b1224dc31',
+        name: '大写数字',
+        path: 'capitalized-amount',
+        description: '数字金额转为大写，最大只支持到千亿。'
       },
       {
-        id: '26969e75-92ae-47b1-8f0d-6e90c8b29e97',
-        name: '生活垃圾',
-        path: 'garbage',
-        description: '生活垃圾分类查询，可回收物、有害垃圾、湿垃圾、干垃圾'
+        id: 'b77b1d53-55fa-469d-a126-92dff48bde18',
+        name: '随机数字',
+        path: 'random-number',
+        description: '返回指定范围的随机数。'
       },
       {
-        id: 'cf87456b-71d0-4599-93e2-d50a8e1ececc',
-        name: '成语大全',
-        path: 'idioms',
-        description: '根据成语查询详细信息，如：详解、同义词、反义词、读音等信息；\n目前总计约收录4.5万组成语。'
+        id: '04b9a0a1-ebb2-47f5-b672-86a21cf92ffe',
+        name: '千分位格式',
+        path: 'thousandth-percentile',
+        description: '数值千分位格式化，支持小数点。'
       },
-      {
-        id: '0bd170e9-67ad-4336-b9df-5f4293003467',
-        name: '成语接龙',
-        path: 'idiom-jielong',
-        description: '支持输入整个成语，或只输入成语中的末尾一个字，返回符合接龙条件的成语；\n目前总计约收录4.5万组成语。'
-      },
-      {
-        id: 'e11519b0-015f-4ded-8b51-1d55db6f63f6',
-        name: '车牌归属地',
-        path: 'license-plate-territory',
-        description: '根据国内车牌号或车牌前缀查询所属归属省份城市'
-      },
-      {
-        id: '220714c8-741b-4242-aa37-7e4ddefc32d8',
-        name: '万年历',
-        path: 'perpetual-calendar',
-        description: '从1900年到2099年的万年历日历表，包括阳历、农历、节日、节气、五行等信息。'
-      },
-      {
-        id: 'f8063ccc-7825-4e57-9916-da03b2bf5dcd',
-        name: '邮政编码',
-        path: 'postcode',
-        description: '邮政编码信息查询，根据地区、邮政编码查询相关信息'
-      },
-      {
-        id: 'c1215523-6f71-4559-ac59-bc6f14319984',
-        name: '二维码生成',
-        path: 'qrcode-generator',
-        description: 'QRcode生成器是一种用于生成文本二维码的工具。\n用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。'
-      },
-      {
-        id: '3b1906b0-874f-462d-b7c5-c30ccbec2052',
-        name: '二十四节气',
-        path: 'solar-terms',
-        description: '二十四节气查询，根据年份查询相关信息'
-      },
-      {
-        id: 'a7a82359-d367-4c0a-9203-c78e948867ae',
-        name: '十二时辰',
-        path: 'twelve-hours',
-        description: '12个时辰的时段、宜忌黄历等信息'
-      }
-    ]
-  },
-  {
-    name: '图片工具',
-    path: 'image',
-    icon: 'carbon:image',
-    description: '',
-    children: [
-      {
-        id: '630eb68f-e0fa-5ecc-887a-7c7a62614681',
-        name: '图像裁剪/翻转/旋转',
-        path: 'image-cropper',
-        description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分'
-      }
-    ]
-  },
-  {
-    name: '数据换算',
-    path: 'conversion',
-    icon: 'fluent:convert-range-24-regular',
-    description: '',
-    children: [
       {
         id: '9d732fed-3f00-4e41-a0c1-d1ed9d09bc31',
         name: '角度换算',
@@ -242,6 +156,122 @@ const routes = [
         name: '无功功率换算',
         path: 'reactive-power',
         description: 'VAR、mVAR、kVAR、MVAR、GVAR换算'
+      }
+    ]
+  },
+  {
+    name: '办公辅助',
+    path: 'office',
+    icon: 'solar:document-text-outline',
+    description: '',
+    children: [
+      {
+        id: '82ea5afa-937b-4899-8569-7d38cc88c853',
+        name: '图像识别',
+        path: 'image-ocr',
+        description: ''
+      }
+    ]
+  },
+  {
+    name: '编程开发',
+    path: 'program',
+    icon: 'solar:programming-outline',
+    description: '',
+    children: [
+      {
+        id: '78f1db8d-7fec-45e9-b98c-4872b442c918',
+        name: 'UUID/NANOID生成器',
+        path: 'uuid-generator',
+        description: '支持生成指定数量的UUID、NANOID；\n支持生成不同版本的UUID，包括V1、V3、V4和V5。'
+      },
+      {
+        id: 'e8c4e89a-ca98-4bf9-a091-c54179f24ce7',
+        name: 'XSS',
+        path: 'xss',
+        description: '对 html 标签进行转义解决 xss 注入'
+      }
+    ]
+  },
+  {
+    name: '生活工具',
+    path: 'life',
+    icon: 'ph:calendar',
+    description: '',
+    children: [
+      {
+        id: '0f01528e-5a20-4e01-b241-7b5db2058719',
+        name: '星座运势',
+        path: 'constellation',
+        description: '十二星座每日、每月、每年运势；\n根据日期或星座名称，查询星座详细信息。'
+      },
+      {
+        id: '26969e75-92ae-47b1-8f0d-6e90c8b29e97',
+        name: '生活垃圾',
+        path: 'garbage',
+        description: '生活垃圾分类查询，可回收物、有害垃圾、湿垃圾、干垃圾'
+      },
+      {
+        id: 'cf87456b-71d0-4599-93e2-d50a8e1ececc',
+        name: '成语大全',
+        path: 'idioms',
+        description: '根据成语查询详细信息，如：详解、同义词、反义词、读音等信息；\n目前总计约收录4.5万组成语。'
+      },
+      {
+        id: '0bd170e9-67ad-4336-b9df-5f4293003467',
+        name: '成语接龙',
+        path: 'idiom-jielong',
+        description: '支持输入整个成语，或只输入成语中的末尾一个字，返回符合接龙条件的成语；\n目前总计约收录4.5万组成语。'
+      },
+      {
+        id: 'e11519b0-015f-4ded-8b51-1d55db6f63f6',
+        name: '车牌归属地',
+        path: 'license-plate-territory',
+        description: '根据国内车牌号或车牌前缀查询所属归属省份城市'
+      },
+      {
+        id: '220714c8-741b-4242-aa37-7e4ddefc32d8',
+        name: '万年历',
+        path: 'perpetual-calendar',
+        description: '从1900年到2099年的万年历日历表，包括阳历、农历、节日、节气、五行等信息。'
+      },
+      {
+        id: 'f8063ccc-7825-4e57-9916-da03b2bf5dcd',
+        name: '邮政编码',
+        path: 'postcode',
+        description: '邮政编码信息查询，根据地区、邮政编码查询相关信息'
+      },
+      {
+        id: 'c1215523-6f71-4559-ac59-bc6f14319984',
+        name: '二维码生成',
+        path: 'qrcode-generator',
+        description: 'QRcode生成器是一种用于生成文本二维码的工具。\n用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。'
+      },
+      {
+        id: '3b1906b0-874f-462d-b7c5-c30ccbec2052',
+        name: '二十四节气',
+        path: 'solar-terms',
+        description: '二十四节气查询，根据年份查询相关信息'
+      },
+      {
+        id: 'a7a82359-d367-4c0a-9203-c78e948867ae',
+        name: '十二时辰',
+        path: 'twelve-hours',
+        description: '12个时辰的时段、宜忌黄历等信息'
+      }
+    ]
+  },
+  {
+    name: '图片工具',
+    path: 'image',
+    icon: 'carbon:image',
+    description: '',
+    children: [
+      {
+        id: '630eb68f-e0fa-5ecc-887a-7c7a62614681',
+        name: '图像裁剪/翻转/旋转',
+        path: 'image-cropper',
+        description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分'
       }
     ]
   },

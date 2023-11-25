@@ -45,18 +45,18 @@ const setupWaifu2x = () => {
 
     // progress
     if (e.data.phase === 'scale' || e.data.phase === 'denoise') {
-      console.log(e.data)
+      // console.log(e.data)
       return
     }
     if (e.data.phase === 'decompose') {
-      console.log('Decomposing image')
+      // console.log('Decomposing image')
       return
     }
     if (e.data.phase === 'recompose') {
-      console.log('Recomposing image')
-      return
+      // console.log('Recomposing image')
+
     }
-    console.log('Received an unknown message from worker')
+    // console.log('Received an unknown message from worker')
   }
 }
 

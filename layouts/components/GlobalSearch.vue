@@ -15,22 +15,24 @@
     :append-to-body="true"
   >
     <div class="search-dialog-wrapper">
-      <el-select-v2
-        v-model="keyword"
-        class="search-dialog-select"
-        clearable
-        filterable
-        :options="options"
-        :height="232"
-        placeholder="输入关键字查找工具，如图片压缩"
-        size="large"
-        @change="onSelectChange"
-      >
-        <template #default="{ item }">
-          <p>{{ item.label }}</p>
-          <p>{{ item.value }}</p>
-        </template>
-      </el-select-v2>
+      <client-only>
+        <el-select-v2
+          v-model="keyword"
+          class="search-dialog-select"
+          clearable
+          filterable
+          :options="options"
+          :height="232"
+          placeholder="输入关键字查找工具，如图片压缩"
+          size="large"
+          @change="onSelectChange"
+        >
+          <template #default="{ item }">
+            <p>{{ item.label }}</p>
+            <p>{{ item.value }}</p>
+          </template>
+        </el-select-v2>
+      </client-only>
 
       <ul class="search-commands">
         <li>
