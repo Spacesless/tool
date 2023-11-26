@@ -21,7 +21,8 @@ const routes = [
         id: '3712b442-20ef-414d-bb66-b6076186cfbb',
         name: '随机字符串',
         path: 'random-string',
-        description: '生成随机字符串，支持设置数量和字典。'
+        description: '生成随机字符串，支持设置数量和字典。',
+        updateTime: '2023-11-26'
       }
     ]
   },
@@ -35,19 +36,22 @@ const routes = [
         id: '9603dd29-1d56-4b98-92eb-986b1224dc31',
         name: '大写数字',
         path: 'capitalized-amount',
-        description: '数字金额转为大写，最大只支持到千亿。'
+        description: '数字金额转为大写，最大只支持到千亿。',
+        updateTime: '2023-11-26'
       },
       {
         id: 'b77b1d53-55fa-469d-a126-92dff48bde18',
         name: '随机数字',
         path: 'random-number',
-        description: '返回指定范围的随机数。'
+        description: '返回指定范围的随机数。',
+        updateTime: '2023-11-26'
       },
       {
         id: '04b9a0a1-ebb2-47f5-b672-86a21cf92ffe',
         name: '千分位格式',
         path: 'thousandth-percentile',
-        description: '数值千分位格式化，支持小数点。'
+        description: '数值千分位格式化，支持小数点。',
+        updateTime: '2023-11-26'
       },
       {
         id: '9d732fed-3f00-4e41-a0c1-d1ed9d09bc31',
@@ -159,20 +163,20 @@ const routes = [
       }
     ]
   },
-  {
-    name: '办公辅助',
-    path: 'office',
-    icon: 'solar:document-text-outline',
-    description: '',
-    children: [
-      {
-        id: '82ea5afa-937b-4899-8569-7d38cc88c853',
-        name: '图像识别',
-        path: 'image-ocr',
-        description: ''
-      }
-    ]
-  },
+  // {
+  //   name: '办公辅助',
+  //   path: 'office',
+  //   icon: 'solar:document-text-outline',
+  //   description: '',
+  //   children: [
+  //     {
+  //       id: '82ea5afa-937b-4899-8569-7d38cc88c853',
+  //       name: '图像识别',
+  //       path: 'image-ocr',
+  //       description: ''
+  //     }
+  //   ]
+  // },
   {
     name: '编程开发',
     path: 'program',
@@ -189,7 +193,8 @@ const routes = [
         id: 'e8c4e89a-ca98-4bf9-a091-c54179f24ce7',
         name: 'XSS',
         path: 'xss',
-        description: '对 html 标签进行转义解决 xss 注入'
+        description: '对 html 标签进行转义解决 xss 注入',
+        updateTime: '2023-11-26'
       }
     ]
   },
@@ -271,7 +276,8 @@ const routes = [
         id: '630eb68f-e0fa-5ecc-887a-7c7a62614681',
         name: '图像裁剪/翻转/旋转',
         path: 'image-cropper',
-        description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分'
+        description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分',
+        updateTime: '2023-11-26'
       }
     ]
   },
