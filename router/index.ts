@@ -163,20 +163,26 @@ const routes = [
       }
     ]
   },
-  // {
-  //   name: '办公辅助',
-  //   path: 'office',
-  //   icon: 'solar:document-text-outline',
-  //   description: '',
-  //   children: [
-  //     {
-  //       id: '82ea5afa-937b-4899-8569-7d38cc88c853',
-  //       name: '图像识别',
-  //       path: 'image-ocr',
-  //       description: ''
-  //     }
-  //   ]
-  // },
+  {
+    name: '办公辅助',
+    path: 'office',
+    icon: 'solar:document-text-outline',
+    description: '',
+    children: [
+      {
+        id: 'c1215523-6f71-4559-ac59-bc6f14319984',
+        name: '二维码生成',
+        path: 'qrcode-generator',
+        description: 'QRcode生成器是一种用于生成文本二维码的工具。\n用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。'
+      },
+      {
+        id: '82ea5afa-937b-4899-8569-7d38cc88c853',
+        name: '二维码识别',
+        path: 'qrcode-reader',
+        description: '上传扫描二维码图片，识别二维码中相关的信息或内容'
+      }
+    ]
+  },
   {
     name: '编程开发',
     path: 'program',
@@ -247,12 +253,6 @@ const routes = [
         description: '邮政编码信息查询，根据地区、邮政编码查询相关信息'
       },
       {
-        id: 'c1215523-6f71-4559-ac59-bc6f14319984',
-        name: '二维码生成',
-        path: 'qrcode-generator',
-        description: 'QRcode生成器是一种用于生成文本二维码的工具。\n用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。'
-      },
-      {
         id: '3b1906b0-874f-462d-b7c5-c30ccbec2052',
         name: '二十四节气',
         path: 'solar-terms',
@@ -278,6 +278,12 @@ const routes = [
         path: 'image-cropper',
         description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分',
         updateTime: '2023-11-26'
+      },
+      {
+        id: '221eb77d-61b3-4757-af12-9a5a0c81f9e3',
+        name: '图片放大',
+        path: 'waifu2x',
+        description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大'
       }
     ]
   },

@@ -10,7 +10,6 @@
       :sm="12"
       :md="8"
       :lg="6"
-      :xl="4"
     >
       <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
         <strong class="card-item__title">{{ name }}</strong>
