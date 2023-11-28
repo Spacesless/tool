@@ -111,12 +111,12 @@ function setHeight (cur: number | undefined = 0) {
   })
 }
 
-function onOffsetXChnage (cur: number | undefined = 0, prev: number | undefined = 0) {
-  cropper?.move(cur - prev, 0)
+function onOffsetXChnage (cur: number | undefined = 0) {
+  cropper?.moveTo(cur, 0)
 }
 
-function onOffsetYChnage (cur: number | undefined = 0, prev: number | undefined = 0) {
-  cropper?.move(0, cur - prev)
+function onOffsetYChnage (cur: number | undefined = 0) {
+  cropper?.moveTo(0, cur)
 }
 
 function zoomTo (cur: number | undefined) {
@@ -171,6 +171,10 @@ const handleSave = () => {
 
   .mb0 {
     margin-bottom: 0;
+  }
+
+  &-wrapper {
+    flex: 1;
   }
 }
 
