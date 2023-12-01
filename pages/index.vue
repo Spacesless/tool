@@ -28,6 +28,7 @@ useSeoMeta({
 const toolList = computed((): ToolCategory => {
   return tools.map(item => ({
     ...item,
+    count: item.children.length,
     children: item.children.slice(0, 12)
   }))
 })

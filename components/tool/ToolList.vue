@@ -1,29 +1,34 @@
 <template>
-  <h2 class="card__title">
-    {{ tool.name }}
-  </h2>
-  <el-row :gutter="24">
-    <el-col
-      v-for="({ path, name, id, description }) in tool.children"
-      :key="path"
-      :xs="24"
-      :sm="12"
-      :md="8"
-      :lg="6"
-    >
-      <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
-        <strong class="card-item__title">{{ name }}</strong>
-        <Icon
-          class="card-item__icon"
-          :name="calcFavorite(id) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
-          @click.stop.prevent="toggleFavorite(id)"
-        />
-        <p class="card-item__description" :title="description">
-          {{ description }}
-        </p>
-      </NuxtLink>
-    </el-col>
-  </el-row>
+  <section class="card">
+    <div class="card-header">
+      <h2 class="card-header__title">
+        {{ tool.name }}
+      </h2>
+      <span class="card-header__count">{{ tool.count || tool.children.length }}</span>
+    </div>
+    <el-row :gutter="24">
+      <el-col
+        v-for="({ path, name, id, description }) in tool.children"
+        :key="path"
+        :xs="24"
+        :sm="12"
+        :md="8"
+        :lg="6"
+      >
+        <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
+          <strong class="card-item__title">{{ name }}</strong>
+          <Icon
+            class="card-item__icon"
+            :name="calcFavorite(id) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
+            @click.stop.prevent="toggleFavorite(id)"
+          />
+          <p class="card-item__description" :title="description">
+            {{ description }}
+          </p>
+        </NuxtLink>
+      </el-col>
+    </el-row>
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -56,23 +61,47 @@ const toggleFavorite = (id: string) => {
 </script>
 
 <style lang="scss" scoped>
-.card {
-  &__title {
-    position: relative;
-    padding: 16px 0 32px;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1.5;
+@font-face {
+  font-family: zcool;
+  src: url('@/assets/font/zcool-happy.ttf');
+}
 
-    &::after{
+.card {
+  &-header {
+    position: relative;
+    padding: 24px 0 42px;
+
+    &__title {
+      position: relative;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1.5;
+
+      &::after{
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(130deg,#24c6dc,var(--el-color-primary) 60%,#5433ff);
+        border-radius: 96px;
+        content: "";
+      }
+    }
+
+    &__count {
       position: absolute;
-      bottom: 24px;
-      left: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(130deg,#24c6dc,var(--el-color-primary) 60%,#5433ff);
-      border-radius: 96px;
-      content: "";
+      top: 0;
+      right: 0;
+      z-index: -1;
+      color: var(--el-color-info-light-8);
+      font-weight: bold;
+      font-size: 90px;
+      font-family: zcool, sans-serif;
+      background: linear-gradient(to bottom, var(--el-color-info-light-7) 0%, var(--el-color-info-light-8) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
 

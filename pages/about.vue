@@ -48,5 +48,5 @@
     </p>
   </section>
 
-  <GitalkComment />
+  <GiscusComment />
 </template>
