@@ -40,6 +40,8 @@
 </template>
 
 <script lang="ts" setup>
+import CryptoJS from 'crypto-js'
+
 const algorithmOptions = reactive([
   'Base64', 'Latin1', 'Utf8', 'Utf16', 'Utf16LE'
 ])
