@@ -23,6 +23,13 @@ const routes = [
         path: 'random-string',
         description: '生成随机字符串，支持设置数量和字典。',
         updateTime: '2023-11-26'
+      },
+      {
+        id: 'c9e2fe39-8c04-4846-b462-57054576aadc',
+        name: '大小写转换',
+        path: 'case-converter',
+        description: '支持下划线、驼峰、大小写转换',
+        updateTime: '2023-12-03'
       }
     ]
   },
@@ -201,6 +208,13 @@ const routes = [
         path: 'xss',
         description: '对 html 标签进行转义解决 xss 注入',
         updateTime: '2023-11-26'
+      },
+      {
+        id: '6a101a1a-8010-4051-a75d-b4733c3cc310',
+        name: '解析URL字符串',
+        path: 'url-convert',
+        description: '将 url 字符串转换为对象或对象转换成编码后的 url 字符串',
+        updateTime: '2023-12-02'
       }
     ]
   },
@@ -277,13 +291,20 @@ const routes = [
         name: '图像裁剪/翻转/旋转',
         path: 'image-cropper',
         description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分',
-        updateTime: '2023-11-26'
+        updateTime: '2023-12-02',
+        version: '1.0.1'
       },
+      // {
+      //   id: '221eb77d-61b3-4757-af12-9a5a0c81f9e3',
+      //   name: '图片放大',
+      //   path: 'waifu2x',
+      //   description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大'
+      // },
       {
-        id: '221eb77d-61b3-4757-af12-9a5a0c81f9e3',
-        name: '图片放大',
-        path: 'waifu2x',
-        description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大'
+        id: '4e268ad9-2f10-4123-bcf4-90fc27e93fca',
+        name: '必应图片',
+        path: 'bing-images',
+        description: '自2018年到现在的必应每日图片'
       }
     ]
   },
@@ -345,7 +366,9 @@ const routes = [
         id: 'abf7bb65-3cb8-472c-80e5-4eb1df1aa487',
         name: '编码解码',
         path: 'format-coder',
-        description: '支持Base64、Utf8、Latin1、Utf16、Utf16LE编码解码'
+        description: '支持Base64、Utf8、Latin1、Utf16、Utf16LE编码解码',
+        updateTime: '2023-12-02',
+        version: '1.0.1'
       },
       {
         id: 'cbdb0d7b-12e3-4fca-af4b-104a32e6390a',

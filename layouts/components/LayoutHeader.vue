@@ -5,7 +5,7 @@
     </div>
 
     <div class="header-right">
-      <el-tooltip effect="dark" :content="colorMode.preference === 'light' ? '黑夜模式' : '白天模式'" placement="bottom">
+      <el-tooltip effect="dark" :content="isDark ? '白天模式' : '黑夜模式'" placement="bottom">
         <Icon class="header-right__icon" :name="isDark ? 'ph:sun' : 'ph:moon'" @click="toggleColorMode" />
       </el-tooltip>
     </div>

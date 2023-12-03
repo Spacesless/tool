@@ -13,7 +13,7 @@
         <upload-filled />
       </el-icon>
       <div class="el-upload__text">
-        Drop file here or <em>click to upload</em>
+        把文件拖到这或者 <em>点击上传</em>
       </div>
     </template>
     <el-button v-else type="primary">
@@ -46,3 +46,17 @@ const handleChange: UploadProps['onChange'] = (uploadFile, uploadFiles) => {
   emit('changeFile', { uploadFile, uploadFiles })
 }
 </script>
+
+<style>
+.el-upload.is-drag {
+  height: 100%;
+}
+
+.el-upload-dragger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+}
+</style>

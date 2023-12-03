@@ -18,7 +18,7 @@
           <el-form-item label="Y">
             <el-input-number v-model="detail.y" :precision="3" controls-position="right" @change="onOffsetYChnage" />
           </el-form-item>
-          <el-form-item label="放大">
+          <el-form-item label="图片放大">
             <el-input-number v-model="scale" :step="0.1" controls-position="right" @change="zoomTo" />
           </el-form-item>
           <el-form-item>
