@@ -1,12 +1,16 @@
 <template>
   <header class="header">
+    <div class="header-collapse" @click="toggleCollapse">
+      <Icon class="header-icon" name="uiw:right" />
+    </div>
+
     <div class="header-left">
       <GlobalSearch />
     </div>
 
     <div class="header-right">
       <el-tooltip effect="dark" :content="isDark ? '白天模式' : '黑夜模式'" placement="bottom">
-        <Icon class="header-right__icon" :name="isDark ? 'ph:sun' : 'ph:moon'" @click="toggleColorMode" />
+        <Icon class="header-icon" :name="isDark ? 'ph:sun' : 'ph:moon'" @click="toggleColorMode" />
       </el-tooltip>
     </div>
   </header>
@@ -16,11 +20,16 @@
 import GlobalSearch from './GlobalSearch.vue'
 
 const colorMode = useColorMode()
+const isCollapse = useState('collapse')
 
 const isDark = computed(() => colorMode.value === 'dark')
 
 const toggleColorMode = () => {
   colorMode.preference = isDark.value ? 'light' : 'dark'
+}
+
+const toggleCollapse = () => {
+  isCollapse.value = false
 }
 </script>
 
@@ -32,15 +41,29 @@ const toggleColorMode = () => {
   height: 60px;
   line-height: 60px;
 
-  &-right {
-    &__icon {
-      font-size: 20px;
-      outline: none;
-    }
+  &-collapse {
+    display: none;
   }
 
-  &-alart {
-    margin-bottom: 24px;
+  &-icon {
+    font-size: 20px;
+    outline: none;
+  }
+
+  @media (width <= 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 7;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 16px;
+    background: #ffffff;
+    box-shadow: var(--el-box-shadow-lighter);
+
+    &-collapse {
+      display: block;
+    }
   }
 }
 </style>

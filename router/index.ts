@@ -294,12 +294,13 @@ const routes = [
         updateTime: '2023-12-02',
         version: '1.0.1'
       },
-      // {
-      //   id: '221eb77d-61b3-4757-af12-9a5a0c81f9e3',
-      //   name: '图片放大',
-      //   path: 'waifu2x',
-      //   description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大'
-      // },
+      {
+        id: '221eb77d-61b3-4757-af12-9a5a0c81f9e3',
+        name: '图片放大',
+        path: 'waifu2x',
+        description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大',
+        updatTime: '2023-12-04'
+      },
       {
         id: '4e268ad9-2f10-4123-bcf4-90fc27e93fca',
         name: '必应图片',

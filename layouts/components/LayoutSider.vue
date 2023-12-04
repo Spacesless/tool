@@ -96,11 +96,11 @@ const toggleCollapse = () => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 9;
   width: 208px;
   height: 100%;
   background-color: var(--el-bg-color);
-  transition: width .3s;
+  transition: width 0.3s, left 0.3s;
 
   &-logo {
     padding: 16px 0 8px;
@@ -164,28 +164,40 @@ const toggleCollapse = () => {
     cursor: pointer;
   }
 
-  &--collapse {
-    width: 64px;
+  @media (width > 768px) {
+    &--collapse {
+      width: 64px;
 
-    .sider {
-        &-logo {
-        &__img {
-          width: 48px;
-          height: 48px;
+      .sider {
+          &-logo {
+          &__img {
+            width: 48px;
+            height: 48px;
+          }
+
+          &__name {
+            height: 0;
+          }
         }
 
-        &__name {
-          height: 0;
+        &-scrollbar {
+          height: calc(100% - 125px);
         }
       }
 
-      &-scrollbar {
-        height: calc(100% - 125px);
+      :deep(.el-sub-menu__title) {
+        padding-right: var(--el-menu-base-level-padding);
       }
     }
+  }
 
-    :deep(.el-sub-menu__title) {
-      padding-right: var(--el-menu-base-level-padding);
+  @media (width <= 768px) {
+    &--collapse {
+      left: -208px;
+    }
+
+    :deep(.el-menu-item) {
+      transition: none;
     }
   }
 }

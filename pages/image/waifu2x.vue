@@ -83,6 +83,11 @@
         </el-row>
       </el-form>
     </section>
+
+    <template #content>
+      <p>参考 <a href="https://github.com/takuyaa/waifu2x-js" target="__blank">https://github.com/takuyaa/waifu2x-js</a> 实现。</p>
+      <p>还有点问题：png图片处理完背景变黑色了</p>
+    </template>
   </ToolLayout>
 </template>
 

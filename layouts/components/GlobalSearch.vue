@@ -9,7 +9,7 @@
 
   <el-dialog
     v-model="dialogVisible"
-    width="600px"
+    :width="isMobile ? '90%' : '600px'"
     class="search-dialog"
     :show-close="false"
     :append-to-body="true"
@@ -86,6 +86,7 @@ import { ToolItem } from '@/types/tool'
 
 const router = useRouter()
 const allTools = useState('allTools', (): Array<ToolItem> => [])
+const isMobile = useState('isMobile', () => false)
 
 const keyword = ref()
 
