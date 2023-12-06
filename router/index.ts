@@ -215,6 +215,13 @@ const routes = [
         path: 'url-convert',
         description: '将 url 字符串转换为对象或对象转换成编码后的 url 字符串',
         updateTime: '2023-12-02'
+      },
+      {
+        id: 'b351df44-70a6-43e9-80be-fe1a26600f94',
+        name: '进制转换',
+        path: 'decimal-convert',
+        description: '支持2到32进制间的互相转换。',
+        updateTime: '2023-12-02'
       }
     ]
   },
