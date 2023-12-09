@@ -222,6 +222,13 @@ const routes = [
         path: 'decimal-convert',
         description: '支持2到32进制间的互相转换。',
         updateTime: '2023-12-02'
+      },
+      {
+        id: '2ad13eb5-4e54-4647-804a-54e2a9cb34ad',
+        name: '颜色转换',
+        path: 'color-convert',
+        description: '支持hex、rgb、hsl、cmyk转换',
+        updateTime: '2023-12-09'
       }
     ]
   },
