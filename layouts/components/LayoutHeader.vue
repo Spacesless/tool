@@ -58,7 +58,7 @@ const toggleCollapse = () => {
     box-sizing: border-box;
     width: 100%;
     padding: 0 16px;
-    background: #ffffff;
+    background-color: var(--el-bg-color);
     box-shadow: var(--el-box-shadow-lighter);
 
     &-collapse {
