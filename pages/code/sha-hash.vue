@@ -53,7 +53,7 @@
       <p>SHA384 生成的结果为：384 bit，48 byte</p>
       <p>SHA512 生成的结果为：512 bit，64 byte</p>
     </template>
-  </ToolLayout>>
+  </ToolLayout>
 </template>
 
 <script lang="ts" setup>

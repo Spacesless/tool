@@ -1,7 +1,7 @@
 <template>
   <ToolLayout>
     <EncryptDecrypt algorithm="RC4Drop" />
-  </ToolLayout>>
+  </ToolLayout>
 </template>
 
 <script lang="ts" setup>

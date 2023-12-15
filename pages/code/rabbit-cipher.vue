@@ -1,7 +1,7 @@
 <template>
   <ToolLayout>
     <EncryptDecrypt algorithm="Rabbit" />
-  </ToolLayout>>
+  </ToolLayout>
 </template>
 
 <script lang="ts" setup>
