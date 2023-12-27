@@ -27,6 +27,13 @@
   font-size: 14px;
   line-height: 45px;
   text-align: center;
+  word-break: break-all;
+
+  @media (width < 768px) {
+    height: auto;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
 
   &__icon {
     padding: 0 3px;
@@ -34,6 +41,7 @@
   }
 
   &__link {
+    display: inline-block;
     margin-left: 10px;
     color: var(--el-color-primary);
   }

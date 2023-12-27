@@ -35,11 +35,13 @@ const toggleCollapse = () => {
 
 <style lang="scss" scoped>
 .header {
+  --header-height: 60px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  line-height: 60px;
+  height: var(--header-height);
+  line-height: var(--header-height);
 
   &-collapse {
     display: none;
@@ -51,6 +53,8 @@ const toggleCollapse = () => {
   }
 
   @media (width <= 768px) {
+    --header-height: 50px;
+
     position: fixed;
     top: 0;
     left: 0;

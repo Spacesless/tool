@@ -75,10 +75,16 @@ const colorMode = useColorMode()
 const toolList = useState('tools', (): ToolCategory => [])
 
 const isCollapse = useState('collapse', () => false)
+const isMobile = useState('isMobile', () => false)
 
 const activeMenu = computed(() => {
   const fullPath = route.path
   return fullPath.replace('/', '').split('/').shift()
+})
+watch(() => route.name, () => {
+  if (isMobile.value && !isCollapse.value) {
+    isCollapse.value = true
+  }
 })
 
 const toggleCollapse = () => {

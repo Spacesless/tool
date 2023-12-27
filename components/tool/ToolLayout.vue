@@ -11,7 +11,7 @@
     </div>
   </section>
 
-  <GiscusComment />
+  <WalineComment />
 </template>
 
 <script setup lang="ts">

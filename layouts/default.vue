@@ -71,7 +71,7 @@ function hideMask () {
 
   @media (width <= 768px) {
     margin-left: 0;
-    padding: 70px 20px 0;
+    padding: 60px 20px 0;
 
     &-mask {
       position: fixed;

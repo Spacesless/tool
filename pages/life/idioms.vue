@@ -10,9 +10,9 @@
 
       <el-table :data="filterData" border :height="600">
         <el-table-column prop="name" label="成语" width="120" />
-        <el-table-column prop="jbsy" label="基本释义" />
-        <el-table-column prop="jyc" label="近义词" />
-        <el-table-column prop="fyc" label="反义词" />
+        <el-table-column prop="jbsy" label="基本释义" min-width="200" />
+        <el-table-column prop="jyc" label="近义词" min-width="200" />
+        <el-table-column prop="fyc" label="反义词" min-width="200" />
       </el-table>
 
       <el-pagination
@@ -20,7 +20,7 @@
         class="pagination"
         :page-size="pagination.pageSize"
         :background="true"
-        layout="total, ->, prev, pager, next, jumper"
+        :layout="layout"
         :total="pagination.total"
         @current-change="handleCurrentChange"
       />
@@ -64,4 +64,7 @@ function handleSearch () {
 function handleCurrentChange (val: number) {
   pagination.currentPage = val
 }
+
+const isMobile = useState('isMobile', () => false)
+const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
 </script>

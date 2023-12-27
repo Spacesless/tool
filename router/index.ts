@@ -30,6 +30,13 @@ const routes = [
         path: 'case-converter',
         description: '支持下划线、驼峰、大小写转换',
         updateTime: '2023-12-03'
+      },
+      {
+        id: '040f860f-52fa-4c43-bd4e-dc587a03da04',
+        name: '字数统计',
+        path: 'letter-count',
+        description: '行数、字符、单词、数字、字母的数量统计',
+        updateTime: '2023-12-27'
       }
     ]
   },
