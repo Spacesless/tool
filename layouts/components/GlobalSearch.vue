@@ -120,7 +120,7 @@ const onSelectChange = () => {
 
 <style lang="scss" scoped>
 .search {
-  color: var(--el-text-color-secondary);
+  color: var(--el-text-color-regular);
   cursor: pointer;
 
   &:hover {

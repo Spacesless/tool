@@ -38,7 +38,7 @@
           <el-menu-item index="favorite">
             <Icon class="sider-menu__icon" name="clarity:favorite-line" />
             <template #title>
-              收藏
+              我的收藏
             </template>
           </el-menu-item>
         </NuxtLink>

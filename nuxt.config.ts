@@ -30,7 +30,17 @@ export default defineNuxtConfig({
     classSuffix: ''
   },
   elementPlus: {
-    themes: ['dark']
+    themes: ['dark'],
+    importStyle: 'scss'
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/style/element/index.scss" as element;'
+        }
+      }
+    }
   }
   // googleAdsense: {
   //   id: 'ca-pub-1379822583295856'

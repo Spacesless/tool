@@ -23,7 +23,7 @@
 <style lang="scss" scoped>
 .footer {
   height: 45px;
-  color: var(--el-text-color-secondary);
+  color: var(--el-text-color-primary);
   font-size: 14px;
   line-height: 45px;
   text-align: center;
@@ -44,6 +44,7 @@
     display: inline-block;
     margin-left: 10px;
     color: var(--el-color-primary);
+    text-decoration: none;
   }
 }
 </style>

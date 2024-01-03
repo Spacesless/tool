@@ -98,7 +98,7 @@ const toggleFavorite = (id: string) => {
       font-weight: bold;
       font-size: 90px;
       font-family: zcool, sans-serif;
-      background: linear-gradient(to bottom, var(--el-color-info-light-7) 0%, var(--el-color-info-light-8) 100%);
+      background: linear-gradient(to bottom, var(--el-color-info-light-5) 0%, var(--el-color-info-light-8) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -122,7 +122,7 @@ const toggleFavorite = (id: string) => {
       overflow: hidden;
       color: var(--el-text-color-primary);
       font-weight: normal;
-      font-size: 20px;
+      font-size: 22px;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -143,7 +143,7 @@ const toggleFavorite = (id: string) => {
       height: 20px;
       overflow: hidden;
       color: var(--el-text-color-regular);
-      font-size: 14px;
+      font-size: 16px;
       line-height: 20px;
       white-space: nowrap;
       text-overflow: ellipsis;

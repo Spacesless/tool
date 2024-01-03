@@ -8,6 +8,7 @@
     </main>
     <FixedBar />
     <LayoutFooter />
+    <div class="spotlight" />
   </section>
 </template>
 
@@ -83,5 +84,17 @@ function hideMask () {
       background: rgba(0,0,0,0.45);
     }
   }
+}
+
+.spotlight {
+  position: fixed;
+  right: 0;
+  bottom: -30vh;
+  left: 0;
+  z-index: -1;
+  height: 40vh;
+  background: linear-gradient(45deg,#00dc82,#69b1ff 50%,#1677ff);
+  opacity: 0.45;
+  filter: blur(20vh);
 }
 </style>
