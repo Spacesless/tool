@@ -95,6 +95,7 @@ const toggleCollapse = () => {
 <style lang="scss" scoped>
 @font-face {
   font-family: Bega;
+  font-display: swap;
   src: url('@/assets/font/Bega-Light.ttf');
 }
 

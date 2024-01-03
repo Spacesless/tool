@@ -11,7 +11,6 @@ import '@waline/client/waline.css'
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.value === 'dark')
 
-const serverURL = '/comment'
 const path = computed(() => useRoute().path)
 const emoji: WalineEmojiInfo[] = [
   {
@@ -82,7 +81,7 @@ onMounted(() => {
     locale: {
       reactionTitle: '你认为这个工具怎么样？'
     },
-    serverURL,
+    serverURL: location.origin + '/comment',
     emoji
   })
 })

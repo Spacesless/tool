@@ -1,120 +1,122 @@
 <template>
   <ToolLayout>
-    <el-row class="section" tag="section" :gutter="16">
-      <el-col :sm="24" :md="16">
-        <el-calendar ref="calendar" v-model="dateTime" class="calendar">
-          <template #header>
-            <div class="calendar-header">
-              <el-date-picker v-model="dateTime" size="default" type="month" />
-              <el-icon @click="selectDate('prev-month')">
-                <ArrowLeft />
-              </el-icon>
-              <el-icon @click="selectDate('next-month')">
-                <ArrowRight />
-              </el-icon>
-              <span v-show="isToday" class="calendar-header__today" @click="selectDate('today')">今</span>
-            </div>
-          </template>
-          <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
-            <div
-              class="calendar-item"
-              :class="{
-                'calendar-item--holiday': lunar.isHoliday,
-                'calendar-item--work': lunar.isWork,
-                'calendar-item--weekend': lunar.isWeekend && !lunar.isWork,
-                'calendar-item--selected': data.isSelected
-              }"
+    <section class="section">
+      <el-row :gutter="16">
+        <el-col :sm="24" :md="16">
+          <el-calendar ref="calendar" v-model="dateTime" class="calendar">
+            <template #header>
+              <div class="calendar-header">
+                <el-date-picker v-model="dateTime" size="default" type="month" />
+                <el-icon @click="selectDate('prev-month')">
+                  <ArrowLeft />
+                </el-icon>
+                <el-icon @click="selectDate('next-month')">
+                  <ArrowRight />
+                </el-icon>
+                <span v-show="isToday" class="calendar-header__today" @click="selectDate('today')">今</span>
+              </div>
+            </template>
+            <template #date-cell="{ data, lunar = getDayOverview(data.date) }">
+              <div
+                class="calendar-item"
+                :class="{
+                  'calendar-item--holiday': lunar.isHoliday,
+                  'calendar-item--work': lunar.isWork,
+                  'calendar-item--weekend': lunar.isWeekend && !lunar.isWork,
+                  'calendar-item--selected': data.isSelected
+                }"
+              >
+                <p class="calendar-item__day">
+                  {{ lunar.solarDay }}
+                </p>
+                <p class="calendar-item__info" :class="{'calendar-item__info--holiday': lunar.festivals || lunar.solarTerms}">
+                  {{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}
+                </p>
+                <span v-if="lunar.isHoliday && !lunar.isWork" class="calendar-item__rest">休</span>
+                <span v-if="lunar.isWork" class="calendar-item__work">班</span>
+              </div>
+            </template>
+          </el-calendar>
+        </el-col>
+
+        <el-col :sm="24" :md="8">
+          <div class="solar">
+            <p class="solar-day">
+              {{ dayData.day }}
+            </p>
+            <p>{{ dayData.date }} {{ dayData.cnWeek }}</p>
+            <p>{{ dayData.lunar.date }}</p>
+            <p>
+              {{ dayData.lunar.cyclicalYear }}({{ dayData.lunar.zodiac }})年
+              {{ dayData.lunar.cyclicalMonth }}月
+              {{ dayData.lunar.cyclicalDay }}日
+            </p>
+            <p>本年第{{ dayData.weekInYear }}周， 第{{ dayData.dayInYear }}天</p>
+          </div>
+
+          <div class="lunar">
+            <el-descriptions
+              :column="1"
+              size="small"
+              border
             >
-              <p class="calendar-item__day">
-                {{ lunar.solarDay }}
-              </p>
-              <p class="calendar-item__info" :class="{'calendar-item__info--holiday': lunar.festivals || lunar.solarTerms}">
-                {{ lunar.festivals || lunar.solarTerms || lunar.lunarDay }}
-              </p>
-              <span v-if="lunar.isHoliday && !lunar.isWork" class="calendar-item__rest">休</span>
-              <span v-if="lunar.isWork" class="calendar-item__work">班</span>
-            </div>
-          </template>
-        </el-calendar>
-      </el-col>
-
-      <el-col :sm="24" :md="8">
-        <div class="solar">
-          <p class="solar-day">
-            {{ dayData.day }}
-          </p>
-          <p>{{ dayData.date }} {{ dayData.cnWeek }}</p>
-          <p>{{ dayData.lunar.date }}</p>
-          <p>
-            {{ dayData.lunar.cyclicalYear }}({{ dayData.lunar.zodiac }})年
-            {{ dayData.lunar.cyclicalMonth }}月
-            {{ dayData.lunar.cyclicalDay }}日
-          </p>
-          <p>本年第{{ dayData.weekInYear }}周， 第{{ dayData.dayInYear }}天</p>
-        </div>
-
-        <div class="lunar">
-          <el-descriptions
-            :column="1"
-            size="small"
-            border
-          >
-            <el-descriptions-item label="星座" min-width="80">
-              {{ dayData.astro }}
-            </el-descriptions-item>
-            <el-descriptions-item label="节日">
-              {{ dayData.festivals.join('、') }}
-            </el-descriptions-item>
-            <el-descriptions-item label="月相">
-              {{ dayData.lunar.yuexiang }}
-            </el-descriptions-item>
-            <el-descriptions-item label="物候">
-              {{ dayData.lunar.wuhou }}
-            </el-descriptions-item>
-            <el-descriptions-item label="数九">
-              {{ dayData.lunar.shujiu }}
-            </el-descriptions-item>
-            <el-descriptions-item label="三伏">
-              {{ dayData.lunar.sanfu }}
-            </el-descriptions-item>
-            <el-descriptions-item label="宜">
-              {{ dayData.almanac.yi }}
-            </el-descriptions-item>
-            <el-descriptions-item label="忌">
-              {{ dayData.almanac.ji }}
-            </el-descriptions-item>
-            <el-descriptions-item label="吉神方位">
-              <p>喜神：{{ dayData.almanac.jishenfangwei.xi }}</p>
-              <p>阳贵神：{{ dayData.almanac.jishenfangwei.yanggui }}</p>
-              <p>阴贵神：{{ dayData.almanac.jishenfangwei.yingui }}</p>
-              <p>福神：{{ dayData.almanac.jishenfangwei.fu }}</p>
-              <p>财神：{{ dayData.almanac.jishenfangwei.cai }}</p>
-            </el-descriptions-item>
-            <el-descriptions-item label="冲">
-              {{ dayData.almanac.chong }}
-            </el-descriptions-item>
-            <el-descriptions-item label="煞">
-              {{ dayData.almanac.sha }}
-            </el-descriptions-item>
-            <el-descriptions-item label="纳音">
-              {{ dayData.almanac.nayin }}
-            </el-descriptions-item>
-            <el-descriptions-item label="建除十二执星">
-              {{ dayData.almanac.shiershen }}
-            </el-descriptions-item>
-            <el-descriptions-item label="二十八宿">
-              {{ dayData.almanac.xingxiu }}
-            </el-descriptions-item>
-            <el-descriptions-item label="七政">
-              {{ dayData.almanac.zheng }}
-            </el-descriptions-item>
-            <el-descriptions-item label="彭祖百忌">
-              {{ dayData.almanac.pengzubaiji.join('、') }}
-            </el-descriptions-item>
-          </el-descriptions>
-        </div>
-      </el-col>
-    </el-row>
+              <el-descriptions-item label="星座" min-width="80">
+                {{ dayData.astro }}
+              </el-descriptions-item>
+              <el-descriptions-item label="节日">
+                {{ dayData.festivals.join('、') }}
+              </el-descriptions-item>
+              <el-descriptions-item label="月相">
+                {{ dayData.lunar.yuexiang }}
+              </el-descriptions-item>
+              <el-descriptions-item label="物候">
+                {{ dayData.lunar.wuhou }}
+              </el-descriptions-item>
+              <el-descriptions-item label="数九">
+                {{ dayData.lunar.shujiu }}
+              </el-descriptions-item>
+              <el-descriptions-item label="三伏">
+                {{ dayData.lunar.sanfu }}
+              </el-descriptions-item>
+              <el-descriptions-item label="宜">
+                {{ dayData.almanac.yi }}
+              </el-descriptions-item>
+              <el-descriptions-item label="忌">
+                {{ dayData.almanac.ji }}
+              </el-descriptions-item>
+              <el-descriptions-item label="吉神方位">
+                <p>喜神：{{ dayData.almanac.jishenfangwei.xi }}</p>
+                <p>阳贵神：{{ dayData.almanac.jishenfangwei.yanggui }}</p>
+                <p>阴贵神：{{ dayData.almanac.jishenfangwei.yingui }}</p>
+                <p>福神：{{ dayData.almanac.jishenfangwei.fu }}</p>
+                <p>财神：{{ dayData.almanac.jishenfangwei.cai }}</p>
+              </el-descriptions-item>
+              <el-descriptions-item label="冲">
+                {{ dayData.almanac.chong }}
+              </el-descriptions-item>
+              <el-descriptions-item label="煞">
+                {{ dayData.almanac.sha }}
+              </el-descriptions-item>
+              <el-descriptions-item label="纳音">
+                {{ dayData.almanac.nayin }}
+              </el-descriptions-item>
+              <el-descriptions-item label="建除十二执星">
+                {{ dayData.almanac.shiershen }}
+              </el-descriptions-item>
+              <el-descriptions-item label="二十八宿">
+                {{ dayData.almanac.xingxiu }}
+              </el-descriptions-item>
+              <el-descriptions-item label="七政">
+                {{ dayData.almanac.zheng }}
+              </el-descriptions-item>
+              <el-descriptions-item label="彭祖百忌">
+                {{ dayData.almanac.pengzubaiji.join('、') }}
+              </el-descriptions-item>
+            </el-descriptions>
+          </div>
+        </el-col>
+      </el-row>
+    </section>
   </ToolLayout>
 </template>
 

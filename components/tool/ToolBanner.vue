@@ -3,8 +3,8 @@
     <h1 class="banner__title">
       {{ props.toolData.name }}
     </h1>
-    <p class="banner__description">
-      {{ props.toolData.description }}
+    <p v-for="(item, index) in descriptions" :key="index" class="banner__description">
+      {{ item }}
     </p>
   </section>
 </template>
@@ -15,5 +15,9 @@ const props = defineProps({
     type: Object,
     default: () => {}
   }
+})
+
+const descriptions = computed(() => {
+  return props.toolData.description.split('\n')
 })
 </script>
