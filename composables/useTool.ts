@@ -20,7 +20,7 @@ export function useToolData (path?: string) {
   const { name, description } = toolData.value
 
   useSeoMeta({
-    title: `${name} - 一个安全免费的工具箱`,
+    title: name,
     description: description?.replace('\n', '')
   })
 

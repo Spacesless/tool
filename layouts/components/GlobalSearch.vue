@@ -17,6 +17,7 @@
     <div class="search-dialog-wrapper">
       <client-only>
         <el-select-v2
+          ref="searchRef"
           v-model="keyword"
           class="search-dialog-select"
           clearable
@@ -102,8 +103,13 @@ onUnmounted(() => {
   document.removeEventListener('keydown', keyDownHandler)
 })
 const dialogVisible = ref<boolean>(false)
+const searchRef = ref()
 const handleSearch = () => {
   dialogVisible.value = true
+  setTimeout(() => {
+    searchRef.value.$el.click()
+    searchRef.value.$refs.inputRef?.focus()
+  }, 250)
 }
 const keyDownHandler = (e: KeyboardEvent) => {
   if (e.ctrlKey && e.key.toLowerCase() === 'k') {
@@ -180,7 +186,7 @@ const onSelectChange = () => {
     height: 44px;
     color: var(--el-text-color-primary);
     font-size: 14px;
-    background-color: var(--el-color-white);
+    background-color: var(--el-bg-color);
 
     li {
       margin-left: 16px;

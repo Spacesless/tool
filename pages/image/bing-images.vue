@@ -27,7 +27,7 @@
         class="pagination"
         :page-size="params.pageSize"
         :background="true"
-        layout="total, ->, prev, pager, next, jumper"
+        :layout="layout"
         :total="total"
       />
     </section>
@@ -80,6 +80,9 @@ watch(() => data, (res) => {
 }, {
   deep: true
 })
+
+const isMobile = useState('isMobile', () => false)
+const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
 </script>
 
 <style lang="scss" scoped>

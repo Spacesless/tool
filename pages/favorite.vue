@@ -8,7 +8,7 @@
 import { ToolItem } from '@/types/tool'
 
 useSeoMeta({
-  title: '我的收藏 - 一个安全免费的工具箱',
+  title: '我的收藏',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'
 })
 

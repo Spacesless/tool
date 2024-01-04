@@ -21,7 +21,7 @@ import tools from '@/router'
 import { ToolCategory } from '@/types/tool'
 
 useSeoMeta({
-  title: 'Toolbox - 一个安全免费的工具箱',
+  title: 'Toolbox',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'
 })
 

@@ -72,11 +72,11 @@ onMounted(() => {
     imageUploader: false,
     dark: isDark.value,
     reaction: [
-      '//unpkg.com/@waline/emojis/tieba/tieba_lovely.png',
-      '//unpkg.com/@waline/emojis/tieba/tieba_agree.png',
-      '//unpkg.com/@waline/emojis/tieba/tieba_smirk.png',
-      '//unpkg.com/@waline/emojis/tieba/tieba_pick_nose.png',
-      '//unpkg.com/@waline/emojis/tieba/tieba_look_down.png'
+      'https://cos.timelessq.com/static/emojis/tieba/tieba_lovely.png',
+      'https://cos.timelessq.com/static/emojis/tieba/tieba_agree.png',
+      'https://cos.timelessq.com/static/emojis/tieba/tieba_smirk.png',
+      'https://cos.timelessq.com/static/emojis/tieba/tieba_pick_nose.png',
+      'https://cos.timelessq.com/static/emojis/tieba/tieba_look_down.png'
     ],
     locale: {
       reactionTitle: '你认为这个工具怎么样？'

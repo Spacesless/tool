@@ -25,39 +25,32 @@
         :default-active="activeMenu"
         :collapse="isCollapse"
         :default-openeds="['category']"
+        router
       >
-        <NuxtLink class="sider-menu-link" to="/">
-          <el-menu-item index="">
-            <Icon class="sider-menu__icon" name="iconamoon:home-light" />
-            <template #title>
-              首页
-            </template>
-          </el-menu-item>
-        </NuxtLink>
-        <NuxtLink class="sider-menu-link" to="/favorite">
-          <el-menu-item index="favorite">
-            <Icon class="sider-menu__icon" name="clarity:favorite-line" />
-            <template #title>
-              我的收藏
-            </template>
-          </el-menu-item>
-        </NuxtLink>
-        <NuxtLink v-for="item in toolList" :key="item.path" class="sider-menu-link" :to="'/' + item.path">
-          <el-menu-item :index="item.path">
-            <Icon class="sider-menu__icon" :name="item.icon" />
-            <template #title>
-              {{ item.name }}
-            </template>
-          </el-menu-item>
-        </NuxtLink>
-        <NuxtLink class="sider-menu-link" to="/about">
-          <el-menu-item index="about">
-            <Icon class="sider-menu__icon" name="ph:info" />
-            <template #title>
-              <span class="sider-menu__name">关于</span>
-            </template>
-          </el-menu-item>
-        </NuxtLink>
+        <el-menu-item index="/">
+          <Icon class="sider-menu__icon" name="iconamoon:home-light" />
+          <template #title>
+            首页
+          </template>
+        </el-menu-item>
+        <el-menu-item index="/favorite">
+          <Icon class="sider-menu__icon" name="clarity:favorite-line" />
+          <template #title>
+            我的收藏
+          </template>
+        </el-menu-item>
+        <el-menu-item v-for="item in toolList" :key="item.path" :index="'/' + item.path">
+          <Icon class="sider-menu__icon" :name="item.icon" />
+          <template #title>
+            {{ item.name }}
+          </template>
+        </el-menu-item>
+        <el-menu-item index="/about">
+          <Icon class="sider-menu__icon" name="ph:info" />
+          <template #title>
+            关于
+          </template>
+        </el-menu-item>
       </el-menu>
     </el-scrollbar>
 
@@ -79,7 +72,7 @@ const isMobile = useState('isMobile', () => false)
 
 const activeMenu = computed(() => {
   const fullPath = route.path
-  return fullPath.replace('/', '').split('/').shift()
+  return '/' + fullPath.replace('/', '').split('/').shift()
 })
 watch(() => route.name, () => {
   if (isMobile.value && !isCollapse.value) {
@@ -144,21 +137,6 @@ const toggleCollapse = () => {
       font-size: 20px;
       text-align: center;
       vertical-align: middle;
-    }
-
-    &__name {
-      vertical-align: middle;
-    }
-
-    &-link {
-      display: block;
-      width: 100%;
-      color: var(--el-menu-text-color);
-      text-decoration: none;
-
-      &.router-link-active {
-        color: var(--el-menu-active-color);
-      }
     }
   }
 

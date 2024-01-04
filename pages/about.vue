@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: '关于本站 - 一个安全免费的工具箱',
+  title: '关于本站',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'
 })
 </script>

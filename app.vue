@@ -8,10 +8,15 @@
 
 <script lang="ts" setup>
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
 import { ToolItem } from '@/types/tool'
-
 import tools from '@/router'
+
+useHead({
+  titleTemplate: title => `${title} - 一个安全免费的工具箱`,
+  htmlAttrs: {
+    lang: 'zh-CN'
+  }
+})
 
 useState('tools', () => tools)
 useState('allTools', () => {
