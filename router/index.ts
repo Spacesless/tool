@@ -236,6 +236,18 @@ const routes = [
         path: 'color-convert',
         description: '支持hex、rgb、hsl、cmyk转换',
         updateTime: '2023-12-09'
+      },
+      {
+        id: '0a621d35-634b-4a03-811a-9edb77e3330e',
+        name: '颜色拾取',
+        path: 'color-picker',
+        description: '颜色盘选择，颜色吸管拾取图片颜色'
+      },
+      {
+        id: '246f7a26-b569-4fce-8a7f-9b1457032162',
+        name: '坐标转换',
+        path: 'coordinate-transform',
+        description: '百度、高德、腾讯、WGS84坐标系互转'
       }
     ]
   },
@@ -298,6 +310,12 @@ const routes = [
         name: '十二时辰',
         path: 'twelve-hours',
         description: '12个时辰的时段、宜忌黄历等信息'
+      },
+      {
+        id: '7ef85521-04a4-46fc-8524-fe3af4c597f3',
+        name: '节日大全',
+        path: 'holiday',
+        description: '每年的节日信息，当前日期和每个节日的间隔时长'
       }
     ]
   },
@@ -327,6 +345,18 @@ const routes = [
         name: '必应图片',
         path: 'bing-images',
         description: '自2018年到现在的必应每日图片'
+      },
+      {
+        id: 'ea120bc3-1ef4-497f-9c6b-29ca09e30ac5',
+        name: '分析图片颜色',
+        path: 'analyze-image-color',
+        description: '支持上传图片，获取图片的主要颜色'
+      },
+      {
+        id: 'be798299-8c35-4da0-9595-8b167027a764',
+        name: 'Favicon生成',
+        path: 'image-to-favicon',
+        description: '图片转换成ico文件，生成网站favicon.ico'
       }
     ]
   },

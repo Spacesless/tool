@@ -15,7 +15,7 @@
     :append-to-body="true"
   >
     <div class="search-dialog-wrapper">
-      <client-only>
+      <ClientOnly>
         <el-select-v2
           ref="searchRef"
           v-model="keyword"
@@ -33,7 +33,7 @@
             <p>{{ item.value }}</p>
           </template>
         </el-select-v2>
-      </client-only>
+      </ClientOnly>
 
       <ul class="search-commands">
         <li>
@@ -84,6 +84,7 @@
 <script lang="ts" setup>
 import { Search } from '@element-plus/icons-vue'
 import { ToolItem } from '@/types/tool'
+import { sleep } from '@/utils'
 
 const router = useRouter()
 const allTools = useState('allTools', (): Array<ToolItem> => [])
@@ -104,12 +105,11 @@ onUnmounted(() => {
 })
 const dialogVisible = ref<boolean>(false)
 const searchRef = ref()
-const handleSearch = () => {
+const handleSearch = async () => {
   dialogVisible.value = true
-  setTimeout(() => {
-    searchRef.value.$el.click()
-    searchRef.value.$refs.inputRef?.focus()
-  }, 250)
+  await sleep(300)
+  searchRef.value.$el.click()
+  searchRef.value.$refs.inputRef?.focus()
 }
 const keyDownHandler = (e: KeyboardEvent) => {
   if (e.ctrlKey && e.key.toLowerCase() === 'k') {

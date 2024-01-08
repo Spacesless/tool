@@ -210,7 +210,7 @@ function getDayDetail (datetime: Date) {
       ...lunarInstance.getOtherFestivals()
     ], // 节日
     lunar: {
-      date: `${cnYear}${lunarInstance.getMonthInChinese() + '月'}${lunarInstance.getDayInChinese()}`,
+      date: `${cnYear + lunarInstance.getMonthInChinese()}月${lunarInstance.getDayInChinese()}`,
       zodiac: lunarInstance.getYearShengXiao(), // 生肖
       cyclicalYear: lunarInstance.getYearInGanZhi(), // 干支纪年
       cyclicalMonth: lunarInstance.getMonthInGanZhi(), // 干支纪月

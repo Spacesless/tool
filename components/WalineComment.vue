@@ -96,5 +96,8 @@ watch(() => isDark.value, (val) => {
 <style lang="scss" scoped>
 .comment {
   padding: 12px;
+
+  --waline-theme-color: var(--el-color-primary);
+  --waline-active-color: var(--el-color-primary-light-3);
 }
 </style>

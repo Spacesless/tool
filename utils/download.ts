@@ -4,9 +4,9 @@ import JSZip from 'jszip'
 // eslint-disable-next-line import/no-named-as-default-member
 const { saveAs } = fileSaver
 
-export default function downloadFile (fileList: any[], filename: string) {
+export default function downloadFile (fileList: any[], filename?: string) {
   if (fileList.length === 1) {
-    saveAs(fileList[0].file, filename)
+    saveAs(fileList[0].file, fileList[0].filename || filename)
   }
 
   if (fileList.length > 1) {

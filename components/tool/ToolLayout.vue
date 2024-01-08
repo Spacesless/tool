@@ -11,9 +11,9 @@
     </div>
   </section>
 
-  <client-only>
+  <ClientOnly>
     <WalineComment />
-  </client-only>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
