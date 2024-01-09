@@ -3,7 +3,9 @@
     <section class="section">
       <el-row :gutter="16">
         <el-col :md="12">
-          <Vue3ColorPicker v-model="picker" mode="solid" class="color-picker" :theme="theme" />
+          <ClientOnly>
+            <Vue3ColorPicker v-model="picker" mode="solid" class="color-picker" :theme="theme" />
+          </ClientOnly>
         </el-col>
         <el-col :md="12">
           <el-descriptions
@@ -36,10 +38,20 @@
         <el-button class="color-image-close" :icon="Close" circle @click="handleClear" />
       </div>
     </section>
+
+    <template #content>
+      <p>
+        此工具依赖
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/EyeDropper" target="__blank">EyeDropper</a>，
+        需要要在谷歌浏览器，Microsoft Edge中使用。
+      </p>
+    </template>
   </ToolLayout>
 </template>
 
 <script setup lang="ts">
+import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
+import '@cyhnkckali/vue3-color-picker/dist/style.css'
 import Color from 'color'
 import { Close } from '@element-plus/icons-vue'
 import type { UploadFile } from 'element-plus'

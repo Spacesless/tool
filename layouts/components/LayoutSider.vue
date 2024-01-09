@@ -25,6 +25,7 @@
         :default-active="activeMenu"
         :collapse="isCollapse"
         :default-openeds="['category']"
+        :collapse-transition="!isMobile"
         router
       >
         <el-menu-item index="/">

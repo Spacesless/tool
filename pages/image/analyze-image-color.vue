@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import analyze from 'rgbaster-plus'
+import analyze from 'rgbaster'
 import type { UploadFile } from 'element-plus'
 import { sleep } from '@/utils'
 

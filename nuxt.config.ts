@@ -41,13 +41,7 @@ export default defineNuxtConfig({
         }
       }
     }
-  },
-  plugins: [
-    {
-      src: '~/plugins/vue-color-picker.ts',
-      mode: 'client'
-    }
-  ]
+  }
   // googleAdsense: {
   //   id: 'ca-pub-1379822583295856'
   // }
