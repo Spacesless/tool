@@ -14,7 +14,7 @@ const findTool = computed(() => {
 })
 
 useSeoMeta({
-  title: `${findTool.value.name} - 一个安全免费的工具箱`,
+  title: findTool.value.name,
   description: findTool.value.description?.replace('\n', '')
 })
 </script>
