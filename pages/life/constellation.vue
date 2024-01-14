@@ -91,8 +91,13 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs'
+import dayjs, { extend } from 'dayjs'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import constellation from '@/assets/json/xing-zuo.json'
+
+extend(isSameOrBefore)
+extend(isSameOrAfter)
 
 interface RoleItem {
   name: string
@@ -165,7 +170,7 @@ function handleSearch () {
     const momentTime = dayjs(dateTime.value)
     const year = momentTime.year()
     const findRange = monthRange.find((item) => {
-      return momentTime.isAfter(`${year}-${item.start}`) && momentTime.isAfter(`${year}-${item.end}`)
+      return momentTime.isSameOrAfter(`${year}-${item.start}`) && momentTime.isSameOrBefore(`${year}-${item.end}`)
     })
     key = findRange?.name || '摩羯'
   } else {

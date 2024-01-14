@@ -316,11 +316,11 @@ function getDayDetail (datetime: Date) {
 
 :deep(.calendar) {
   .calendar-item--holiday {
-    background-color: #fef5f5;
+    background-color: var(--el-color-danger-light-9);
   }
 
   .calendar-item--work {
-    background-color: #f5f5f6;
+    background-color: var(--el-color-warning-light-9);
   }
 
   .calendar-item--weekend .calendar-item__day {

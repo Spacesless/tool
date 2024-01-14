@@ -138,6 +138,10 @@ function getHolidays (solarYear: number) {
     font-size: 16px;
     line-height: 1.7;
 
+    @media (width < 768px) {
+      padding-left: 0;
+    }
+
     &__name {
       color: var(--el-text-color-primary);
     }

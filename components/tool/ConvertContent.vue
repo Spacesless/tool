@@ -15,7 +15,7 @@
     </div>
 
     <el-descriptions
-      :column="2"
+      :column="isMobile ? 1 : 2"
       border
     >
       <el-descriptions-item v-for="item in options" :key="item.value" :label="`${item.label}(${item.value})`">
@@ -43,6 +43,8 @@ const { options, defaultUnit, defaultValue } = defineProps({
     default: 1
   }
 })
+
+const isMobile = useState('isMobile', () => false)
 
 const form = reactive<{
   value: number;
@@ -78,5 +80,9 @@ function handleConvert () {
 <style lang="scss" scoped>
 .section-group-select {
   width: 200px;
+
+  @media (width <= 768px) {
+    width: 130px;
+  }
 }
 </style>

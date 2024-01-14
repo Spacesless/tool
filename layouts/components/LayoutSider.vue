@@ -1,5 +1,5 @@
 <template>
-  <aside class="sider" :class="{'sider--collapse': isCollapse}">
+  <aside class="sider" :class="{'sider--collapse': isCollapse, 'sider--loaded': isLoaded}">
     <div class="sider-logo">
       <svg
         class="sider-logo__img"
@@ -79,6 +79,11 @@ watch(() => route.name, () => {
   if (isMobile.value && !isCollapse.value) {
     isCollapse.value = true
   }
+})
+
+const isLoaded = ref(false)
+onMounted(() => {
+  isLoaded.value = true
 })
 
 const toggleCollapse = () => {
@@ -178,6 +183,12 @@ const toggleCollapse = () => {
   }
 
   @media (width <= 768px) {
+    display: none;
+
+    &--loaded {
+      display: block;
+    }
+
     &--collapse {
       left: -208px;
     }

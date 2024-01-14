@@ -15,12 +15,12 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="输入">
-              <el-input v-model="form.input" type="textarea" :rows="5" @change="handleConvert" />
+              <el-input v-model="form.input" type="textarea" :rows="6" @change="handleConvert" />
             </el-form-item>
           </el-col>
           <el-col :sm="24" :md="12">
             <el-form-item label="输出">
-              <el-input v-model="form.output" type="textarea" :rows="9" readonly />
+              <el-input v-model="form.output" type="textarea" :rows="10" readonly />
             </el-form-item>
           </el-col>
         </el-row>
@@ -47,6 +47,18 @@ onBeforeMount(() => {
 function handleConvert () {
   const { input, type } = form
 
-  form.output = type === 'url2obj' ? JSON.stringify(url2obj(input), null, 2) : obj2url(input)
+  if (type === 'url2obj') {
+    try {
+      form.output = JSON.stringify(url2obj(input), null, 2)
+    } catch {
+      form.output = '{}'
+    }
+  } else {
+    try {
+      form.output = obj2url(JSON.parse(input))
+    } catch {
+      form.output = ''
+    }
+  }
 }
 </script>

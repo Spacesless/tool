@@ -1,7 +1,7 @@
 <template>
   <LayoutSider />
   <section class="container" :class="{'container--collapse': isCollapse}">
-    <div v-if="!isCollapse" class="container-mask" @click="hideMask" />
+    <div v-if="!isCollapse" class="container-mask" :class="{'container-mask--loaded': isLoaded}" @click="hideMask" />
     <LayoutHeader />
     <main class="main">
       <slot />
@@ -21,7 +21,9 @@ import FixedBar from './components/FixedBar.vue'
 const isCollapse = useState('collapse', () => false)
 const isMobile = useState('isMobile', () => false)
 
+const isLoaded = ref(false)
 onMounted(() => {
+  isLoaded.value = true
   onResize()
 
   window.addEventListener('resize', onResize)
@@ -79,9 +81,14 @@ function hideMask () {
       top: 0;
       left: 0;
       z-index: 8;
+      display: none;
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.45);
+
+      &--loaded {
+        display: block;
+      }
     }
   }
 }
