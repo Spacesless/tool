@@ -55,6 +55,11 @@ function hideMask () {
 <style lang="scss" scoped>
 .main {
   min-height: calc(100vh - 105px);
+  padding-right: 32px;
+
+  @media (width <= 768px) {
+    padding-right: 0;
+  }
 }
 
 .container {

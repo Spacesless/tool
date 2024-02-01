@@ -1,10 +1,24 @@
 <template>
   <div class="fixbar">
+    <el-tooltip effect="dark" content="分享" placement="left">
+      <transition name="fade-transform">
+        <div class="fixbar-item">
+          <Icon class="fixbar-item__icon" name="clarity:share-line" />
+        </div>
+      </transition>
+    </el-tooltip>
+    <el-tooltip effect="dark" content="收藏" placement="left">
+      <transition name="fade-transform">
+        <div class="fixbar-item">
+          <Icon class="fixbar-item__icon" name="clarity:favorite-line" />
+        </div>
+      </transition>
+    </el-tooltip>
     <el-tooltip effect="dark" content="点我坐电梯" placement="left" :disabled="backTopTips">
       <transition name="fade-transform">
         <div v-show="backTopShow" class="fixbar-item fixbar-item-back" @click="backTop">
           <span class="fixbar-item-back__percent">{{ scrollPercent }}%</span>
-          <Icon class="fixbar-item-back__icon" name="tdesign:backtop" />
+          <Icon class="fixbar-item__icon fixbar-item-back__icon" name="radix-icons:pin-top" />
         </div>
       </transition>
     </el-tooltip>
@@ -56,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .fixbar {
   position: fixed;
-  right: 12px;
+  right: 10px;
   bottom: 24px;
   z-index: 998;
 
@@ -78,6 +92,11 @@ export default {
     box-shadow: var(--el-box-shadow-light);
     cursor: pointer;
     user-select: none;
+
+    &__icon{
+      font-size: 20px;
+      vertical-align: -0.1em;
+    }
 
     &:hover {
       color: var(--color-primary);

@@ -91,13 +91,15 @@
 </template>
 
 <script setup lang="ts">
-import dayjs, { extend } from 'dayjs'
+import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import constellation from '@/assets/json/xing-zuo.json'
 
-extend(isSameOrBefore)
-extend(isSameOrAfter)
+// eslint-disable-next-line import/no-named-as-default-member
+dayjs.extend(isSameOrBefore)
+// eslint-disable-next-line import/no-named-as-default-member
+dayjs.extend(isSameOrAfter)
 
 interface RoleItem {
   name: string

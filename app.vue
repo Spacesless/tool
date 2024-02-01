@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <NuxtLayout name="default">
+    <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </el-config-provider>

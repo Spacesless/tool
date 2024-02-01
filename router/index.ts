@@ -37,6 +37,13 @@ const routes = [
         path: 'letter-count',
         description: '行数、字符、单词、数字、字母的数量统计',
         updateTime: '2023-12-27'
+      },
+      {
+        id: 'bc5036d6-db8f-471a-90df-382f4764d3a6',
+        name: '文本对比',
+        path: 'text-comparison',
+        description: '在线文本对比工具',
+        updateTime: '2024-02-03'
       }
     ]
   },
@@ -316,6 +323,12 @@ const routes = [
         name: '节日大全',
         path: 'holiday',
         description: '每年的节日信息，当前日期和每个节日的间隔时长'
+      },
+      {
+        id: '9ab2c2bf-d9cd-492d-a1e7-3d0d70714bee',
+        name: '称呼计算',
+        path: 'relationship',
+        description: '中国亲戚关系计算器；\n逢年过节遇到三姑六婆，拒绝叫不出口的尴尬！轻松搞定亲戚关系～'
       }
     ]
   },

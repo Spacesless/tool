@@ -109,7 +109,7 @@ const toggleCollapse = () => {
   transition: width 0.3s, left 0.3s;
 
   &-logo {
-    padding: 16px 0 8px;
+    padding: 24px 0 12px;
     text-align: center;
 
     &__img {
@@ -129,7 +129,7 @@ const toggleCollapse = () => {
   }
 
   &-scrollbar {
-    height: calc(100% - 175px);
+    height: calc(100% - 186px);
     transition: height 0.3s;
   }
 
