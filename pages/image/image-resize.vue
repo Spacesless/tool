@@ -2,7 +2,7 @@
   <ToolLayout>
     <section class="section">
       <div class="section-header">
-        <FileUpload />
+        <UploadFile />
       </div>
       <el-table
         :data="data"

@@ -1,18 +1,14 @@
 <template>
   <div class="fixbar">
     <el-tooltip effect="dark" content="分享" placement="left">
-      <transition name="fade-transform">
-        <div class="fixbar-item">
-          <Icon class="fixbar-item__icon" name="clarity:share-line" />
-        </div>
-      </transition>
+      <div class="fixbar-item" @click="handleCopy">
+        <Icon class="fixbar-item__icon" name="clarity:share-line" />
+      </div>
     </el-tooltip>
-    <el-tooltip effect="dark" content="收藏" placement="left">
-      <transition name="fade-transform">
-        <div class="fixbar-item">
-          <Icon class="fixbar-item__icon" name="clarity:favorite-line" />
-        </div>
-      </transition>
+    <el-tooltip v-if="isShowFavorite" effect="dark" content="收藏" placement="left">
+      <div class="fixbar-item" @click="toggleFavorite">
+        <Icon class="fixbar-item__icon" :name="isFavorite ? 'clarity:favorite-solid' : 'clarity:favorite-line'" />
+      </div>
     </el-tooltip>
     <el-tooltip effect="dark" content="点我坐电梯" placement="left" :disabled="backTopTips">
       <transition name="fade-transform">
@@ -25,45 +21,75 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ElNotification } from 'element-plus'
+import copy from 'copy-to-clipboard'
 import { getPosition, scrollTo } from '@/utils/scroll-to'
 
 const REFERENCE = 100
 
-export default {
-  name: 'FixedBar',
-  data () {
-    return {
-      backTopShow: false,
-      backTopTips: false,
-      scrollTop: 0,
-      scrollPercent: 0
-    }
-  },
-  watch: {
-    scrollTop () {
-      this.backTopShow = this.scrollTop > REFERENCE
+const backTopShow = ref(false)
+const backTopTips = ref(false)
+const scrollTop = ref(0)
+const scrollPercent = ref(0)
 
-      const screenHeight = window.innerHeight
-      const windowHeight = document.body.clientHeight || document.documentElement.clientHeight
-      const percent = Math.ceil(this.scrollTop / (windowHeight - screenHeight) * 100)
-      this.scrollPercent = percent > 100 ? 100 : percent
-    }
-  },
-  mounted () {
-    this.scrollTop = getPosition()
-    window.addEventListener('scroll', () => {
-      this.scrollTop = getPosition()
-    })
-  },
-  methods: {
-    backTop () {
-      this.backTopTips = true
-      scrollTo(0, 800, undefined, () => {
-        this.backTopTips = false
-      })
-    }
+const route = useRoute()
+const isShowFavorite = computed(() => {
+  const paths = route.path.split('/')
+  return paths.length > 2
+})
+
+watch(scrollTop, () => {
+  backTopShow.value = scrollTop.value > REFERENCE
+
+  const screenHeight = window.innerHeight
+  const windowHeight = document.body.clientHeight || document.documentElement.clientHeight
+  const percent = Math.ceil(scrollTop.value / (windowHeight - screenHeight) * 100)
+  scrollPercent.value = percent > 100 ? 100 : percent
+})
+
+onMounted(() => {
+  scrollTop.value = getPosition()
+
+  document.addEventListener('scroll', () => {
+    scrollTop.value = getPosition()
+  })
+})
+
+const backTop = () => {
+  backTopTips.value = true
+  scrollTo(0, 800, undefined, () => {
+    backTopTips.value = false
+  })
+}
+
+const handleCopy = () => {
+  copy(location.href, {
+    message: '请按#{key}复制'
+  })
+  ElNotification({
+    title: '复制成功',
+    message: '快拿这个工具去祸祸别人吧',
+    type: 'success'
+  })
+}
+
+const favoriteTools = useState('favoriteTools', (): string[] => [])
+const isFavorite = computed(() => {
+  const { toolData } = useToolData()
+  return favoriteTools.value.includes(toolData.value.id)
+})
+
+const toggleFavorite = () => {
+  const { toolData } = useToolData()
+  if (isFavorite.value) {
+    const findIndex = favoriteTools.value.findIndex(item => item === toolData.value.id)
+    favoriteTools.value.splice(findIndex, 1)
+  } else {
+    favoriteTools.value.push(toolData.value.id)
   }
+
+  localStorage.setItem('favoriteTools', favoriteTools.value.toString())
 }
 </script>
 
