@@ -329,6 +329,12 @@ const routes = [
         name: '称呼计算',
         path: 'relationship',
         description: '中国亲戚关系计算器；\n逢年过节遇到三姑六婆，拒绝叫不出口的尴尬！轻松搞定亲戚关系～'
+      },
+      {
+        id: '6c8ba946-3dbd-4fb3-9027-0372f947e4d9',
+        name: '日期计算',
+        path: 'time-difference',
+        description: '自然日间隔计算、日期加减计算'
       }
     ]
   },

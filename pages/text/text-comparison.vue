@@ -14,14 +14,24 @@ onMounted(() => {
   // eslint-disable-next-line no-new
   new MergeView({
     a: {
-      doc: '',
+      doc: `1
+2
+3
+4
+5
+6`,
       extensions: basicSetup
     },
     b: {
-      doc: '',
+      doc: `1
+3
+3
+4
+5
+6`,
       extensions: basicSetup
     },
-    parent: document.getElementById('codemirror')
+    parent: document.getElementById('codemirror') || undefined
   })
 })
 </script>

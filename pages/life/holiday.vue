@@ -48,7 +48,7 @@ const holidays = computed(() => {
   return getHolidays(solarYear)
 })
 
-const nowTime = dayjs()
+const nowTime = dayjs().startOf('day')
 function getHolidays (solarYear: number) {
   const yearDays = SolarUtil.getDaysOfYear(solarYear)
 
