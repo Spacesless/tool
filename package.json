@@ -35,7 +35,9 @@
     "@types/color": "^3.0.6",
     "@types/convert-units": "^2.3.9",
     "@types/crypto-js": "^4.1.2",
+    "@types/csso": "^5.0.4",
     "@types/file-saver": "^2.0.7",
+    "@types/js-beautify": "^1.14.3",
     "@types/opencc-js": "^1.0.2",
     "@types/qrcode": "^1.5.0",
     "@types/relationship.js": "^1.2.0",
@@ -45,7 +47,10 @@
     "convert-units": "^2.3.4",
     "cropperjs": "^1.6.1",
     "crypto-js": "^4.1.1",
+    "csso": "^5.0.5",
     "eslint": "^8.51.0",
+    "javascript-obfuscator": "^4.1.0",
+    "js-beautify": "^1.15.1",
     "jsqr": "^1.4.0",
     "letter-count": "^5.2.1",
     "lunar-typescript": "^1.6.13",
@@ -62,6 +67,7 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
+    "terser": "^5.27.1",
     "uuid": "^9.0.1",
     "xijs": "^1.2.6"
   }

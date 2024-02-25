@@ -124,7 +124,7 @@ onMounted(() => {
 
 let worker: Worker
 const setupWaifu2x = () => {
-  worker = new Worker('/assets/js/worker.js')
+  worker = new Worker('/assets/js/waifu2x/worker.js')
 
   const calculatedCanvasNode = document.getElementById('calculated-canvas') as HTMLCanvasElement
   worker.onmessage = (e) => {

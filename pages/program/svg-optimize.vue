@@ -1,13 +1,39 @@
 <template>
   <ToolLayout>
-    <UploadFile />
-    <el-checkbox-group v-model="plugins">
-      <el-checkbox v-for="item in pluginOptions" :key="item.value" :label="item.value">
-        {{ item.name }}}
-      </el-checkbox>
-    </el-checkbox-group>
-    <CodeEditor />
-    <CodeEditor />
+    <section class="section svgo">
+      <el-scrollbar class="svgo-setting">
+        <el-button-group>
+          <el-button type="primary" @click="selectAll">全选</el-button>
+          <el-button type="primary" @click="handleClear">清空</el-button>
+          <el-button type="primary" @click="handleReset">重置</el-button>
+        </el-button-group>
+        <el-checkbox-group v-model="plugins">
+          <el-checkbox v-for="item in pluginOptions" :key="item.value" :label="item.value">
+            {{ item.name }}}
+          </el-checkbox>
+        </el-checkbox-group>
+      </el-scrollbar>
+      <el-row class="svgo-editor" :gutter="16">
+        <el-col :md="12">
+          <CodeEditor v-model="svgString" />
+          <div class="svgo-result">
+            <img :src="svgToBase64(svgString)" alt="">
+            <p></p>
+          </div>
+          <UploadFile />
+          <el-button type="primary" @click="handleOptimize">压缩</el-button>
+        </el-col>
+        <el-col :md="12">
+          <CodeEditor v-model="optimizedSvgString" />
+          <div class="svgo-result">
+            <img :src="svgToBase64(optimizedSvgString)" alt="">
+            <p></p>
+          </div>
+          <el-button type="primary">复制</el-button>
+          <el-button type="primary">下载</el-button>
+        </el-col>
+      </el-row>
+    </section>
   </ToolLayout>
 </template>
 
@@ -16,10 +42,13 @@ import { optimize } from 'svgo'
 import type { PluginConfig } from 'svgo'
 import { ref, reactive } from 'vue'
 
+const svgString = ref('')
 const optimizedSvgString = ref('')
-const svgString = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="37.07" height="36" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 198"><path fill="#41B883" d="M204.8 0H256L128 220.8L0 0h97.92L128 51.2L157.44 0h47.36Z"></path><path fill="#41B883" d="m0 0l128 220.8L256 0h-51.2L128 132.48L50.56 0H0Z"></path><path fill="#35495E" d="M50.56 0L128 133.12L204.8 0h-47.36L128 51.2L97.92 0H50.56Z"></path></svg>'
 
-const pluginOptions = reactive([
+const pluginOptions = reactive<{
+  name: string;
+  value: PluginConfig
+}[]>([
   {
     name: '清除属性空格',
     value: 'cleanupAttrs'
@@ -29,7 +58,7 @@ const pluginOptions = reactive([
     value: 'cleanupEnableBackground'
   },
   {
-    name: '',
+    name: '清理 ID',
     value: 'cleanupIds'
   },
   {
@@ -49,12 +78,8 @@ const pluginOptions = reactive([
     value: 'convertColors'
   },
   {
-    name: '',
+    name: '将非偏心<椭圆>转换为<圆>',
     value: 'convertEllipseToCircle'
-  },
-  {
-    name: '',
-    value: 'convertOneStopGradients'
   },
   {
     name: '转换路径数据',
@@ -95,10 +120,6 @@ const pluginOptions = reactive([
   {
     name: '移动group属性到元素',
     value: 'moveGroupAttrsToElems'
-  },
-  {
-    name: '',
-    value: 'prefixIds'
   },
   {
     name: '移除注释',
@@ -185,7 +206,7 @@ const pluginOptions = reactive([
     value: 'removeViewBox'
   },
   {
-    name: '',
+    name: '移除Xlink',
     value: 'removeXlink'
   },
   {
@@ -197,7 +218,7 @@ const pluginOptions = reactive([
     value: 'removeXMLNS'
   },
   {
-    name: '',
+    name: '用链接替换重复的元素',
     value: 'reusePaths'
   },
   {
@@ -205,12 +226,12 @@ const pluginOptions = reactive([
     value: 'sortAttrs'
   },
   {
-    name: '',
+    name: '对 <defs 的子项进行排序>',
     value: 'sortDefsChildren'
   }
 ])
 
-const plugins = reactive<PluginConfig[]>([
+const defaultPlugins: PluginConfig[] = [
   'removeDoctype',
   'removeXMLProcInst',
   'removeComments',
@@ -246,17 +267,34 @@ const plugins = reactive<PluginConfig[]>([
   'sortDefsChildren',
   'removeTitle',
   'removeDesc'
-])
+]
+const plugins = ref<PluginConfig[]>([...defaultPlugins])
+
+watch(() => plugins, handleOptimize)
 
 function handleOptimize () {
-  const result = optimize(svgString, {
+  const result = optimize(svgString.value, {
     multipass: false, // boolean
     js2svg: {
       indent: 4, // number
       pretty: false // boolean
     },
-    plugins
+    plugins: plugins.value
   })
   optimizedSvgString.value = result.data
+}
+
+function svgToBase64(svgString: string) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURI(svgString)}`;
+}
+
+function handleClear() {
+  plugins.value = []
+}
+function selectAll() {
+  plugins.value = pluginOptions.map(item => item.value)
+}
+function handleReset() {
+  plugins.value = [...defaultPlugins]
 }
 </script>

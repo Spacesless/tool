@@ -1,4 +1,4 @@
-importScripts(getJsPath() + '/waifu2x.js');
+importScripts(getJsPath() + '/index.js');
 
 var Waifu2x = self.Waifu2x;
 

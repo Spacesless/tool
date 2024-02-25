@@ -18,30 +18,24 @@
 </template>
 
 <script setup lang="ts">
-// npm i -D js-beautify terser javascript-obfuscator
-import { minify } from 'html-minifier'
+import { minify } from 'terser'
 import beautify from 'js-beautify'
 import { obfuscate } from 'javascript-obfuscator'
 
 const input = ref('')
+const output = ref('')
 
-function handleMinify () {
-  return minify(input.value, {
-    minifyCSS: true, // 压缩css
-    minifyJS: true, // 压缩js
-    collapseWhitespace: true, // 删除html里的空格 达到html的压缩
-    removeAttributeQuotes: true, // 尽可能删除html标签里的双引号 达到html的压缩
-    removeComments: true, // 删除html中的注释
-    removeCommentsFromCDATA: true // 从脚本和样式删除的注释
-  })
+async function handleMinify () {
+  const result = await minify(input.value)
+  output.value = result.code || ''
 }
 
 function handleBeautify () {
-  return beautify(input.value, {})
+  output.value = beautify(input.value, {})
 }
 
 function handleObfuscator () {
-  return obfuscate(input.value,
+  const obfuscationResult = obfuscate(input.value,
     {
       compact: false,
       controlFlowFlattening: true,
@@ -53,5 +47,7 @@ function handleObfuscator () {
       stringArrayThreshold: 1
     }
   )
+
+  output.value = obfuscationResult.getObfuscatedCode()
 }
 </script>

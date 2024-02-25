@@ -4,7 +4,7 @@
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _Waifu2x = require("./Waifu2x");
+var _Waifu2x = require(".");
 
 var _Waifu2x2 = _interopRequireDefault(_Waifu2x);
 

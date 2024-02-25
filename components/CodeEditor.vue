@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-// npm i vue-codemirror6 codemirror
-
 const value = ref()
 
 const colorMode = useColorMode()

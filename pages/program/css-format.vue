@@ -15,19 +15,19 @@
 </template>
 
 <script setup lang="ts">
-// npm i -D js-beautify clean-css
-import CleanCSS from 'clean-css'
+import { minify } from 'csso'
 import beautify from 'js-beautify'
 
-const input = ref()
+const input = ref('')
+const output = ref('')
 
 function handleMinify () {
   const options = { /* options */ }
-  const output = new CleanCSS(options).minify(input.value)
-  return output.styles
+  const result = minify(input.value, options)
+  output.value = result.css
 }
 
 function handleBeautify () {
-  return beautify(input.value, {})
+  output.value = beautify.css(input.value, {})
 }
 </script>

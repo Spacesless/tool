@@ -1,4 +1,4 @@
-const easeInOutQuad = function (t, b, c, d) {
+const easeInOutQuad = function (t: number, b: number, c: number, d: number) {
   t /= d / 2
   if (t < 1) {
     return c / 2 * t * t + b
@@ -23,12 +23,11 @@ const requestAnimFrame = (function () {
  * @param {number} amount
  * @summary element不传则body滚动
  */
-function move (amount, element) {
+function move (amount: number, element?: HTMLElement) {
   if (element) {
     element.scrollTop = amount
   } else {
     document.documentElement.scrollTop = amount
-    document.body.parentNode.scrollTop = amount
     document.body.scrollTop = amount
   }
 }
@@ -37,11 +36,11 @@ function move (amount, element) {
  * 获取scrollTop
  * @param {Document} element 需要滚动的元素
  */
-export function getPosition (element) {
+export function getPosition (element?: HTMLElement) {
   if (element) {
     return element.scrollTop
   } else {
-    return document.documentElement.scrollTop || document.body.parentNode.scrollTop || document.body.scrollTop
+    return document.documentElement.scrollTop || document.body.scrollTop
   }
 }
 
@@ -51,7 +50,7 @@ export function getPosition (element) {
  * @param {Document} element 需要滚动的元素
  * @param {Function} callback 滚动结束的回调函数
  */
-export function scrollTo (to, duration, element, callback) {
+export function scrollTo (to: number, duration: number, element?: HTMLElement, callback?: Function) {
   const start = getPosition(element)
   const change = to - start
   const increment = 20
@@ -66,7 +65,7 @@ export function scrollTo (to, duration, element, callback) {
     move(val, element)
     // do the animation unless its over
     if (currentTime < duration) {
-      requestAnimFrame(animateScroll)
+      requestAnimFrame && requestAnimFrame(animateScroll)
     } else if (callback && typeof (callback) === 'function') {
       // the animation is done so lets callback
       callback()
