@@ -1,36 +1,45 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <ToolLayout>
     <section class="section svgo">
       <el-scrollbar class="svgo-setting">
-        <el-button-group>
-          <el-button type="primary" @click="selectAll">全选</el-button>
-          <el-button type="primary" @click="handleClear">清空</el-button>
-          <el-button type="primary" @click="handleReset">重置</el-button>
+        <el-button-group class="svgo-setting-fast">
+          <el-button type="primary" @click="selectAll">
+            全选
+          </el-button>
+          <el-button type="primary" @click="handleClear">
+            清空
+          </el-button>
+          <el-button type="primary" @click="handleReset">
+            重置
+          </el-button>
         </el-button-group>
-        <el-checkbox-group v-model="plugins">
-          <el-checkbox v-for="item in pluginOptions" :key="item.value" :label="item.value">
-            {{ item.name }}}
+        <el-checkbox-group v-model="plugins" lang="xml">
+          <el-checkbox v-for="item in pluginOptions" :key="item.name" :label="item.value">
+            {{ item.name }}
           </el-checkbox>
         </el-checkbox-group>
       </el-scrollbar>
       <el-row class="svgo-editor" :gutter="16">
         <el-col :md="12">
-          <CodeEditor v-model="svgString" />
-          <div class="svgo-result">
-            <img :src="svgToBase64(svgString)" alt="">
-            <p></p>
+          <CodeEditor v-model:code="svgString" lang="xml" />
+          <div class="svgo-upload">
+            <UploadFile />
           </div>
-          <UploadFile />
-          <el-button type="primary" @click="handleOptimize">压缩</el-button>
+          <el-button type="primary" @click="handleOptimize">
+            压缩
+          </el-button>
+          <div class="svgo-result" v-html="svgString" />
         </el-col>
         <el-col :md="12">
-          <CodeEditor v-model="optimizedSvgString" />
-          <div class="svgo-result">
-            <img :src="svgToBase64(optimizedSvgString)" alt="">
-            <p></p>
-          </div>
-          <el-button type="primary">复制</el-button>
-          <el-button type="primary">下载</el-button>
+          <CodeEditor v-model:code="optimizedSvgString" lang="xml" />
+          <el-button type="primary">
+            复制
+          </el-button>
+          <el-button type="primary">
+            下载
+          </el-button>
+          <div class="svgo-result" v-html="optimizedSvgString" />
         </el-col>
       </el-row>
     </section>
@@ -166,7 +175,7 @@ const pluginOptions = reactive<{
     value: 'removeNonInheritableGroupAttrs'
   },
   {
-    name: '',
+    name: '删除OffCanvas路径',
     value: 'removeOffCanvasPaths'
   },
   {
@@ -206,10 +215,6 @@ const pluginOptions = reactive<{
     value: 'removeViewBox'
   },
   {
-    name: '移除Xlink',
-    value: 'removeXlink'
-  },
-  {
     name: '移除XML指令',
     value: 'removeXMLProcInst'
   },
@@ -231,7 +236,7 @@ const pluginOptions = reactive<{
   }
 ])
 
-const defaultPlugins: PluginConfig[] = [
+const defaultPlugins: string[] = [
   'removeDoctype',
   'removeXMLProcInst',
   'removeComments',
@@ -268,9 +273,9 @@ const defaultPlugins: PluginConfig[] = [
   'removeTitle',
   'removeDesc'
 ]
-const plugins = ref<PluginConfig[]>([...defaultPlugins])
+const plugins = ref<string[]>([...defaultPlugins])
 
-watch(() => plugins, handleOptimize)
+watch(() => plugins.value, handleOptimize)
 
 function handleOptimize () {
   const result = optimize(svgString.value, {
@@ -279,22 +284,44 @@ function handleOptimize () {
       indent: 4, // number
       pretty: false // boolean
     },
-    plugins: plugins.value
+    plugins: plugins.value as PluginConfig[]
   })
   optimizedSvgString.value = result.data
 }
 
-function svgToBase64(svgString: string) {
-  return `data:image/svg+xml;charset=utf-8,${encodeURI(svgString)}`;
-}
-
-function handleClear() {
+function handleClear () {
   plugins.value = []
 }
-function selectAll() {
-  plugins.value = pluginOptions.map(item => item.value)
+function selectAll () {
+  plugins.value = pluginOptions.map(item => item.value as string)
 }
-function handleReset() {
+function handleReset () {
   plugins.value = [...defaultPlugins]
 }
 </script>
+
+<style lang="scss" scoped>
+.svgo {
+  &-setting-fast {
+    margin-bottom: 10px;
+  }
+
+  :deep(.cm-editor) {
+    margin: 10px 0 16px;
+  }
+
+  &-upload {
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  &-result {
+    margin-top: 16px;
+
+    :deep(svg) {
+      height: 128px;
+    }
+  }
+}
+</style>

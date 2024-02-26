@@ -376,6 +376,12 @@ const routes = [
         name: 'Favicon生成',
         path: 'image-to-favicon',
         description: '图片转换成ico文件，生成网站favicon.ico'
+      },
+      {
+        id: '140481ca-a1ce-452a-9a6c-c95a199168f3',
+        name: 'SVG压缩',
+        path: 'svg-optimize',
+        description: '基于SVGO对SVG文件进行压缩'
       }
     ]
   },

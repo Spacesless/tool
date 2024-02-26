@@ -8,10 +8,9 @@
           Minify
         </button>
       </div>
-      <textarea id="output" rows="8" cols="40" readonly="" />
+      <textarea id="output" rows="8" cols="40" />
 
       <p id="stats" />
-      </div>
       <div id="options">
         <ul>
           <li>
@@ -24,7 +23,7 @@
             </span>
           </li>
           <li>
-            <input id="collapseBooleanAttributes" type="checkbox" checked="">
+            <input id="collapseBooleanAttributes" type="checkbox">
             <label for="collapseBooleanAttributes">
               折叠布尔属性
             </label>
@@ -33,7 +32,7 @@
             </span>
           </li>
           <li>
-            <input id="collapseWhitespace" type="checkbox" checked="">
+            <input id="collapseWhitespace" type="checkbox">
             <label for="collapseWhitespace">
               折叠空格
             </label>
@@ -69,7 +68,7 @@
             </span>
           </li>
           <li>
-            <input id="decodeEntities" type="checkbox" checked="">
+            <input id="decodeEntities" type="checkbox">
             <label for="decodeEntities">
               解码实体字符
             </label>
@@ -78,7 +77,7 @@
             </span>
           </li>
           <li>
-            <input id="html5" type="checkbox" checked="">
+            <input id="html5" type="checkbox">
             <label for="html5">
               HTML5
             </label>
@@ -114,7 +113,7 @@
             </span>
           </li>
           <li>
-            <input id="minifyCSS" type="checkbox" checked="">
+            <input id="minifyCSS" type="checkbox">
             <label for="minifyCSS">
               缩小 CSS
             </label>
@@ -123,7 +122,7 @@
             </span>
           </li>
           <li>
-            <input id="minifyJS" type="checkbox" checked="">
+            <input id="minifyJS" type="checkbox">
             <label for="minifyJS">
               缩小 JavaScript
             </label>
@@ -150,7 +149,7 @@
             </span>
           </li>
           <li>
-            <input id="processConditionalComments" type="checkbox" checked="">
+            <input id="processConditionalComments" type="checkbox">
             <label for="processConditionalComments">
               处理条件注释
             </label>
@@ -177,7 +176,7 @@
             </span>
           </li>
           <li>
-            <input id="removeAttributeQuotes" type="checkbox" checked="">
+            <input id="removeAttributeQuotes" type="checkbox">
             <label for="removeAttributeQuotes">
               删除属性引号
             </label>
@@ -186,7 +185,7 @@
             </span>
           </li>
           <li>
-            <input id="removeComments" type="checkbox" checked="">
+            <input id="removeComments" type="checkbox">
             <label for="removeComments">
               删除注释
             </label>
@@ -195,7 +194,7 @@
             </span>
           </li>
           <li>
-            <input id="removeEmptyAttributes" type="checkbox" checked="">
+            <input id="removeEmptyAttributes" type="checkbox">
             <label for="removeEmptyAttributes">
               删除空属性
             </label>
@@ -213,13 +212,13 @@
             </span>
           </li>
           <li>
-            <input id="removeOptionalTags" type="checkbox" checked="">
+            <input id="removeOptionalTags" type="checkbox">
             <label for="removeOptionalTags">
               删除可选标签
             </label>
           </li>
           <li>
-            <input id="removeRedundantAttributes" type="checkbox" checked="">
+            <input id="removeRedundantAttributes" type="checkbox">
             <label for="removeRedundantAttributes">
               删除冗余属性
             </label>
@@ -228,7 +227,7 @@
             </span>
           </li>
           <li>
-            <input id="removeScriptTypeAttributes" type="checkbox" checked="">
+            <input id="removeScriptTypeAttributes" type="checkbox">
             <label for="removeScriptTypeAttributes">
               删除脚本类型属性
             </label>
@@ -237,7 +236,7 @@
             </span>
           </li>
           <li>
-            <input id="removeStyleLinkTypeAttributes" type="checkbox" checked="">
+            <input id="removeStyleLinkTypeAttributes" type="checkbox">
             <label for="removeStyleLinkTypeAttributes">
               删除样式链接类型属性
             </label>
@@ -246,7 +245,7 @@
             </span>
           </li>
           <li>
-            <input id="removeTagWhitespace" type="checkbox" checked="">
+            <input id="removeTagWhitespace" type="checkbox">
             <label for="removeTagWhitespace" class="unsafe">
               删除标签空格
             </label>
@@ -255,7 +254,7 @@
             </span>
           </li>
           <li>
-            <input id="sortAttributes" type="checkbox" checked="">
+            <input id="sortAttributes" type="checkbox">
             <label for="sortAttributes" class="unsafe">
               对属性进行排序
             </label>
@@ -264,7 +263,7 @@
             </span>
           </li>
           <li>
-            <input id="sortClassName" type="checkbox" checked="">
+            <input id="sortClassName" type="checkbox">
             <label for="sortClassName" class="unsafe">
               对类名进行排序
             </label>
@@ -273,7 +272,7 @@
             </span>
           </li>
           <li>
-            <input id="trimCustomFragments" type="checkbox" checked="">
+            <input id="trimCustomFragments" type="checkbox">
             <label for="trimCustomFragments">
               修剪自定义片段周围的空白
             </label>
@@ -282,7 +281,7 @@
             </span>
           </li>
           <li>
-            <input id="useShortDoctype" type="checkbox" checked="">
+            <input id="useShortDoctype" type="checkbox">
             <label for="useShortDoctype">
               使用短文档类型
             </label>
@@ -305,9 +304,14 @@
 <script setup lang="ts">
 import beautify from 'js-beautify'
 
+useHead({
+  script: [{ src: '/assets/js/html-minify/index.js' }]
+})
+
 const input = ref('')
 
 let minify = (function () {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const minify = require('html-minifier').minify
   return function (value, options, callback, errorback) {
     options.log = function (message) {
