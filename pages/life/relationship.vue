@@ -136,16 +136,16 @@
 </template>
 
 <script setup lang="ts">
-import relationship from 'relationship.js'
+import relationship, { Options } from 'relationship.js'
 
-interface Options extends relationship.Options {
+interface FormData extends Options {
   inputType: string;
   input: string;
   output: string;
   target: string;
 }
 
-const form = reactive<Options>({
+const form = reactive<FormData>({
   inputType: 'default',
   mode: 'default',
   sex: 1,

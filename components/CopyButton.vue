@@ -8,7 +8,7 @@
 import copy from 'copy-to-clipboard'
 import { CopyDocument } from '@element-plus/icons-vue'
 
-const { text } = defineProps({
+const props = defineProps({
   text: {
     type: String,
     default: ''
@@ -16,7 +16,7 @@ const { text } = defineProps({
 })
 
 const handleCopy = () => {
-  copy(text, {
+  copy(props.text, {
     message: '请按#{key}复制'
   })
 }

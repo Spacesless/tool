@@ -23,6 +23,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: false
+})
+
 const { toolData } = useToolData()
 
 const route = useRoute()

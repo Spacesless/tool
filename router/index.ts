@@ -255,6 +255,30 @@ const routes = [
         name: '坐标转换',
         path: 'coordinate-transform',
         description: '百度、高德、腾讯、WGS84坐标系互转'
+      },
+      {
+        id: '6f785ede-3b7e-459a-8349-b384d0175841',
+        name: 'HTML格式化',
+        path: 'html-format',
+        description: '支持HTML代码压缩、美化'
+      },
+      {
+        id: '0ed8d4b3-6b49-4d91-83f1-aabd4f5baadc',
+        name: 'CSS格式化',
+        path: 'css-format',
+        description: '支持CSS代码压缩、美化'
+      },
+      {
+        id: 'aacfad38-1e68-4363-9fa5-b7d9a9f7f378',
+        name: 'Javascript格式化',
+        path: 'javascript-format',
+        description: '支持Javascript代码压缩、美化'
+      },
+      {
+        id: '730f523b-8732-4391-aa48-26b253740e86',
+        name: 'JSON格式化',
+        path: 'json-format',
+        description: '支持JSON代码压缩、美化'
       }
     ]
   },

@@ -57,7 +57,9 @@
     </ul>
   </section>
 
-  <GiscusComment />
+  <ClientOnly>
+    <WalineComment />
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

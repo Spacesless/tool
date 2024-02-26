@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  importScripts('assets/js/html-minify/index.js');
+  importScripts('/assets/js/html-minify/index.js');
   var minify = require('html-minifier').minify;
   addEventListener('message', function(event) {
     try {

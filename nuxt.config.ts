@@ -18,14 +18,9 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@nuxtjs/color-mode',
     '@nuxtjs/eslint-module',
-    // '@nuxtjs/google-adsense',
-    // '@nuxtjs/i18n',
     '@nuxtjs/stylelint-module',
     'nuxt-icon'
   ],
-  // i18n: {
-  //   vueI18n: './i18n.config.ts'
-  // },
   colorMode: {
     classSuffix: ''
   },
@@ -40,9 +35,9 @@ export default defineNuxtConfig({
           additionalData: '@use "@/assets/style/element/index.scss" as element;'
         }
       }
+    },
+    define: {
+      'process.platform': 'win32'
     }
   }
-  // googleAdsense: {
-  //   id: 'ca-pub-1379822583295856'
-  // }
 })

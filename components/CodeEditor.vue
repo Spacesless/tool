@@ -21,6 +21,7 @@ import { html } from '@codemirror/lang-html'
 import { xml } from '@codemirror/lang-xml'
 import { css } from '@codemirror/lang-css'
 import { javascript } from '@codemirror/lang-javascript'
+import { json } from '@codemirror/lang-json'
 
 const props = defineProps({
   code: {
@@ -49,22 +50,20 @@ watch(() => input.value, (val) => {
   emit('update:code', val)
 })
 
+const langConfigs: Record<string, Function> = {
+  html,
+  xml,
+  css,
+  javascript,
+  json
+}
 const extensions = computed((): any => {
   const result = [basicSetup, EditorView.lineWrapping]
   if (dark.value) {
     result.push(oneDark)
   }
-  if (props.lang === 'html') {
-    result.push(html())
-  }
-  if (props.lang === 'xml') {
-    result.push(xml())
-  }
-  if (props.lang === 'css') {
-    result.push(css())
-  }
-  if (props.lang === 'javascript') {
-    result.push(javascript())
+  if (langConfigs[props.lang]) {
+    result.push(langConfigs[props.lang]())
   }
   return result
 })
