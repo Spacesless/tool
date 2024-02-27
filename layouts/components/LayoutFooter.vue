@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span>Copyright © 2023 Timeless. All rights reserved. </span>
+    <span>Copyright © 2023 - {{ thisYear }} Timeless. All rights reserved. </span>
     <a
       class="footer__link"
       href="https://beian.miit.gov.cn/"
@@ -19,6 +19,12 @@
     </a>
   </footer>
 </template>
+
+<script lang="ts" setup>
+import dayjs from 'dayjs'
+
+const thisYear = ref(dayjs().year())
+</script>
 
 <style lang="scss" scoped>
 .footer {

@@ -24,7 +24,7 @@
         <el-col :md="12">
           <CodeEditor v-model:code="svgString" lang="xml" />
           <div class="svgo-upload">
-            <UploadFile />
+            <UploadFile accept=".svg" @change-file="onFileChange" />
           </div>
           <el-button type="primary" @click="handleOptimize">
             压缩
@@ -50,6 +50,7 @@
 import { optimize } from 'svgo'
 import type { PluginConfig } from 'svgo'
 import { ref, reactive } from 'vue'
+import type { UploadFile } from 'element-plus'
 
 const svgString = ref('')
 const optimizedSvgString = ref('')
@@ -297,6 +298,16 @@ function selectAll () {
 }
 function handleReset () {
   plugins.value = [...defaultPlugins]
+}
+
+const onFileChange = ({ uploadFile }: { uploadFile: UploadFile }) => {
+  if (uploadFile.raw) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      svgString.value = e.target?.result?.toString() || ''
+    }
+    reader.readAsText(uploadFile.raw)
+  }
 }
 </script>
 
