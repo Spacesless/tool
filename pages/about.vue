@@ -55,6 +55,19 @@
       <li>快速复制粘贴、文件导入导出</li>
       <li>...</li>
     </ul>
+    <h2>外部嵌入</h2>
+    <ul>
+      <li>
+        工具URL后面添加iframe参数即可去除外部容器使用iframe嵌入，如：
+        <a href="https://app.timelessq.com/text/chinese-convert?iframe=true" target="_blank">
+          https://app.timelessq.com/text/chinese-convert?iframe=true</a>
+      </li>
+      <li>
+        工具URL后面添加theme以设置暗黑模式，如：
+        <a href="https://app.timelessq.com/text/chinese-convert?theme=dark" target="_blank">
+          https://app.timelessq.com/text/chinese-convert?theme=dark</a>
+      </li>
+    </ul>
   </section>
 
   <ClientOnly>

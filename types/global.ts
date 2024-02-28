@@ -12,3 +12,8 @@ declare module 'rgbaster' {
   }[]>;
   export = analyze
 }
+
+declare module 'svgo/dist/svgo.browser.js' {
+  import svgo from 'svgo'
+  export const optimize: typeof svgo.optimize
+}

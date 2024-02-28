@@ -15,13 +15,11 @@
         </el-button-group>
         <li v-for="item in optionsList" :key="item.value">
           <template v-if="item.type === 'input'">
-            <p class="html-config__name">
-              {{ item.name }}：
-            </p>
+            <span class="html-config__name" :title="item.description">{{ item.name }}：</span>
             <el-input v-model="options[item.value]" />
           </template>
           <el-checkbox v-else v-model="options[item.value]">
-            {{ item.name }}
+            <span :title="item.description">{{ item.name }}</span>
           </el-checkbox>
         </li>
       </ul>
@@ -296,6 +294,7 @@ function handleBeautify () {
     }
 
     &__name {
+      display: inline-block;
       margin-bottom: 6px;
       color: var(--el-text-color-regular);
       font-size: 14px;

@@ -23,10 +23,6 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: false
-})
-
 const { toolData } = useToolData()
 
 const route = useRoute()
@@ -34,7 +30,7 @@ const colorMode = useColorMode()
 
 const isIframe = ref(false)
 
-onBeforeMount(() => {
+onMounted(() => {
   const { iframe, theme } = route.query || {}
 
   if (iframe) {
@@ -44,9 +40,7 @@ onBeforeMount(() => {
     setPageLayout('default')
   }
 
-  if (theme === 'dark') {
-    colorMode.value = 'dark'
-  }
+  colorMode.preference = theme === 'dark' ? 'dark' : 'light'
 })
 </script>
 

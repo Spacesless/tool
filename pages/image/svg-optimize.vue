@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { optimize } from 'svgo'
+import { optimize } from 'svgo/dist/svgo.browser.js'
 import type { PluginConfig } from 'svgo'
 import { ref, reactive } from 'vue'
 import type { UploadFile } from 'element-plus'
@@ -116,11 +116,11 @@ const pluginOptions = reactive<{
     value: 'mergePaths'
   },
   {
-    name: '',
+    name: '合并样式',
     value: 'mergeStyles'
   },
   {
-    name: '压缩styles',
+    name: '压缩样式',
     value: 'minifyStyles'
   },
   {

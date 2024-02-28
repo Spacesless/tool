@@ -21,6 +21,12 @@ export default defineNuxtConfig({
     '@nuxtjs/stylelint-module',
     'nuxt-icon'
   ],
+  eslint: {
+    lintOnStart: false
+  },
+  stylelint: {
+    lintOnStart: false
+  },
   colorMode: {
     classSuffix: ''
   },
@@ -36,8 +42,8 @@ export default defineNuxtConfig({
         }
       }
     },
-    define: {
-      'process.platform': 'win32'
+    optimizeDeps: {
+      needsInterop: ['svgo']
     }
   }
 })
