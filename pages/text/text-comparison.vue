@@ -39,5 +39,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 .codemirror {
   height: 600px;
+  overflow-y: auto;
 }
 </style>

@@ -21,23 +21,28 @@
       <el-form-item label="秘钥">
         <el-input v-model="form.secret" type="password" show-password />
       </el-form-item>
-      <el-form-item label="秘钥偏移量">
+      <el-form-item v-if="!['RC4', 'RC4Drop'].includes(props.algorithm)" label="秘钥偏移量">
         <el-input v-model="form.iv" type="password" show-password />
       </el-form-item>
-      <el-form-item label="模式">
-        <el-select v-model="form.mode">
-          <el-option v-for="item in modeOptions" :key="item" :value="item">
-            {{ item }}
-          </el-option>
-        </el-select>
+      <el-form-item v-if="props.algorithm === 'RC4Drop'" label="丢弃字数">
+        <el-input-number v-model="form.drop" :min="0" :max="99999" />
       </el-form-item>
-      <el-form-item label="填充">
-        <el-select v-model="form.padding">
-          <el-option v-for="item in paddingOptions" :key="item" :value="item">
-            {{ item }}
-          </el-option>
-        </el-select>
-      </el-form-item>
+      <template v-if="!['Rabbit', 'RC4', 'RC4Drop'].includes(props.algorithm)">
+        <el-form-item label="模式">
+          <el-select v-model="form.mode">
+            <el-option v-for="item in modeOptions" :key="item" :value="item">
+              {{ item }}
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="填充">
+          <el-select v-model="form.padding">
+            <el-option v-for="item in paddingOptions" :key="item" :value="item">
+              {{ item }}
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </template>
       <el-form-item label="输出">
         <el-input
           v-model="result"
@@ -53,7 +58,7 @@
 <script lang="ts" setup>
 import CryptoJS from 'crypto-js'
 
-const { algorithm } = withDefaults(
+const props = withDefaults(
   defineProps<{ algorithm?: string }>(), {
     algorithm: 'AES'
   }
@@ -65,7 +70,8 @@ const form = reactive({
   iv: '6688',
   mode: 'CBC',
   padding: 'Pkcs7',
-  content: 'CryptoJS encryption and decryption'
+  content: 'CryptoJS encryption and decryption',
+  drop: 0
 })
 const result = ref('')
 const modeOptions = reactive(['CBC', 'CFB', 'CTR', 'OFB', 'ECB'])
@@ -77,7 +83,7 @@ watch(() => form, handleCipher, {
 })
 
 function handleCipher () {
-  const { method, secret, iv, mode, padding, content } = form
+  const { method, secret, iv, mode, padding, content, drop } = form
 
   const secretHex = CryptoJS.enc.Utf8.parse(secret)
   const SECRET_IV = CryptoJS.enc.Utf8.parse(iv)
@@ -100,7 +106,8 @@ function handleCipher () {
     const encrypted = algorithmHandler.encrypt(dataHex, secretHex, {
       iv: SECRET_IV,
       mode: getMode(mode),
-      padding: getPadding(padding)
+      padding: getPadding(padding),
+      drop
     })
     result.value = encrypted.ciphertext.toString()
   }
@@ -108,7 +115,7 @@ function handleCipher () {
 
 function getAlgorithmHandler () {
   let algorithmHandler = CryptoJS.AES
-  switch (algorithm) {
+  switch (props.algorithm) {
     case 'DES':
       algorithmHandler = CryptoJS.DES
       break

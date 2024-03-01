@@ -27,7 +27,7 @@
                 </template>
               </el-select>
             </el-form-item>
-            <el-form-item label="输入">
+            <el-form-item label="输出">
               <el-input v-model="ouput" style="width: 90%;" readonly />
             </el-form-item>
           </el-col>
