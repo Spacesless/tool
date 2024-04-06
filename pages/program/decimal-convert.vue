@@ -14,7 +14,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="输入">
-              <el-input-number v-model="form.input" style="width: 90%;" controls-position="right" />
+              <el-input v-model="form.input" style="width: 90%;" />
             </el-form-item>
           </el-col>
           <el-col :sm="24" :md="12">
