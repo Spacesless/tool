@@ -6,10 +6,12 @@
     :accept="accept"
     :drag="drag"
     :multiple="multiple"
+    :file-list="fileList"
     :list-type="!isPictureCard ? 'text' : 'picture-card'"
     :show-file-list="isPictureCard"
     :on-change="handleChange"
     :on-preview="handlePreview"
+    :before-upload="beforeUpload"
   >
     <template v-if="!isPictureCard">
       <template v-if="drag">
@@ -51,14 +53,21 @@ const props = defineProps({
   listType: {
     type: String,
     default: 'text'
+  },
+  limitSize: {
+    type: Number,
+    default: 100
   }
 })
 const emit = defineEmits(['changeFile'])
+
+const fileList = ref([])
 
 const isPictureCard = computed(() => props.listType === 'picture-card')
 
 const handleChange: UploadProps['onChange'] = (uploadFile, uploadFiles) => {
   emit('changeFile', { uploadFile, uploadFiles })
+  fileList.value = []
 }
 
 const previewShow = ref(false)
@@ -71,6 +80,13 @@ const handlePreview = (uploadFile: UploadFile) => {
 const closeImageViewer = () => {
   previewShow.value = false
   document.body.classList.remove('el-popup-parent--hidden')
+}
+const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.size / 1024 / 1024 > props.limitSize) {
+    ElMessage.error(`为了你的浏览器着想，请不要上传超过${props.limitSize}MB的文件!`)
+    return false
+  }
+  return true
 }
 </script>
 

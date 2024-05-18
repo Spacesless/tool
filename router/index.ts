@@ -44,6 +44,13 @@ const routes = [
         path: 'text-comparison',
         description: '在线文本对比工具',
         updateTime: '2024-02-03'
+      },
+      {
+        id: 'a43a2e6e-d187-4c57-b44e-e4df9a1b3010',
+        name: '摩尔斯电码',
+        path: 'morse',
+        description: '摩尔斯电码和文本互转工具，支持中文。',
+        updateTime: '2024-05-18'
       }
     ]
   },
@@ -406,6 +413,20 @@ const routes = [
         name: 'SVG压缩',
         path: 'svg-optimize',
         description: '基于SVGO对SVG文件进行压缩'
+      },
+      {
+        id: '611e8a3c-6bbe-4795-bf01-947f757e37eb',
+        name: '批量处理图片',
+        path: 'image-compress',
+        description: '图片批量压缩、修改尺寸、裁剪、转换格式',
+        updateTime: '2024-05-18'
+      },
+      {
+        id: 'b5e96dbc-5198-48b5-a34f-492820910fa6',
+        name: '去除图片背景',
+        path: 'remove-background',
+        description: '依据RMBG-1.4 AI大模型去除图片背景',
+        updateTime: '2024-05-18'
       }
     ]
   },

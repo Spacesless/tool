@@ -273,6 +273,7 @@ function getDayDetail (datetime: Date) {
 
   :deep(.calendar-item) {
     position: relative;
+    box-sizing: border-box;
     height: 100%;
     padding-top: 10px;
     text-align: center;
