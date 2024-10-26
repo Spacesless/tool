@@ -148,6 +148,14 @@ const toggleFavorite = (id: string) => {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    &:hover {
+      box-shadow: var(--el-box-shadow);
+    }
+
+    &:hover &__title{
+      color: var(--el-color-primary);
+    }
   }
 }
 </style>

@@ -63,7 +63,7 @@ function hideMask () {
 }
 
 .container {
-  margin-left: 208px;
+  margin-left: 178px;
   padding: 0 32px;
   transition: margin-left 0.3s;
 

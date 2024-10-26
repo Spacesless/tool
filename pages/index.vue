@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import tools from '@/router'
-import { ToolCategory } from '@/types/tool'
+import type { ToolCategory } from '@/types/tool'
 
 useSeoMeta({
   title: 'Toolbox',

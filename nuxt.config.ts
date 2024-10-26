@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
           additionalData: '@use "@/assets/style/element/index.scss" as element;'
         }
       }
@@ -45,5 +46,6 @@ export default defineNuxtConfig({
     optimizeDeps: {
       needsInterop: ['svgo']
     }
-  }
+  },
+  compatibilityDate: '2024-10-25'
 })

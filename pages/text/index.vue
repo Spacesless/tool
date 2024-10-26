@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ToolCategory } from '@/types/tool'
+import type { ToolCategory } from '@/types/tool'
 
 const route = useRoute()
 const toolList = useState('tools', (): ToolCategory => [])

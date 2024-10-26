@@ -50,6 +50,7 @@ const toggleCollapse = () => {
   &-icon {
     font-size: 20px;
     outline: none;
+    cursor: pointer;
   }
 
   @media (width <= 768px) {

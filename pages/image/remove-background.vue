@@ -50,7 +50,7 @@ const imageUrl = ref('')
 onMounted(() => {
   // Since we will download the model from the Hugging Face Hub, we can skip the local model check
   env.allowLocalModels = true
-  const wasmPath = '/models/ort-wasm-simd.wasm'
+  const wasmPath = 'https://cos.timelessq.com/static/models/ort-wasm-simd.wasm'
   const absoluteWasmPath = new URL(wasmPath, location.origin).href
   env.backends.onnx.wasm.wasmPaths = {
     'ort-wasm-simd.wasm': absoluteWasmPath

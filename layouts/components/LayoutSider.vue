@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ToolCategory } from '@/types/tool'
+import type { ToolCategory } from '@/types/tool'
 
 const route = useRoute()
 const colorMode = useColorMode()
@@ -100,12 +100,13 @@ const toggleCollapse = () => {
 
 .sider {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
   z-index: 9;
-  width: 208px;
-  height: 100%;
+  width: 168px;
   background-color: var(--el-bg-color);
+  border-radius: 10px;
   transition: width 0.3s, left 0.3s;
 
   &-logo {
@@ -129,7 +130,7 @@ const toggleCollapse = () => {
   }
 
   &-scrollbar {
-    height: calc(100% - 186px);
+    height: calc(100% - 182px);
     transition: height 0.3s;
   }
 
@@ -139,7 +140,7 @@ const toggleCollapse = () => {
 
     &__icon {
       width: 24px;
-      margin-right: 5px;
+      margin-right: 6px;
       font-size: 20px;
       text-align: center;
       vertical-align: middle;
@@ -160,7 +161,7 @@ const toggleCollapse = () => {
       width: 64px;
 
       .sider {
-          &-logo {
+        &-logo {
           &__img {
             width: 48px;
             height: 48px;
@@ -172,7 +173,7 @@ const toggleCollapse = () => {
         }
 
         &-scrollbar {
-          height: calc(100% - 135px);
+          height: calc(100% - 132px);
         }
       }
 
@@ -190,7 +191,7 @@ const toggleCollapse = () => {
     }
 
     &--collapse {
-      left: -208px;
+      left: -180px;
     }
 
     :deep(.el-menu-item) {
