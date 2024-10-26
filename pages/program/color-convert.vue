@@ -35,6 +35,12 @@
 <script setup lang="ts">
 import Color from 'color'
 
+definePageMeta({
+  title: '颜色转换',
+  description: '支持hex、rgb、hsl、cmyk转换',
+  updateTime: '2023-12-09'
+})
+
 const input = ref('#66ccff')
 const result = ref({
   hex: '',

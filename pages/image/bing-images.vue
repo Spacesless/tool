@@ -10,7 +10,13 @@
           :md="6"
           class="bing-list"
         >
-          <el-image :src="item.thumb" :alt="item.title" :preview-src-list="previewSrcList" :initial-index="index" lazy />
+          <el-image
+            :src="item.thumb"
+            :alt="item.title"
+            :preview-src-list="previewSrcList"
+            :initial-index="index"
+            lazy
+          />
           <div class="bing-list-text">
             <span class="bing-list__time">
               {{ item.time }}
@@ -35,6 +41,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: '必应图片',
+  description: '自2018年到现在的必应每日图片；\n数据接口请查看https://api.timelessq.com。'
+})
+
 type ImageList = Array<{
   url: string;
   urlbase: string;
@@ -89,6 +100,7 @@ const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' 
 .bing {
   :deep(.el-image) {
     display: block;
+    height: 100%;
   }
 
   &-list {

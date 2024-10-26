@@ -54,6 +54,11 @@
 import type { UploadFiles } from 'element-plus'
 import downloadFile from '@/utils/download'
 
+definePageMeta({
+  title: 'Favicon生成',
+  description: '图片转换成ico文件，生成网站favicon.ico'
+})
+
 interface Options {
   source: string;
   size: number;

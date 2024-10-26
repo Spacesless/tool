@@ -203,6 +203,11 @@ import Compressor from 'compressorjs'
 import convert from 'convert-units'
 import downloadFile from '@/utils/download'
 
+definePageMeta({
+  title: '批量处理图片',
+  description: '图片批量压缩、修改尺寸、裁剪、转换格式'
+})
+
 interface FileItem {
   name: string;
   file: File;

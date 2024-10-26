@@ -43,6 +43,11 @@
 <script setup lang="ts">
 import beautify from 'js-beautify'
 
+definePageMeta({
+  title: 'HTML格式化',
+  description: '支持HTML代码压缩、美化。'
+})
+
 const defaultConfig: Record<string, any> = {
   collapseBooleanAttributes: true,
   collapseWhitespace: true,

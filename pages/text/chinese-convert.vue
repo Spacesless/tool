@@ -36,6 +36,11 @@
 <script setup lang="ts">
 import * as OpenCC from 'opencc-js'
 
+definePageMeta({
+  title: '简繁转换',
+  description: '用于将汉字从简体转换为繁体或从繁体转换为简体的工具。'
+})
+
 const form = reactive({
   content: '',
   type: 'hk',

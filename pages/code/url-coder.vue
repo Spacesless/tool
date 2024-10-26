@@ -40,6 +40,11 @@
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  title: 'URL编码解码',
+  description: '对URL地址进行编码、解码。'
+})
+
 const algorithmOptions = reactive([
   'URI', 'URIComponent'
 ])

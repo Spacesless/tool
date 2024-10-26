@@ -83,18 +83,17 @@
 
 <script lang="ts" setup>
 import { Search } from '@element-plus/icons-vue'
-import { ToolItem } from '@/types/tool'
 import { sleep } from '@/utils'
 
 const router = useRouter()
-const allTools = useState('allTools', (): Array<ToolItem> => [])
+const routes = router.getRoutes()
 const isMobile = useState('isMobile', () => false)
 
 const keyword = ref()
 
-const options = computed(() => allTools.value.map(item => ({
+const options = computed(() => routes.filter(item => item.meta.description).map(item => ({
   value: item.path,
-  label: item.name
+  label: item.meta.title
 })))
 
 onMounted(() => {

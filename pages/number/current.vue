@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '电流换算',
+  description: 'A、mA、kA换算'
+})
+
 const options = reactive([
   {
     value: 'A',

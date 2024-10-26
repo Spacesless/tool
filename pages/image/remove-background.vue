@@ -38,6 +38,12 @@ import type { UploadFile } from 'element-plus'
 import { Close } from '@element-plus/icons-vue'
 import downloadFile from '@/utils/download'
 
+definePageMeta({
+  title: '去除图片背景',
+  description: '依据RMBG-1.4 AI大模型去除图片背景',
+  updateTime: '2024-05-18'
+})
+
 // Constants
 const EXAMPLE_URL = '/79600c1573ff116d.jpg'
 

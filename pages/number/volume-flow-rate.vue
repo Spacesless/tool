@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '体积流量换算',
+  description: 'mm3/s、cm3/s、ml/s、cl/s、dl/s、l/s、l/min、l/h、kl/s、kl/min、kl/h、m3/s、m3/min、m3/h、km3/s换算'
+})
+
 const options = reactive([
   {
     value: 'mm3/s',

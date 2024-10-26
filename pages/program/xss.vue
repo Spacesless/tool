@@ -22,6 +22,11 @@
 <script setup lang="ts">
 import xss from 'xijs/src/xss'
 
+definePageMeta({
+  title: 'XSS',
+  description: '对 html 标签进行转义解决 xss 注入'
+})
+
 const form = reactive({
   input: '<a href="#">Me & you</a>',
   output: ''

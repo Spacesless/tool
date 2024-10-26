@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '字节换算',
+  description: 'b、Kb、Mb、Gb、Tb、B、KB、MB、GB、TB换算'
+})
+
 const options = reactive([
   {
     value: 'b',

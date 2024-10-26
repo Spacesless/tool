@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '温度换算',
+  description: '摄氏度、华氏度、开尔文、兰氏度换算'
+})
+
 const options = reactive([
   {
     value: 'C',

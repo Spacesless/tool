@@ -19,6 +19,11 @@
 <script setup lang="ts">
 import garbages from '@/assets/json/garbage.json'
 
+definePageMeta({
+  title: '生活垃圾',
+  description: '生活垃圾分类查询，可回收物、有害垃圾、湿垃圾、干垃圾'
+})
+
 interface GarbageItem {
   name: string
   categroy: number

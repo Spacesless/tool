@@ -29,6 +29,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'JSON格式化',
+  description: '支持JSON代码压缩、美化'
+})
+
 const input = ref('')
 const output = ref('')
 

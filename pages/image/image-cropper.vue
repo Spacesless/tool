@@ -71,6 +71,13 @@ import type { UploadFile } from 'element-plus'
 
 import downloadFile from '@/utils/download'
 
+definePageMeta({
+  title: '图像裁剪/翻转/旋转',
+  description: '一款多功能的图片编辑工具；\n置操修剪或剪切图像中不需要的部分',
+  updateTime: '2023-12-02',
+  version: '1.0.1'
+})
+
 const scale = ref(1)
 const aspectRatio = ref(0)
 const detail = ref({
@@ -140,7 +147,7 @@ function handleReset () {
   cropper?.reset() // 重置
 }
 
-function onAspectRatioChange (value: string | number | boolean) {
+function onAspectRatioChange (value: string | number | boolean | undefined) {
   const aspectRatio = [16 / 9, 4 / 3, 1, NaN][value as number]
   cropper.setAspectRatio(aspectRatio)
 }

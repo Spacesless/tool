@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '视在功率换算',
+  description: 'VA、mVA、kVA、MVA、GVA换算'
+})
+
 const options = reactive([
   {
     value: 'VA',

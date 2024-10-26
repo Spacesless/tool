@@ -40,6 +40,11 @@
 import dayjs from 'dayjs'
 import { Solar, SolarUtil } from 'lunar-typescript'
 
+definePageMeta({
+  title: '节日大全',
+  description: '每年的节日信息，当前日期和每个节日的间隔时长'
+})
+
 const year = ref(new Date())
 
 const holidays = computed(() => {

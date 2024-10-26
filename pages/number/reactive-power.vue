@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '无功功率换算',
+  description: 'VAR、mVAR、kVAR、MVAR、GVAR换算'
+})
+
 const options = reactive([
   {
     value: 'VAR',

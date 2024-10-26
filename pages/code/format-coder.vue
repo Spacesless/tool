@@ -42,6 +42,13 @@
 <script lang="ts" setup>
 import CryptoJS from 'crypto-js'
 
+definePageMeta({
+  title: '编码解码',
+  description: '支持Base64、Utf8、Latin1、Utf16、Utf16LE编码解码',
+  updateTime: '2023-12-02',
+  version: '1.0.1'
+})
+
 const algorithmOptions = reactive([
   'Base64', 'Latin1', 'Utf8', 'Utf16', 'Utf16LE'
 ])

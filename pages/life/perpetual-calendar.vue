@@ -126,6 +126,11 @@ import type { CalendarDateType, CalendarInstance } from 'element-plus'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 
+definePageMeta({
+  title: '万年历',
+  description: '从1900年到2099年的万年历日历表，包括阳历、农历、节日、节气、五行等信息。'
+})
+
 const dateTime = ref(new Date())
 const calendar = ref<CalendarInstance>()
 const selectDate = (val: CalendarDateType) => {

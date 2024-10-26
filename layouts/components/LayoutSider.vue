@@ -28,28 +28,10 @@
         :collapse-transition="!isMobile"
         router
       >
-        <el-menu-item index="/">
-          <Icon class="sider-menu__icon" name="iconamoon:home-light" />
+        <el-menu-item v-for="item in menuList" :key="item.path" :index="item.path">
+          <Icon class="sider-menu__icon" :name="item.meta.icon" />
           <template #title>
-            首页
-          </template>
-        </el-menu-item>
-        <el-menu-item index="/favorite">
-          <Icon class="sider-menu__icon" name="clarity:favorite-line" />
-          <template #title>
-            我的收藏
-          </template>
-        </el-menu-item>
-        <el-menu-item v-for="item in toolList" :key="item.path" :index="'/' + item.path">
-          <Icon class="sider-menu__icon" :name="item.icon" />
-          <template #title>
-            {{ item.name }}
-          </template>
-        </el-menu-item>
-        <el-menu-item index="/about">
-          <Icon class="sider-menu__icon" name="ph:info" />
-          <template #title>
-            关于
+            {{ item.meta.title }}
           </template>
         </el-menu-item>
       </el-menu>
@@ -62,11 +44,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { ToolCategory } from '@/types/tool'
-
 const route = useRoute()
+const router = useRouter()
+const routes = router.getRoutes()
 const colorMode = useColorMode()
-const toolList = useState('tools', (): ToolCategory => [])
 
 const isCollapse = useState('collapse', () => false)
 const isMobile = useState('isMobile', () => false)
@@ -75,6 +56,11 @@ const activeMenu = computed(() => {
   const fullPath = route.path
   return '/' + fullPath.replace('/', '').split('/').shift()
 })
+const menuList = computed(() => {
+  return routes.filter(item => item.meta.icon)
+    .sort((a, b) => a.meta.order - b.meta.order)
+})
+
 watch(() => route.name, () => {
   if (isMobile.value && !isCollapse.value) {
     isCollapse.value = true

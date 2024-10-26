@@ -8,8 +8,6 @@
 
 <script lang="ts" setup>
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import { ToolItem } from '@/types/tool'
-import tools from '@/router'
 
 useHead({
   titleTemplate: title => `${title} - 一个安全免费的工具箱`,
@@ -18,18 +16,6 @@ useHead({
   }
 })
 
-useState('tools', () => tools)
-useState('allTools', () => {
-  const result: Array<ToolItem> = []
-  tools.forEach((item) => {
-    const children = item.children.map(child => ({
-      ...child,
-      path: `/${item.path}/${child.path}`
-    }))
-    result.push(...children)
-  })
-  return result
-})
 const favoriteTools = useState('favoriteTools', (): string[] => [])
 
 onBeforeMount(() => {

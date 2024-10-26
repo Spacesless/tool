@@ -32,6 +32,11 @@
 import { minify } from 'csso'
 import beautify from 'js-beautify'
 
+definePageMeta({
+  title: 'CSS格式化',
+  description: '支持CSS代码压缩、美化'
+})
+
 const input = ref('')
 const output = ref('')
 

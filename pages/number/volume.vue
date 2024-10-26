@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '体积换算',
+  description: '立方毫米、立方厘米、毫升、升、千升、立方米、立方千米、茶匙、立方英寸、液量盎司、杯子、品脱、夸特、加仑、立方码、立方英尺换算'
+})
+
 const options = reactive([
   {
     value: 'mm3',

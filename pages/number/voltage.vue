@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '电压换算',
+  description: 'V、mV、kV换算'
+})
+
 const options = reactive([
   {
     value: 'V',

@@ -43,6 +43,11 @@
 <script lang="ts" setup>
 import MD5 from 'crypto-js/md5'
 
+definePageMeta({
+  title: 'MD5哈希',
+  description: 'MD5哈希工具是一种加密算法，可为任何给定的输入数据生成唯一的哈希值。'
+})
+
 const form = reactive({
   content: ''
 })

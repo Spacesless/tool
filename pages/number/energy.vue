@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '能量换算',
+  description: 'Wh、mWh、kWh、MWh、GWh、J、kJ换算'
+})
+
 const options = reactive([
   {
     value: 'Wh',

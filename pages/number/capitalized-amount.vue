@@ -16,6 +16,12 @@
 <script setup lang="ts">
 import capitalizedAmount from 'xijs/src/capitalizedAmount'
 
+definePageMeta({
+  title: '大写数字',
+  description: '数字金额转为大写，最大只支持到千亿。',
+  updateTime: '2023-11-26'
+})
+
 const form = reactive({
   input: 666.66,
   output: ''

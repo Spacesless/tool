@@ -18,6 +18,11 @@
 import jsQR from 'jsqr'
 import type { UploadFile } from 'element-plus'
 
+definePageMeta({
+  title: '二维码识别',
+  description: '上传扫描二维码图片，识别二维码中相关的信息或内容。'
+})
+
 const output = ref('')
 
 const onFileChange = async ({ uploadFile }: { uploadFile: UploadFile }) => {

@@ -17,19 +17,27 @@
 </template>
 
 <script lang="ts" setup>
-import tools from '@/router'
-import type { ToolCategory } from '@/types/tool'
+const router = useRouter()
+const routes = router.getRoutes()
+
+definePageMeta({
+  title: '首页',
+  icon: 'iconamoon:home-light',
+  order: 0
+})
 
 useSeoMeta({
   title: 'Toolbox',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'
 })
 
-const toolList = computed((): ToolCategory => {
-  return tools.map(item => ({
-    ...item,
-    count: item.children.length,
-    children: item.children.slice(0, 12)
-  }))
+const toolList = computed(() => {
+  return routes.filter(item => item.children.length)
+    .sort((a, b) => a.meta.order - b.meta.order)
+    .map(item => ({
+      ...item,
+      count: item.children.length, // 用于首页的总数统计，首页只展示12个
+      children: item.children.slice(0, 12)
+    }))
 })
 </script>

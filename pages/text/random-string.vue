@@ -22,6 +22,12 @@
 <script setup lang="ts">
 import randomStr from 'xijs/src/randomStr'
 
+definePageMeta({
+  title: '随机字符串',
+  description: '生成随机字符串，支持设置数量和字典。',
+  updateTime: '2023-11-26'
+})
+
 const form = reactive({
   count: 10,
   dictionary: undefined,

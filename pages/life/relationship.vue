@@ -136,13 +136,22 @@
 </template>
 
 <script setup lang="ts">
-import relationship, { Options } from 'relationship.js'
+import relationship from 'relationship.js'
 
-interface FormData extends Options {
+definePageMeta({
+  title: '称呼计算',
+  description: '中国亲戚关系计算器；\n逢年过节遇到三姑六婆，拒绝叫不出口的尴尬！轻松搞定亲戚关系～'
+})
+
+interface FormData {
   inputType: string;
   input: string;
   output: string;
   target: string;
+  mode: string;
+  reverse: boolean;
+  optimal: boolean;
+  sex: number;
 }
 
 const form = reactive<FormData>({

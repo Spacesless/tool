@@ -29,6 +29,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: '成语接龙',
+  description: '支持输入整个成语，或只输入成语中的末尾一个字，返回符合接龙条件的成语；\n目前总计约收录4.5万组成语。'
+})
+
 const { pending, data }: { pending: Ref<boolean>; data: Ref<any[]> } = await useFetch('/assets/json/idiom.json', {
   lazy: true,
   server: false

@@ -34,6 +34,12 @@
 import obj2url from 'xijs/src/obj2url'
 import url2obj from 'xijs/src/url2obj'
 
+definePageMeta({
+  title: '解析URL字符串',
+  description: '将 url 字符串转换为对象或对象转换成编码后的 url 字符串',
+  updateTime: '2023-12-02'
+})
+
 const form = reactive({
   input: '?a=1&b=2&c=test',
   type: 'url2obj',

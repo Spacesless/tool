@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '时间换算',
+  description: 'ns、mu、ms、s、min、h、d、week、month、year换算'
+})
+
 const options = reactive([
   {
     value: 'ns',

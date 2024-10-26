@@ -47,6 +47,11 @@
 import { v1 as uuidv1, v3 as uuidv3, v4 as uuidv4, v5 as uuidv5 } from 'uuid'
 import { nanoid } from 'nanoid'
 
+definePageMeta({
+  title: 'UUID/NANOID生成器',
+  description: '支持生成指定数量的UUID、NANOID；\n支持生成不同版本的UUID，包括V1、V3、V4和V5。'
+})
+
 const form = reactive({
   type: 'uuid',
   name: 'timeless',

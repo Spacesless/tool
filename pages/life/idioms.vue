@@ -29,6 +29,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: '成语大全',
+  description: '根据成语查询详细信息，如：详解、同义词、反义词、读音等信息；\n目前总计约收录4.5万组成语。'
+})
+
 const { pending, data }: { pending: Ref<boolean>; data: Ref<any[]> } = await useFetch('/assets/json/idiom.json', {
   lazy: true,
   server: false

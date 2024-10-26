@@ -10,6 +10,12 @@
 import { MergeView } from '@codemirror/merge'
 import { basicSetup } from 'codemirror'
 
+definePageMeta({
+  title: '文本对比',
+  description: '在线文本对比工具',
+  updateTime: '2024-02-03'
+})
+
 onMounted(() => {
   // eslint-disable-next-line no-new
   new MergeView({

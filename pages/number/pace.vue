@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '配速换算',
+  description: 's/m、min/km、s/ft、min/mi换算'
+})
+
 const options = reactive([
   {
     value: 's/m',

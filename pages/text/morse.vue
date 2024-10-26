@@ -21,6 +21,12 @@
 <script setup lang="ts">
 import { decode, encode } from 'xmorse'
 
+definePageMeta({
+  title: '摩尔斯电码',
+  description: '摩尔斯电码和文本互转工具，支持中文。',
+  updateTime: '2024-05-18'
+})
+
 const input = ref('SOS')
 const output = ref('.../---/...')
 

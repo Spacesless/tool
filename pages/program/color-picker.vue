@@ -56,6 +56,11 @@ import Color from 'color'
 import { Close } from '@element-plus/icons-vue'
 import type { UploadFile } from 'element-plus'
 
+definePageMeta({
+  title: '颜色拾取',
+  description: '颜色盘选择，颜色吸管拾取图片颜色'
+})
+
 const colorMode = useColorMode()
 const theme = computed(() => colorMode.value === 'dark' ? 'dark' : 'light')
 

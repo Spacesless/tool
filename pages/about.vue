@@ -76,6 +76,12 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: '关于',
+  icon: 'ph:info',
+  order: 99
+})
+
 useSeoMeta({
   title: '关于本站',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'

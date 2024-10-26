@@ -96,6 +96,11 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import constellation from '@/assets/json/xing-zuo.json'
 
+definePageMeta({
+  title: '星座运势',
+  description: '十二星座每日、每月、每年运势；\n根据日期或星座名称，查询星座详细信息。'
+})
+
 // eslint-disable-next-line import/no-named-as-default-member
 dayjs.extend(isSameOrBefore)
 // eslint-disable-next-line import/no-named-as-default-member

@@ -34,6 +34,7 @@ const scrollTop = ref(0)
 const scrollPercent = ref(0)
 
 const route = useRoute()
+const routeName = computed(() => route.name as string)
 const isShowFavorite = computed(() => {
   const paths = route.path.split('/')
   return paths.length > 2
@@ -76,17 +77,15 @@ const handleCopy = () => {
 
 const favoriteTools = useState('favoriteTools', (): string[] => [])
 const isFavorite = computed(() => {
-  const { toolData } = useToolData()
-  return favoriteTools.value.includes(toolData.value.id)
+  return favoriteTools.value.includes(routeName.value)
 })
 
 const toggleFavorite = () => {
-  const { toolData } = useToolData()
   if (isFavorite.value) {
-    const findIndex = favoriteTools.value.findIndex(item => item === toolData.value.id)
+    const findIndex = favoriteTools.value.findIndex(item => item === routeName.value)
     favoriteTools.value.splice(findIndex, 1)
   } else {
-    favoriteTools.value.push(toolData.value.id)
+    favoriteTools.value.push(routeName.value)
   }
 
   localStorage.setItem('favoriteTools', favoriteTools.value.toString())

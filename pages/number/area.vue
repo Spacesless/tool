@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '面积换算',
+  description: 'mm2、cm2、m2、ha、km2、in2、ft2、ac、mi2换算'
+})
+
 const options = reactive([
   {
     value: 'mm2',

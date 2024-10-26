@@ -60,6 +60,11 @@
 import SHA1 from 'crypto-js/sha1'
 import SHA3 from 'crypto-js/sha3'
 
+definePageMeta({
+  title: 'SHA哈希',
+  description: 'SHA安全哈希算法主要适用于数字签名标准里面定义的数字签名。'
+})
+
 const form = reactive({
   algorithm: 1,
   textCase: 'lower',

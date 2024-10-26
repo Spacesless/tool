@@ -16,6 +16,12 @@
 <script setup lang="ts">
 import formatNumber from 'xijs/src/formatNumber'
 
+definePageMeta({
+  title: '千分位格式',
+  description: '数值千分位格式化，支持小数点。',
+  updateTime: '2023-11-26'
+})
+
 const form = reactive({
   input: 1234567,
   output: ''

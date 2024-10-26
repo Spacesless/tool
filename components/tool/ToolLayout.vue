@@ -4,15 +4,15 @@
   </section>
 
   <template v-else>
-    <ToolBanner :tool-data="toolData" />
+    <ToolBanner />
     <slot />
 
     <section class="section content">
       <slot name="content" />
 
       <div class="content-footer">
-        <p>版本：{{ toolData.version || 'v1.0.0' }}</p>
-        <p>发布时间：{{ toolData.updateTime || '2023-11-19' }}</p>
+        <p>版本：{{ route.meta?.version || 'v1.0.0' }}</p>
+        <p>发布时间：{{ route.meta?.updateTime || '2023-11-19' }}</p>
       </div>
     </section>
 
@@ -23,10 +23,13 @@
 </template>
 
 <script setup lang="ts">
-const { toolData } = useToolData()
-
 const route = useRoute()
 const colorMode = useColorMode()
+
+useSeoMeta({
+  title: route.meta.title || '',
+  description: route.meta.description?.replace('\n', '')
+})
 
 const isIframe = ref(false)
 

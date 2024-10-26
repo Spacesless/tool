@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '浓度换算',
+  description: '支持ppm、ppb、ppt、ppq换算'
+})
+
 const options = reactive([
   {
     value: 'ppm',

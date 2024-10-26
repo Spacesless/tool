@@ -22,6 +22,11 @@
 <script setup lang="ts">
 import { Solar, Lunar, LunarUtil } from 'lunar-typescript'
 
+definePageMeta({
+  title: '十二时辰',
+  description: '12个时辰的时段、宜忌黄历等信息'
+})
+
 type TableData = Array<{
   date: string
   hours: string

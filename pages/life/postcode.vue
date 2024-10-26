@@ -21,6 +21,11 @@
 <script setup lang="ts">
 import postalcodes from '@/assets/json/postalcode.json'
 
+definePageMeta({
+  title: '邮政编码',
+  description: '邮政编码信息查询，根据地区、邮政编码查询相关信息'
+})
+
 type TableData = Array<{
   province: string
   city: string

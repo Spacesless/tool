@@ -26,6 +26,12 @@
 <script setup lang="ts">
 import random from 'xijs/src/random'
 
+definePageMeta({
+  title: '随机数字',
+  description: '返回指定范围的随机数。',
+  updateTime: '2023-11-26'
+})
+
 const form = reactive({
   start: 0,
   end: 100,

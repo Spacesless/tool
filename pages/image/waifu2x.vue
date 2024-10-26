@@ -96,6 +96,12 @@ import type { UploadFile } from 'element-plus'
 
 import downloadFile from '@/utils/download'
 
+definePageMeta({
+  title: '图片放大',
+  description: '使用人工智能深度学习技术深度卷积神经网络；\n将噪点和锯齿的部分进行补充，实现图片的无损放大',
+  updatTime: '2023-12-04'
+})
+
 const state = reactive<{
   imageData?: ImageData;
   filename: string;

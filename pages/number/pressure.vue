@@ -6,6 +6,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '压力换算',
+  description: '支持Pa、kPa、MPa等压力单位换算'
+})
+
 const options = reactive([
   {
     value: 'Pa',

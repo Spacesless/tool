@@ -39,6 +39,11 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 
+definePageMeta({
+  title: '日期计算',
+  description: '自然日间隔计算、日期加减计算'
+})
+
 const form = reactive({
   type: 'diff',
   startDate: dayjs().format('YYYY-MM-DD'),

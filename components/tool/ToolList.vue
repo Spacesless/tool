@@ -2,13 +2,13 @@
   <section class="card">
     <div class="card-header">
       <h2 class="card-header__title">
-        {{ tool.name }}
+        {{ tool.meta?.title }}
       </h2>
       <span class="card-header__count">{{ tool.count || tool.children.length }}</span>
     </div>
     <el-row :gutter="24">
       <el-col
-        v-for="({ path, name, id, description }) in tool.children"
+        v-for="({ path, name, meta }) in tool.children"
         :key="path"
         :xs="24"
         :sm="12"
@@ -16,14 +16,14 @@
         :lg="6"
       >
         <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
-          <strong class="card-item__title">{{ name }}</strong>
+          <strong class="card-item__title">{{ meta?.title }}</strong>
           <Icon
             class="card-item__icon"
-            :name="calcFavorite(id) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
-            @click.stop.prevent="toggleFavorite(id)"
+            :name="calcFavorite(name) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
+            @click.stop.prevent="toggleFavorite(name)"
           />
-          <p class="card-item__description" :title="description">
-            {{ description }}
+          <p class="card-item__description" :title="meta?.description">
+            {{ meta?.description }}
           </p>
         </NuxtLink>
       </el-col>
@@ -40,7 +40,7 @@ const { tool } = defineProps({
 })
 
 const getAbsolutePath = (parentPath: string, path: string) : string => {
-  return parentPath ? `/${parentPath}/${path}` : path
+  return parentPath ? `${parentPath}/${path}` : path
 }
 
 const favoriteTools = useState('favoriteTools', (): string[] => [])

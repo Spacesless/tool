@@ -19,6 +19,12 @@
 <script setup lang="ts">
 import { count } from 'letter-count'
 
+definePageMeta({
+  title: '字数统计',
+  description: '行数、字符、单词、数字、字母的数量统计',
+  updateTime: '2023-12-27'
+})
+
 const input = ref('')
 
 const result = computed(() => {

@@ -21,7 +21,10 @@
 <script setup lang="ts">
 import licenses from '@/assets/json/license.json'
 
-const { currentTool } = useToolData()
+definePageMeta({
+  title: '车牌归属地',
+  description: '根据国内车牌号或车牌前缀查询所属归属省份城市'
+})
 
 interface License {
   province: string

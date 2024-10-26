@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '无功能量换算',
+  description: 'VARh、mVARh、kVARh、MVARh、GVARh换算'
+})
+
 const options = reactive([
   {
     value: 'VARh',

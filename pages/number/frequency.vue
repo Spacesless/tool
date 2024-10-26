@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '频率换算',
+  description: 'Hz、mHz、kHz、MHz、GHz、THz、rpm、deg/s、rad/s换算'
+})
+
 const options = reactive([
   {
     value: 'Hz',

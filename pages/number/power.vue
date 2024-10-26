@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '功率换算',
+  description: '支持W、mW、kW、MW、GW功率单位换算'
+})
+
 const options = reactive([
   {
     value: 'W',

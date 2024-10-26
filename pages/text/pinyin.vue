@@ -53,6 +53,11 @@
 <script setup lang="ts">
 import { pinyin } from 'pinyin-pro'
 
+definePageMeta({
+  title: '拼音汉字转换',
+  description: '可以快速轻松地将汉字转换为拼音。\n支持多音字、姓氏、声母、韵母等'
+})
+
 interface BasicOptions {
   type: 'string' | 'array' | 'all';
   toneType?: 'symbol' | 'num' | 'none';

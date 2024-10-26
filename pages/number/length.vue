@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '长度换算',
+  description: 'mm、cm、m、in、ft-us、ft、mi换算'
+})
+
 const options = reactive([
   {
     value: 'mm',

@@ -5,7 +5,7 @@
         <el-row :gutter="16">
           <el-col :sm="24" :md="12">
             <el-form-item label="输入">
-              <el-input v-model="form.input" type="textarea" placeholder="" rows="8" @input="handleFormat" />
+              <el-input v-model="form.input" type="textarea" placeholder="" :rows="8" @input="handleFormat" />
             </el-form-item>
             <el-form-item label="格式">
               <el-select v-model="form.textCase" @change="handleFormat">
@@ -20,7 +20,7 @@
           </el-col>
           <el-col :sm="24" :md="12">
             <el-form-item label="输出">
-              <el-input v-model="form.output" type="textarea" readonly rows="12" />
+              <el-input v-model="form.output" type="textarea" readonly :rows="12" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -32,6 +32,12 @@
 <script setup lang="ts">
 import camelize from 'xijs/src/camelize'
 import hyphenate from 'xijs/src/hyphenate'
+
+definePageMeta({
+  title: '大小写转换',
+  description: '支持下划线、驼峰、大小写转换',
+  updateTime: '2023-12-03'
+})
 
 const options = reactive([
   { value: 'camelize', label: '横线转驼峰' },

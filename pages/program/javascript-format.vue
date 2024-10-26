@@ -32,6 +32,11 @@
 import { minify } from 'terser'
 import beautify from 'js-beautify'
 
+definePageMeta({
+  title: 'Javascript格式化',
+  description: '支持Javascript代码压缩、美化'
+})
+
 const input = ref('')
 const output = ref('')
 

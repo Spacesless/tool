@@ -7,6 +7,12 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '角度换算 ',
+  description: 'deg、rad、grad、arcmin、arcsec换算',
+  updateTime: '2023-11-26'
+})
+
 const options = reactive([
   {
     value: 'deg',

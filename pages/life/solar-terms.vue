@@ -19,6 +19,11 @@
 <script setup lang="ts">
 import { Solar } from 'lunar-typescript'
 
+definePageMeta({
+  title: '二十四节气',
+  description: '二十四节气查询，根据年份查询相关信息'
+})
+
 type TableData = Array<{
   name: string
   time: string
@@ -50,7 +55,7 @@ function handleSearch () {
   const jieQi = lunarInstance.getJieQiTable()
   for (let i = 0, j = jieQiList.length; i < j; i++) {
     let name = jieQiList[i]
-    const time = jieQi.get(name).toYmdHms()
+    const time = jieQi[name].toYmdHms()
     name = solarTermEnum[name] || name
     result.push({ name, time })
   }

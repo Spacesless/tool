@@ -25,6 +25,11 @@ import analyze from 'rgbaster'
 import type { UploadFile } from 'element-plus'
 import { sleep } from '@/utils'
 
+definePageMeta({
+  title: '分析图片颜色',
+  description: '支持上传图片，获取图片的主要颜色'
+})
+
 const result = ref<{ color: string; count: number }[]>([])
 
 const analyzing = ref(false)

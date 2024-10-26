@@ -7,6 +7,11 @@
 <script setup lang="ts">
 import ConvertContent from '@/components/tool/ConvertContent.vue'
 
+definePageMeta({
+  title: '质量换算',
+  description: 'mcg、mg、g、kg、lb、oz、mt、t换算'
+})
+
 const options = reactive([
   {
     value: 'mcg',

@@ -40,6 +40,11 @@
 <script setup lang="ts">
 import BigNumbers from 'bignumber.js'
 
+definePageMeta({
+  title: '进制转换',
+  description: '支持2到32进制间的互相转换。'
+})
+
 const form = reactive({
   input: 256,
   sourceBase: 10,

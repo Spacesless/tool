@@ -52,6 +52,11 @@ import type { PluginConfig } from 'svgo'
 import { ref, reactive } from 'vue'
 import type { UploadFile } from 'element-plus'
 
+definePageMeta({
+  title: 'SVG压缩',
+  description: '基于SVGO对SVG文件进行压缩'
+})
+
 const svgString = ref('')
 const optimizedSvgString = ref('')
 
