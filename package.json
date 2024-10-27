@@ -58,6 +58,7 @@
     "csso": "^5.0.5",
     "eslint": "^8.51.0",
     "js-beautify": "^1.15.1",
+    "jsbarcode": "^3.11.6",
     "jsqr": "^1.4.0",
     "letter-count": "^5.2.1",
     "lunar-typescript": "^1.6.13",
