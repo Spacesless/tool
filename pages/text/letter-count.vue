@@ -7,7 +7,7 @@
       <el-input v-model="input" type="textarea" placeholder="" :rows="20" />
       <div class="result">
         <p>字符：{{ result.chars }}</p>
-        <p>行数：{{ result.lines }}</p>
+        <p>行数：{{ result.chars ? result.lines : 0 }}</p>
         <p>单词：{{ result.words }}</p>
         <p>数字：{{ result.numbers }}</p>
         <p>字母：{{ result.letters }}</p>

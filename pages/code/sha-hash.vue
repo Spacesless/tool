@@ -47,11 +47,11 @@
     </section>
 
     <template #content>
-      <p>Secure Hash Algorithm，安全哈希算法</p>
-      <p>SHA1 生成的结果为：160 bit，20 byte</p>
-      <p>SHA256 生成的结果为：256 bit，32 byte</p>
+      <p>Secure Hash Algorithm，安全哈希算法，</p>
+      <p>SHA 哈希函数由美国国家安全局 （NSA） 设计。SHA-1 是现有 SHA 哈希函数中最成熟的，它用于各种安全应用程序和协议。不过，随着新攻击的发现或改进，SHA-1 的抗碰撞性一直在减弱。SHA1 生成的结果为：160 bit，20 byte</p>
+      <p>SHA-256 是 SHA-2 集中的四个变体之一。它不像 SHA-1 那样被广泛使用，尽管它似乎提供了更好的安全性。SHA256 生成的结果为：256 bit，32 byte</p>
       <p>SHA384 生成的结果为：384 bit，48 byte</p>
-      <p>SHA512 生成的结果为：512 bit，64 byte</p>
+      <p>SHA-512 与 SHA-256 基本相同，但使用 64 位字而不是 32 位字。SHA512 生成的结果为：512 bit，64 byte</p>
     </template>
   </ToolLayout>
 </template>

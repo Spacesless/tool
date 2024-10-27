@@ -6,6 +6,7 @@ declare module 'vue-router' {
 		order: number;
     icon: string;
     description?: string;
+    same?: string[];
 	}
 }
 

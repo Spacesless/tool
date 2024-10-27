@@ -1,6 +1,6 @@
 <template>
   <section class="card">
-    <div class="card-header">
+    <div v-if="!isSameList" class="card-header">
       <h2 class="card-header__title">
         {{ tool.meta?.title }}
       </h2>
@@ -18,6 +18,7 @@
         <NuxtLink class="card-item" :to="getAbsolutePath(tool.path, path)">
           <strong class="card-item__title">{{ meta?.title }}</strong>
           <Icon
+            v-if="!isSameList"
             class="card-item__icon"
             :name="calcFavorite(name) ? 'clarity:favorite-solid' : 'clarity:favorite-line'"
             @click.stop.prevent="toggleFavorite(name)"
@@ -36,6 +37,10 @@ const { tool } = defineProps({
   tool: {
     type: Object,
     default: () => {}
+  },
+  isSameList: {
+    type: Boolean,
+    default: false
   }
 })
 

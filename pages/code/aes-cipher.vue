@@ -1,6 +1,11 @@
 <template>
   <ToolLayout>
     <EncryptDecrypt algorithm="AES" />
+
+    <template #content>
+      <p>依据 <a href="https://www.npmjs.com/package/crypto-js" target="_blank" rel="noopener noreferrer">https://www.npmjs.com/package/crypto-js</a> 标准和安全加密算法的 JavaScript 实现</p>
+      <p>高级加密标准 （AES） 是美国联邦信息处理标准 （FIPS）。</p>
+    </template>
   </ToolLayout>
 </template>
 

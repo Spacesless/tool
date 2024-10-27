@@ -9,7 +9,8 @@ import ConvertContent from '@/components/tool/ConvertContent.vue'
 
 definePageMeta({
   title: '视在功率换算',
-  description: 'VA、mVA、kVA、MVA、GVA换算'
+  description: 'VA、mVA、kVA、MVA、GVA换算',
+  same: ['number-power', 'number-current', 'number-voltage', 'number-energy']
 })
 
 const options = reactive([

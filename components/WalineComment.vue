@@ -1,5 +1,9 @@
 <template>
   <section class="section comment">
+    <h2 class="section__title">
+      工具评价
+    </h2>
+
     <div id="waline" />
   </section>
 </template>
@@ -95,7 +99,7 @@ watch(() => isDark.value, (val) => {
 
 <style lang="scss" scoped>
 .comment {
-  padding: 12px;
+  padding: 16px;
 
   --waline-theme-color: var(--el-color-primary);
   --waline-active-color: var(--el-color-primary-light-3);

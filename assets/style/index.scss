@@ -12,9 +12,20 @@ html {
   border-radius: 10px;
 
   &__title {
-    margin-bottom: 8px;
+    padding-bottom: 6px;
     font-weight: normal;
-    font-size: 26px;
+
+    &::before{
+      display: inline-block;
+      width: 14px;
+      height: 24px;
+      margin-right: 12px;
+      vertical-align: -0.12em;
+      background-color: var(--el-color-primary-light-3);
+      border-top-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      content: '';
+    }
   }
 
   &-header {
@@ -59,11 +70,6 @@ html {
     font-size: 16px;
   }
 
-  h2 {
-    padding: 6px 0 8px;
-    font-weight: normal;
-  }
-
   ul {
     li {
       position: relative;
@@ -91,11 +97,37 @@ html {
   }
 
   a {
+    margin: 0 3px;
     color: var(--el-color-primary);
     text-decoration: none;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  code {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 3px 6px;
+    color: var(--el-color-primary);
+    font-size: 90%;
+    font-family: Consolas, Menlo, Courier, monospace;
+    line-height: 1em;
+    background-color: #ECF5FF;
+    border-radius: 4px;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--el-border-color-light);
+
+    p {
+      color: var(--el-text-color-regular);
+      font-size: 14px;
     }
   }
 }

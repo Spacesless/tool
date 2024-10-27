@@ -26,6 +26,15 @@
         </el-row>
       </el-form>
     </section>
+
+    <template #content>
+      <p>
+        横线与驼峰互转依赖
+        <a target="_blank" href="https://www.npmjs.com/package/xijs">https://www.npmjs.com/package/xijs</a>
+        工具库的camelize、hyphenate函数进行大小写转换。
+      </p>
+      <p>大小写互转，使用<code>Javascript</code>的<code>toLocaleUpperCase</code>、<code>toLocaleLowerCase</code>方法就能实现了。</p>
+    </template>
   </ToolLayout>
 </template>
 

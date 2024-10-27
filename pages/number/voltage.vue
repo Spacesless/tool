@@ -1,6 +1,6 @@
 <template>
   <ToolLayout>
-    <ConvertContent :options="options" default-unit="d" />
+    <ConvertContent :options="options" default-unit="V" />
   </ToolLayout>
 </template>
 
