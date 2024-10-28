@@ -6,7 +6,7 @@
       </div>
     </el-tooltip>
     <el-tooltip v-if="isShowFavorite" effect="dark" content="收藏" placement="left">
-      <div class="fixbar-item" @click="toggleFavorite">
+      <div class="fixbar-item" @click="toggleFavorite(routeName)">
         <Icon class="fixbar-item__icon" :name="isFavorite ? 'clarity:favorite-solid' : 'clarity:favorite-line'" />
       </div>
     </el-tooltip>
@@ -75,21 +75,8 @@ const handleCopy = () => {
   })
 }
 
-const favoriteTools = useState('favoriteTools', (): string[] => [])
-const isFavorite = computed(() => {
-  return favoriteTools.value.includes(routeName.value)
-})
-
-const toggleFavorite = () => {
-  if (isFavorite.value) {
-    const findIndex = favoriteTools.value.findIndex(item => item === routeName.value)
-    favoriteTools.value.splice(findIndex, 1)
-  } else {
-    favoriteTools.value.push(routeName.value)
-  }
-
-  localStorage.setItem('favoriteTools', favoriteTools.value.toString())
-}
+const { calcFavorite, toggleFavorite } = useFavorite()
+const isFavorite = computed(() => calcFavorite(routeName.value))
 </script>
 
 <style lang="scss" scoped>

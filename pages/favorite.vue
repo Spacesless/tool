@@ -18,7 +18,7 @@ useSeoMeta({
 
 const router = useRouter()
 const routes = router.getRoutes()
-const favoriteTools = useState('favoriteTools', (): string[] => [])
+const { favoriteTools } = useFavorite()
 
 const toolData = computed(() => {
   return {
