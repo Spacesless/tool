@@ -76,6 +76,7 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
     "terser": "^5.27.1",
+    "tesseract.js": "^5.1.1",
     "uuid": "^9.0.1",
     "xijs": "^1.2.6",
     "xmorse": "^1.0.0"

@@ -1,6 +1,6 @@
 <template>
   <ToolLayout>
-    <div class="section">
+    <section class="section">
       <el-row :gutter="16">
         <el-col :sm="24" :md="12">
           <el-form :model="form" label-width="80px">
@@ -95,7 +95,7 @@
           </div>
         </el-col>
       </el-row>
-    </div>
+    </section>
 
     <template #content>
       <p>条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。</p>

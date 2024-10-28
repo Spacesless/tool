@@ -45,7 +45,7 @@ definePageMeta({
 })
 
 // Constants
-const EXAMPLE_URL = '/79600c1573ff116d.jpg'
+const EXAMPLE_URL = '/images/79600c1573ff116d.jpg'
 
 let model: any
 let processor: any
@@ -144,6 +144,7 @@ const onFileChange = ({ uploadFile }: { uploadFile: UploadFile }) => {
 }
 
 const handleTest = () => {
+  imageUrl.value = EXAMPLE_URL
   predict(EXAMPLE_URL)
 }
 
