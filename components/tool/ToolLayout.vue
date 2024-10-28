@@ -13,6 +13,20 @@
         工具简介
       </h2>
 
+      <el-space class="content-tool" :size="20">
+        <el-tooltip effect="dark" content="点赞" placement="bottom">
+          <a href="#thumbsup">
+            <Icon class="content-tool__icon" name="octicon:thumbsup-24" />
+          </a>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="投币" placement="bottom">
+          <Icon class="content-tool__icon" name="hugeicons:coins-yen" @click="dialogVisible = true" />
+        </el-tooltip>
+        <el-tooltip effect="dark" content="收藏" placement="bottom">
+          <Icon class="content-tool__icon" :name="isFavorite ? 'clarity:favorite-solid' : 'clarity:favorite-line'" @click="toggleFavorite(routeName)" />
+        </el-tooltip>
+      </el-space>
+
       <slot name="content">
         <p>很抱歉，你要找的简介内容不见了，因为站长太懒，懒得写了~</p>
       </slot>
@@ -34,6 +48,18 @@
     <ClientOnly>
       <WalineComment />
     </ClientOnly>
+
+    <el-dialog
+      v-model="dialogVisible"
+      title="请我喝[茶]~(￣▽￣)~*"
+      width="660"
+      :align-center="true"
+    >
+      <div style="display: flex;justify-content: space-between;">
+        <img width="300px" style="margin-right: 28px;" src="@/assets/image/alipay.png" alt="alipay">
+        <img width="300px" src="@/assets/image/wechat.png" alt="wechat">
+      </div>
+    </el-dialog>
   </template>
 </template>
 
@@ -42,6 +68,12 @@ const route = useRoute()
 const router = useRouter()
 const routes = router.getRoutes()
 const colorMode = useColorMode()
+
+const dialogVisible = ref(false)
+
+const { calcFavorite, toggleFavorite } = useFavorite()
+const isFavorite = computed(() => calcFavorite(routeName.value))
+const routeName = computed(() => route.name as string)
 
 useSeoMeta({
   title: route.meta.title || '',
@@ -73,6 +105,26 @@ onMounted(() => {
 <style lang="scss" scoped>
 .container {
   padding: 16px;
+}
+
+.content-tool {
+  margin-bottom: 10px;
+  font-size: 28px;
+
+  a {
+    margin: 0;
+    line-height: 24px
+  }
+
+  &__icon{
+    color: var(--el-text-color-regular);
+    outline: none;
+    cursor: pointer;
+
+    &:hover{
+      color: var(--el-color-primary);
+    }
+  }
 }
 
 :deep(.card-item) {

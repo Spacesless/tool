@@ -1,6 +1,6 @@
 <template>
   <section class="section comment">
-    <h2 class="section__title">
+    <h2 id="thumbsup" class="section__title">
       工具评价
     </h2>
 

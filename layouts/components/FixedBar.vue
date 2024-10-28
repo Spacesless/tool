@@ -5,11 +5,6 @@
         <Icon class="fixbar-item__icon" name="clarity:share-line" />
       </div>
     </el-tooltip>
-    <el-tooltip v-if="isShowFavorite" effect="dark" content="收藏" placement="left">
-      <div class="fixbar-item" @click="toggleFavorite(routeName)">
-        <Icon class="fixbar-item__icon" :name="isFavorite ? 'clarity:favorite-solid' : 'clarity:favorite-line'" />
-      </div>
-    </el-tooltip>
     <el-tooltip effect="dark" content="点我坐电梯" placement="left" :disabled="backTopTips">
       <transition name="fade-transform">
         <div v-show="backTopShow" class="fixbar-item fixbar-item-back" @click="backTop">
@@ -32,13 +27,6 @@ const backTopShow = ref(false)
 const backTopTips = ref(false)
 const scrollTop = ref(0)
 const scrollPercent = ref(0)
-
-const route = useRoute()
-const routeName = computed(() => route.name as string)
-const isShowFavorite = computed(() => {
-  const paths = route.path.split('/')
-  return paths.length > 2
-})
 
 watch(scrollTop, () => {
   backTopShow.value = scrollTop.value > REFERENCE
@@ -65,7 +53,7 @@ const backTop = () => {
 }
 
 const handleCopy = () => {
-  copy(location.href, {
+  copy(`${location.href}，${document.title}`, {
     message: '请按#{key}复制'
   })
   ElNotification({
@@ -74,9 +62,6 @@ const handleCopy = () => {
     type: 'success'
   })
 }
-
-const { calcFavorite, toggleFavorite } = useFavorite()
-const isFavorite = computed(() => calcFavorite(routeName.value))
 </script>
 
 <style lang="scss" scoped>

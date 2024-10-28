@@ -13,9 +13,7 @@
             </el-form-item>
             <el-form-item label="格式">
               <el-select v-model="form.format">
-                <el-option v-for="item in formatOptions" :key="item.value" :value="item.value">
-                  {{ item.label }}
-                </el-option>
+                <el-option v-for="item in formatOptions" :key="item.value" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
             <el-form-item label="宽度">
@@ -62,9 +60,7 @@
               </el-form-item>
               <el-form-item label="字体">
                 <el-select v-model="form.font">
-                  <el-option v-for="item in fontOptions" :key="item.value" :value="item.value">
-                    {{ item.label }}
-                  </el-option>
+                  <el-option v-for="item in fontOptions" :key="item.value" :value="item.value" :label="item.label" />
                 </el-select>
               </el-form-item>
               <el-form-item label="字体样式">
