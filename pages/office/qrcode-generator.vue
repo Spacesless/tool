@@ -53,6 +53,7 @@
     </div>
 
     <template #content>
+      <p>基于<a href="https://www.npmjs.com/package/qrcode" target="_blank" rel="noopener noreferrer">https://www.npmjs.com/package/qrcode</a>实现</p>
       <p>QR码生成器是一种用于生成文本QR码的工具。用户可以输入或粘贴文本到工具中，工具会自动生成相应的QR码并在界面上显示出来。</p>
       <p>特点：</p>
       <ul>
@@ -91,12 +92,13 @@ const form = reactive({
 })
 const hasCode = ref(false)
 
-watch(() => form, generateQR, {
-  deep: true,
-  immediate: true
+watch(() => form, generateQrcode, {
+  deep: true
 })
 
-function generateQR () {
+onMounted(() => generateQrcode())
+
+function generateQrcode () {
   try {
     const { content, width, margin, errorCorrectionLevel, fgColor, bgColor } = form
     const decodeText = decodeURIComponent(content)

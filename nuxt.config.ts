@@ -44,7 +44,8 @@ export default defineNuxtConfig({
       }
     },
     optimizeDeps: {
-      needsInterop: ['svgo']
+      needsInterop: ['svgo'],
+      exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util']
     }
   },
   compatibilityDate: '2024-10-25'

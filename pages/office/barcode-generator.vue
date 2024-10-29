@@ -94,6 +94,7 @@
     </section>
 
     <template #content>
+      <p>基于<a href="https://www.npmjs.com/package/jsbarcode" target="_blank" rel="noopener noreferrer">https://www.npmjs.com/package/jsbarcode</a>实现</p>
       <p>条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。</p>
       <p>常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。</p>
       <p>条形码可以标出物品的生产国、制造厂家、商品名称、生产日期、图书分类号、邮件起止地点、类别、日期等许多信息。</p>
@@ -231,13 +232,13 @@ const form = reactive({
 const hasCode = ref(false)
 let message: any
 
-watch(() => form, generateQR, {
+watch(() => form, generateBarcode, {
   deep: true
 })
 
-onMounted(() => generateQR())
+onMounted(() => generateBarcode())
 
-function generateQR () {
+function generateBarcode () {
   try {
     const { content, format, width, height, margin, lineColor, background, displayValue, textAlign, textPosition, font, fontSize, fontStyle, textMargin } = form
 

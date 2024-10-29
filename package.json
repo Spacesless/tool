@@ -33,6 +33,8 @@
   "devDependencies": {
     "@codemirror/merge": "^6.6.0",
     "@cyhnkckali/vue3-color-picker": "^1.1.2",
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
     "@giscus/vue": "^2.3.0",
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",

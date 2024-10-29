@@ -170,7 +170,12 @@ const toggleCollapse = () => {
   }
 
   @media (width <= 768px) {
+    top: 0;
+    bottom: 0;
+    left: 0;
     display: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 
     &--loaded {
       display: block;

@@ -37,13 +37,18 @@
         :total="total"
       />
     </section>
+
+    <template #content>
+      <p>定时任务每日采集 https://cn.bing.com/HPImageArchive.aspx 的数据存于MongoDB，提供Api接口调用。</p>
+      <p>Api接口请查看 <a href="https://api.timelessq.com" target="_blank" rel="noopener noreferrer">https://api.timelessq.com/</a></p>
+    </template>
   </ToolLayout>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   title: '必应图片',
-  description: '自2018年到现在的必应每日图片；\n数据接口请查看https://api.timelessq.com。'
+  description: '自2018年到现在的必应每日图片。'
 })
 
 type ImageList = Array<{
