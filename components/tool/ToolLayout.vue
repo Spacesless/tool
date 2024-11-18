@@ -28,7 +28,7 @@
       </el-space>
 
       <slot name="content">
-        <p>很抱歉，你要找的简介内容不见了，因为站长太懒，懒得写了~</p>
+        <p>很抱歉，你要找的简介内容因为站长太懒，没有写~</p>
       </slot>
 
       <div class="content-footer">
