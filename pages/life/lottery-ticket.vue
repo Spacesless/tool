@@ -167,6 +167,10 @@ function handleCreate () {
   }
 }
 
+/**
+ * 双色球
+ * @param 红区33选6，蓝区16选1
+ */
 function createSSQ () {
   return Array.from({ length: formData.count }).map(() => {
     const red = randomNumber(33, 6, 'red')
@@ -175,9 +179,13 @@ function createSSQ () {
   })
 }
 
+/**
+ * 快乐8
+ * @param 80选十
+ */
 function createKL8 () {
   return Array.from({ length: formData.count }).map(() => {
-    return randomNumber(80, 20, 'red').sort((a, b) => a.code - b.code)
+    return randomNumber(80, 10, 'red').sort((a, b) => a.code - b.code)
   })
 }
 

@@ -15,7 +15,7 @@ import '@waline/client/waline.css'
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.value === 'dark')
 
-const path = computed(() => useRoute().path)
+const path = computed(() => location.origin + location.pathname)
 const emoji: WalineEmojiInfo[] = [
   {
     name: '贴吧',
