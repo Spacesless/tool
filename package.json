@@ -19,6 +19,7 @@
     "@element-plus/nuxt": "^1.1.0",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/google-adsense": "^3.0.0",
+    "@nuxtjs/sitemap": "^7.0.0",
     "@waline/client": "^3.4.1",
     "codemirror": "^6.0.1",
     "copy-to-clipboard": "^3.3.3",

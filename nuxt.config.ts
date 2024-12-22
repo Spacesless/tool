@@ -19,7 +19,11 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/eslint-module',
     '@nuxtjs/stylelint-module',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@nuxtjs/sitemap'
+  ],
+  plugins: [
+    { src: '~/plugins/baidu-analytics.js', mode: 'client' }
   ],
   eslint: {
     lintOnStart: false

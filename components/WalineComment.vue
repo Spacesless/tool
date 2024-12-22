@@ -74,6 +74,7 @@ onMounted(() => {
     path: path.value,
     search: false,
     imageUploader: false,
+    login: 'disable',
     dark: isDark.value,
     reaction: [
       'https://cos.timelessq.com/static/emojis/tieba/tieba_lovely.png',
