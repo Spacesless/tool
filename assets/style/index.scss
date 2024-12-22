@@ -65,6 +65,11 @@ html {
 .content {
   line-height: 1.7;
 
+  h2 {
+    font-weight: normal;
+    line-height: 2;
+  }
+
   p {
     color: var(--el-text-color-primary);
     font-size: 16px;
@@ -104,6 +109,14 @@ html {
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  pre {
+    padding: 12px;
+    color: var(--el-text-color-primary);
+    font-family: Hack, Monaco, Consolas, sans-serif;
+    background-color: var(--el-color-primary-light-9);
+    border-radius: 4px;
   }
 
   code {
