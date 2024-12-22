@@ -9,9 +9,11 @@
     </div>
 
     <div class="header-right">
-      <el-tooltip effect="dark" :content="isDark ? '白天模式' : '黑夜模式'" placement="bottom">
-        <Icon class="header-icon" :name="isDark ? 'ph:sun' : 'ph:moon'" @click="toggleColorMode" />
-      </el-tooltip>
+      <ClientOnly>
+        <el-tooltip effect="dark" :content="isDark ? '白天模式' : '黑夜模式'" placement="bottom">
+          <Icon class="header-icon" :name="isDark ? 'ph:sun' : 'ph:moon'" @click="toggleColorMode" />
+        </el-tooltip>
+      </ClientOnly>
     </div>
   </header>
 </template>
@@ -19,10 +21,17 @@
 <script lang="ts" setup>
 import GlobalSearch from './GlobalSearch.vue'
 
+const route = useRoute()
 const colorMode = useColorMode()
 const isCollapse = useState('collapse')
 
-const isDark = computed(() => colorMode.value === 'dark')
+onBeforeMount(() => {
+  if (route.query.theme) {
+    colorMode.preference = route.query.theme === 'dark' ? 'dark' : 'light'
+  }
+})
+
+const isDark = computed(() => colorMode.preference === 'dark')
 
 const toggleColorMode = () => {
   colorMode.preference = isDark.value ? 'light' : 'dark'

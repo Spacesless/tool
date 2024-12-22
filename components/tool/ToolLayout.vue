@@ -67,7 +67,9 @@
 const route = useRoute()
 const router = useRouter()
 const routes = router.getRoutes()
-const colorMode = useColorMode()
+
+const { iframe } = route.query || {}
+const isIframe = computed(() => iframe === 'true')
 
 const dialogVisible = ref(false)
 
@@ -80,25 +82,10 @@ useSeoMeta({
   description: route.meta.description?.replace('\n', '')
 })
 
-const isIframe = ref(false)
-
 const sameList = computed(() => {
   return {
     children: routes.filter(item => route.meta.same?.includes(item.name as string))
   }
-})
-
-onMounted(() => {
-  const { iframe, theme } = route.query || {}
-
-  if (iframe) {
-    setPageLayout(false)
-    isIframe.value = true
-  } else {
-    setPageLayout('default')
-  }
-
-  colorMode.preference = theme === 'dark' ? 'dark' : 'light'
 })
 </script>
 
