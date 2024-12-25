@@ -5,6 +5,7 @@ declare module 'vue-router' {
 	interface RouteMeta {
 		order: number;
     icon: string;
+    title: string;
     description?: string;
     same?: string[];
 	}

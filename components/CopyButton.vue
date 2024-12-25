@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import copy from 'copy-to-clipboard'
+import { ElNotification } from 'element-plus'
 import { CopyDocument, Check, Close } from '@element-plus/icons-vue'
 
 const props = defineProps({
@@ -18,15 +18,27 @@ const props = defineProps({
 const icon = shallowRef(CopyDocument)
 let timer: any = null
 
-const handleCopy = () => {
-  const isSuccess = copy(props.text, {
-    message: '请按#{key}复制'
-  })
-  icon.value = isSuccess ? Check : Close
+const { copied, copy } = useClipboard({ legacy: true })
+const handleCopy = async () => {
+  await copy(props.text)
 
-  clearTimeout(timer)
-  timer = setTimeout(() => {
-    icon.value = CopyDocument
-  }, 3000)
+  icon.value = copied ? Check : Close
+
+  if (copied) {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      icon.value = CopyDocument
+    }, 3000)
+    ElNotification({
+      title: '复制成功',
+      type: 'success'
+    })
+  } else {
+    ElNotification({
+      title: '复制失败',
+      message: '请手动复制吧',
+      type: 'error'
+    })
+  }
 }
 </script>

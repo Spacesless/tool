@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/stylelint-module',
     'nuxt-icon',
+    '@vueuse/nuxt',
     '@nuxtjs/sitemap'
   ],
   plugins: [

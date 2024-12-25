@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { ElNotification } from 'element-plus'
-import copy from 'copy-to-clipboard'
 import { getPosition, scrollTo } from '@/utils/scroll-to'
 
 const REFERENCE = 100
@@ -52,15 +51,17 @@ const backTop = () => {
   })
 }
 
-const handleCopy = () => {
-  copy(`${location.href}，${document.title}`, {
-    message: '请按#{key}复制'
-  })
-  ElNotification({
-    title: '复制成功',
-    message: '快拿这个工具去祸祸别人吧',
-    type: 'success'
-  })
+const { copied, copy } = useClipboard({ legacy: true })
+const handleCopy = async () => {
+  await copy(`${location.href}，${document.title}`)
+
+  if (copied) {
+    ElNotification({
+      title: '复制成功',
+      message: '快拿这个工具去祸祸别人吧',
+      type: 'success'
+    })
+  }
 }
 </script>
 
