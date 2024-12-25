@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import EncryptDecrypt from '@/components/tool/EncryptDecrypt.vue'
+import EncryptDecrypt from './components/-EncryptDecrypt.vue'
 
 definePageMeta({
   title: 'AES加密解密',

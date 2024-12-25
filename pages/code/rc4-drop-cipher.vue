@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import EncryptDecrypt from '@/components/tool/EncryptDecrypt.vue'
+import EncryptDecrypt from './components/-EncryptDecrypt.vue'
 
 definePageMeta({
   title: 'RC4Drop加密解密',

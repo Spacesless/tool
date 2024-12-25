@@ -4,7 +4,7 @@
   </ToolLayout>
 </template>
 <script setup lang="ts">
-import ConvertContent from '@/components/tool/ConvertContent.vue'
+import ConvertContent from './components/-ConvertContent.vue'
 
 definePageMeta({
   title: '压力换算',

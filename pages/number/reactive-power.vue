@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import ConvertContent from '@/components/tool/ConvertContent.vue'
+import ConvertContent from './components/-ConvertContent.vue'
 
 definePageMeta({
   title: '无功功率换算',
