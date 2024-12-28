@@ -52,38 +52,34 @@ definePageMeta({
   updateTime: '2024-10-29'
 })
 
-const author = ref('')
-const keyword = ref('')
-const tableData = ref<Record<string, string>[]>([])
-const pagination = reactive({
-  total: 0,
-  currentPage: 1,
-  pageSize: 20
-})
-
-const { fetchList } = useFetchData()
+const {
+  author,
+  keyword,
+  tableData,
+  pagination,
+  layout,
+  fetchList,
+  handleSearch,
+  handleCurrentChange
+} = useFetchData()
 
 onMounted(() => {
   fetchList()
 })
 
-const isMobile = useState('isMobile', () => false)
-const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
-
-function handleCurrentChange (val: number) {
-  pagination.currentPage = val
-
-  fetchList()
-}
-
-function handleSearch () {
-  pagination.currentPage = 1
-
-  fetchList()
-}
-
 function useFetchData () {
+  const author = ref('')
+  const keyword = ref('')
+  const tableData = ref<Record<string, string>[]>([])
+  const pagination = reactive({
+    total: 0,
+    currentPage: 1,
+    pageSize: 20
+  })
+
   const page = computed(() => pagination.currentPage)
+  const isMobile = useState('isMobile', () => false)
+  const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
 
   const { data, refresh } = useFetch<{ data: { count: number, data: {}[] } }>(
     'https://api.timelessq.com/poetry',
@@ -105,8 +101,27 @@ function useFetchData () {
     tableData.value = list || []
   }
 
+  function handleSearch () {
+    pagination.currentPage = 1
+
+    fetchList()
+  }
+
+  function handleCurrentChange (val: number) {
+    pagination.currentPage = val
+
+    fetchList()
+  }
+
   return {
-    fetchList
+    author,
+    keyword,
+    tableData,
+    pagination,
+    layout,
+    fetchList,
+    handleSearch,
+    handleCurrentChange
   }
 }
 </script>

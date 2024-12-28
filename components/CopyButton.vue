@@ -12,6 +12,10 @@ const props = defineProps({
   text: {
     type: String,
     default: ''
+  },
+  size: {
+    type: String,
+    default: 'default'
   }
 })
 

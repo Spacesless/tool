@@ -12,7 +12,7 @@
   </div>
 
   <section class="section content">
-    <blockquote>这是一个在线工具网站~</blockquote>
+    <blockquote>这是一个在线工具网站，到目前有 {{ toolCount }} 个工具啦~</blockquote>
     <h2 class="section__title">
       前言
     </h2>
@@ -95,5 +95,12 @@ definePageMeta({
 useSeoMeta({
   title: '关于本站',
   description: '一个安全免费无需登录的在线工具箱，数据全部在客户端处理。'
+})
+
+const router = useRouter()
+const routes = router.getRoutes()
+
+const toolCount = computed(() => {
+  return routes.filter(item => item.meta.description).length
 })
 </script>

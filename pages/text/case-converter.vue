@@ -19,8 +19,14 @@
             </el-form-item>
           </el-col>
           <el-col :sm="24" :md="12">
-            <el-form-item label="输出">
-              <el-input v-model="form.output" type="textarea" readonly :rows="12" />
+            <el-form-item>
+              <template #label>
+                <div class="flex">
+                  <span>输出</span>
+                  <CopyButton :text="form.output" />
+                </div>
+              </template>
+              <el-input v-model="form.output" class="textarea" type="textarea" readonly :rows="12" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -49,8 +55,10 @@ definePageMeta({
 })
 
 const options = reactive([
-  { value: 'camelize', label: '横线转驼峰' },
-  { value: 'hyphenate', label: '驼峰转横线' },
+  { value: 'camelize', label: '中划线转驼峰' },
+  { value: 'hyphenate', label: '驼峰转中划线' },
+  { value: 'underlineCamelize', label: '下划线转驼峰' },
+  { value: 'underlineHyphenate', label: '驼峰转下划线' },
   { value: 'uppercase', label: '大写' },
   { value: 'lowercase', label: '小写' }
 ])
@@ -67,17 +75,50 @@ onBeforeMount(() => {
 function handleFormat () {
   const { input, textCase } = form
   let output = ''
-  if (textCase === 'camelize' || textCase === 'hyphenate') {
-    const inputArr = input.split('\n')
-    const outputArr = inputArr.map((item) => {
-      return textCase === 'camelize' ? camelize(item) : hyphenate(item)
-    })
-    output = outputArr.join('\n')
-  } else if (textCase === 'uppercase') {
-    output = input.toLocaleUpperCase()
-  } else {
-    output = input.toLocaleLowerCase()
+  switch (textCase) {
+    case 'camelize':
+    case 'hyphenate': {
+      const inputArr = input.split('\n')
+      const outputArr = inputArr.map((item) => {
+        return textCase === 'camelize' ? camelize(item) : hyphenate(item)
+      })
+      output = outputArr.join('\n')
+      break
+    }
+    case 'underlineCamelize':
+    case 'underlineHyphenate': {
+      const inputArr = input.split('\n')
+      const outputArr = inputArr.map((item) => {
+        return textCase === 'underlineCamelize' ? camelize(item.replaceAll('_', '-')) : hyphenate(item).replaceAll('-', '_')
+      })
+      output = outputArr.join('\n')
+      break
+    }
+    case 'uppercase': {
+      output = input.toLocaleUpperCase()
+      break
+    }
+    default:
+      output = input.toLocaleLowerCase()
   }
   form.output = output
 }
 </script>
+
+<style lang="scss" scoped>
+:deep(.el-form-item__label) {
+  width: 100%;
+  height: 32px;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textarea :deep(.el-textarea__inner){
+  height: 268px;
+}
+</style>

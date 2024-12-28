@@ -127,7 +127,8 @@ import dayjs from 'dayjs'
 
 definePageMeta({
   title: '佛历',
-  description: '佛历是历法的一种；\n以释迦牟尼涅槃后一年为纪元元年。'
+  description: '佛历是历法的一种；\n以释迦牟尼涅槃后一年为纪元元年。',
+  updateTime: '2024-12-28'
 })
 
 const dateTime = ref(new Date())

@@ -36,6 +36,10 @@ html {
       color: var(--el-text-color-regular);
     }
   }
+
+  &-input {
+    width: 180px;
+  }
 }
 
 .banner {

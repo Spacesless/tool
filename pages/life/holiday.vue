@@ -49,7 +49,8 @@ import { HolidayUtil } from 'lunar-typescript'
 
 definePageMeta({
   title: '法定节假',
-  description: '法定假日指国家规定的放假和调休安排；\n来源于国务院办公厅发布的国办发明电文件。'
+  description: '法定假日指国家规定的放假和调休安排；\n来源于国务院办公厅发布的国办发明电文件。',
+  updateTime: '2024-12-28'
 })
 
 const year = ref(new Date())

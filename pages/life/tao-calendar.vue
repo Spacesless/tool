@@ -145,7 +145,8 @@ import dayjs from 'dayjs'
 
 definePageMeta({
   title: '道历',
-  description: '道历为道教专用的历纪；\n按我国夏历为准，用六十甲子以纪年。'
+  description: '道历为道教专用的历纪；\n按我国夏历为准，用六十甲子以纪年。',
+  updateTime: '2024-12-28'
 })
 
 const dateTime = ref(new Date())

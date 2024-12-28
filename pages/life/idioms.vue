@@ -1,14 +1,13 @@
 <template>
   <ToolLayout>
-    <section v-loading="pending" class="section">
+    <section class="section">
       <div class="section-header">
         <p class="section-header__label">
           请输入成语，按回车键搜索：
         </p>
-        <el-input v-model="keyword" clearable @change="handleSearch" />
+        <el-input v-model="keyword" clearable @keydown.enter="handleSearch" />
       </div>
-
-      <el-table :data="filterData" border :height="600">
+      <el-table v-loading="status === 'pending'" :data="tableData" border :height="600">
         <el-table-column prop="name" label="成语" width="120" />
         <el-table-column prop="jbsy" label="基本释义" min-width="200" />
         <el-table-column prop="jyc" label="近义词" min-width="200" />
@@ -34,42 +33,77 @@ definePageMeta({
   description: '根据成语查询详细信息，如：详解、同义词、反义词、读音等信息；\n目前总计约收录4.5万组成语。'
 })
 
-const { pending, data }: { pending: Ref<boolean>; data: Ref<any[]> } = await useFetch('/assets/json/idiom.json', {
-  lazy: true,
-  server: false
+type TableData = { name: string, jbsy: string, jyc: string, fyc: string }
+
+const {
+  keyword,
+  tableData,
+  pagination,
+  layout,
+  status,
+  fetchList,
+  handleSearch,
+  handleCurrentChange
+} = useFetchData()
+
+onMounted(() => {
+  fetchList()
 })
 
-type TableData = Array<{ name: string, jbsy: string, jyc: string, fyc: string }>
+function useFetchData () {
+  const keyword = ref('一心')
+  const tableData = ref<TableData[]>([])
+  const pagination = reactive({
+    total: 0,
+    currentPage: 1,
+    pageSize: 20
+  })
 
-const keyword = ref('一心')
-const tableData = ref<TableData>([])
-const pagination = reactive({
-  total: 0,
-  currentPage: 1,
-  pageSize: 20
-})
+  const isMobile = useState('isMobile', () => false)
+  const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
+  const page = computed(() => pagination.currentPage)
 
-const filterData = computed(() => {
-  const { currentPage, pageSize } = pagination
-  return tableData.value.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-})
-watch(() => pending.value, handleSearch)
+  const { data, status, refresh } = useFetch<{ data: { count: number, data: TableData[] } }>(
+    'https://api.timelessq.com/idiom',
+    {
+      query: {
+        wd: keyword,
+        page,
+        pageSize: pagination.pageSize
+      },
+      watch: false
+    }
+  )
 
-function handleSearch () {
-  if (keyword.value) {
-    tableData.value = data.value.filter(item => item.name.includes(keyword.value))
-  } else {
-    tableData.value = []
+  async function fetchList () {
+    await refresh()
+    const { count, data: list } = data.value?.data || {}
+
+    pagination.total = count || 0
+    tableData.value = list || []
   }
 
-  pagination.total = tableData.value.length
-  pagination.currentPage = 1
-}
+  function handleSearch () {
+    pagination.currentPage = 1
 
-function handleCurrentChange (val: number) {
-  pagination.currentPage = val
-}
+    fetchList()
+  }
 
-const isMobile = useState('isMobile', () => false)
-const layout = computed(() => isMobile.value ? 'total, ->,  prev, next, jumper' : 'total, ->, prev, pager, next, jumper')
+  function handleCurrentChange (val: number) {
+    pagination.currentPage = val
+
+    fetchList()
+  }
+
+  return {
+    keyword,
+    tableData,
+    pagination,
+    layout,
+    status,
+    fetchList,
+    handleSearch,
+    handleCurrentChange
+  }
+}
 </script>
