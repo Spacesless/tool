@@ -120,7 +120,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Search } from '@element-plus/icons-vue'
+import { Search, ArrowRightBold } from '@element-plus/icons-vue'
 import { sleep } from '@/utils'
 
 const router = useRouter()

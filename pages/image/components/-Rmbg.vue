@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers'
 import type { UploadFile } from 'element-plus'
 import { Close } from '@element-plus/icons-vue'
 import downloadFile from '@/utils/download'
@@ -35,7 +34,16 @@ const loading = ref(true)
 const loadingText = ref('加载模型中')
 const imageUrl = ref('')
 
-onMounted(() => {
+let AutoModel: any
+let AutoProcessor: any
+let RawImage: any
+
+onMounted(async () => {
+  const { AutoModel: ImportAutoModel, AutoProcessor: ImportAutoProcessor, env, RawImage: ImportRawImage } = await import('@xenova/transformers')
+  AutoModel = ImportAutoModel
+  AutoProcessor = ImportAutoProcessor
+  RawImage = ImportRawImage
+
   // Since we will download the model from the Hugging Face Hub, we can skip the local model check
   env.allowLocalModels = true
   const wasmPath = 'https://cos.timelessq.com/static/models/ort-wasm-simd.wasm'

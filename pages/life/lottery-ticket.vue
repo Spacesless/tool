@@ -76,6 +76,8 @@
 <script setup lang="ts">
 import random from 'xijs/src/random'
 
+type CodeItem = { code: string; key: number; color: string }
+
 definePageMeta({
   title: '彩票机选',
   description: '福利彩票、体育彩票机选工具。'
@@ -129,7 +131,7 @@ const typeOptions = reactive([
     ]
   }
 ])
-const result = ref([])
+const result = ref<CodeItem[][]>([])
 const copyText = computed(() => {
   return result.value.map(item => item.map(child => child.code).join('、')).join('\n')
 })
@@ -175,7 +177,7 @@ function createSSQ () {
   return Array.from({ length: formData.count }).map(() => {
     const red = randomNumber(33, 6, 'red')
     const blue = randomNumber(16, 1, 'blue')
-    return [...red.sort((a, b) => a.code - b.code), ...blue]
+    return [...sortArray(red), ...blue]
   })
 }
 
@@ -185,27 +187,37 @@ function createSSQ () {
  */
 function createKL8 () {
   return Array.from({ length: formData.count }).map(() => {
-    return randomNumber(80, 10, 'red').sort((a, b) => a.code - b.code)
+    return sortArray(randomNumber(80, 10, 'red'))
   })
 }
 
+/**
+ * 七乐彩
+ * @param 30选7
+ */
 function createQLC () {
   return Array.from({ length: formData.count }).map(() => {
-    return randomNumber(30, 7).sort((a, b) => a.code - b.code)
+    return sortArray(randomNumber(30, 7))
   })
 }
 
+/**
+ * 福彩3D
+ */
 function createFC3D () {
   return Array.from({ length: formData.count }).map(() => {
     return randomString(999)
   })
 }
 
+/**
+ * 大乐透
+ */
 function createDLT () {
   return Array.from({ length: formData.count }).map(() => {
     const red = randomNumber(35, 5, 'red')
     const blue = randomNumber(12, 2, 'blue')
-    return [...red.sort((a, b) => a.code - b.code), ...blue]
+    return [...sortArray(red), ...sortArray(blue)]
   })
 }
 
@@ -219,32 +231,36 @@ function createQXC () {
   return Array.from({ length: formData.count }).map(() => {
     const red = randomString(999999, 'red')
     const blue = randomNumber(14, 1, 'blue')
-    return [...red.sort((a, b) => a.code - b.code), ...blue]
+    return [...sortArray(red), ...blue]
   })
 }
 
-function randomNumber (end, count, color) {
-  const result = []
+function randomNumber (end: number, count: number, color = ''): CodeItem[] {
+  const result: any = []
   while (result.length < count) {
     const num = Math.floor(random(1, end))
     if (!result.includes(num)) {
       result.push(num)
     }
   }
-  return result.map(item => ({
+  return result.map((item: number) => ({
     code: item.toString().padStart(2, '0'),
     key: Math.random(),
     color
   }))
 }
 
-function randomString (end, color) {
+function randomString (end: number, color = ''): CodeItem[] {
   const num = Math.floor(random(0, end))
   return num.toString().padStart(end.toString().length, '0').split('').map(item => ({
     code: item,
     key: Math.random(),
     color
   }))
+}
+
+function sortArray (arr: CodeItem[]) {
+  return arr.sort((a, b) => +a.code - +b.code)
 }
 </script>
 

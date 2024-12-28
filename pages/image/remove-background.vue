@@ -1,6 +1,6 @@
 <template>
   <ToolLayout>
-    <ClientOnly>
+    <ClientOnly fallback-tag="span" fallback="Loading component...">
       <Rmbg />
     </ClientOnly>
 

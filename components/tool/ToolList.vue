@@ -89,7 +89,7 @@ const { calcFavorite, toggleFavorite } = useFavorite()
       font-weight: bold;
       font-size: 90px;
       font-family: zcool, sans-serif;
-      background: linear-gradient(to bottom, var(--el-color-info-light-5) 0%, var(--el-color-info-light-8) 100%);
+      background: linear-gradient(to bottom, var(--el-color-primary-light-5) 0%, var(--el-color-primary-light-9) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;

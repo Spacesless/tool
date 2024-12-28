@@ -2,47 +2,54 @@
   <ToolLayout>
     <section class="section">
       <div class="section-header">
-        <el-date-picker v-model="year" type="year" :clearable="false" />
+        <el-date-picker v-model="year" type="year" :clearable="false" :disabled-date="getDisabledDate" />
+        <div>
+          <el-button text :icon="ArrowLeft" :disabled="year.getFullYear() === START" @click="selectYear('prev')" />
+          <el-button text :icon="ArrowRight" :disabled="year.getFullYear() === END" @click="selectYear('next')" />
+        </div>
+        <span v-show="isNoThisYear" class="section-header__today" @click="selectYear('today')">今</span>
       </div>
-      <el-timeline>
-        <el-timeline-item v-for="item in holidays" :key="item.month">
-          <div class="holiday-month">
-            <p class="holiday-month__num">
-              {{ item.month }}
-            </p>
-            <div>
-              <p class="holiday-month__unit en">
-                {{ item.monthEn }}
-              </p>
-              <p class="holiday-month__unit">
-                月
-              </p>
-            </div>
-          </div>
-          <el-row :gutter="16">
-            <el-col v-for="child in item.children" :key="child.day" :md="12">
-              <div class="holiday-date">
-                <span class="holiday-date__name">{{ child.name }}</span>
-                <span class="holiday-date__day">[{{ child.day }} {{ child.cnDay }}]</span>
-                <span class="holiday-date__distance">
-                  {{ child.distance < 0 ? '已过' : '还有' }}<span class="bold">{{ Math.abs(child.distance) }}</span>天
-                </span>
-              </div>
-            </el-col>
-          </el-row>
-        </el-timeline-item>
-      </el-timeline>
+      <el-table :data="holidays" border>
+        <el-table-column prop="name" label="假期名称" width="120" />
+        <el-table-column prop="target" label="假期范围">
+          <template #default="{ row }">
+            {{ row.start }} ~ {{ row.end }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="length" label="假期长度" width="120">
+          <template #default="{ row }">
+            {{ getLength(row.start, row.end) }}天
+          </template>
+        </el-table-column>
+        <el-table-column prop="balance" label="假期余额" width="120">
+          <template #default="{ row }">
+            {{ getBalance(row.start, row.end) }}天
+          </template>
+        </el-table-column>
+        <el-table-column prop="distance" label="距离" width="120">
+          <template #default="{ row }">
+            {{ row.distance < 0 ? '已过' : '还有' }}<span>{{ Math.abs(row.distance) }}</span>天
+          </template>
+        </el-table-column>
+        <el-table-column prop="work" label="调休日期" />
+      </el-table>
     </section>
+
+    <template #content>
+      <p>法定假日指国家规定的放假和调休安排，来源于国务院办公厅发布的国办发明电文件。可前往<a href="http://www.gov.cn/zhengce/xxgk/index.htm" target="_blank" rel="noopener noreferrer">http://www.gov.cn/zhengce/xxgk/index.htm</a>搜索节假日查看。一般是每年11月底12月初发布来年的节假日安排。</p>
+      <p>目前支持从2001年12月29日到2025年12月31日的法定假日安排。</p>
+    </template>
   </ToolLayout>
 </template>
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import { Solar, SolarUtil } from 'lunar-typescript'
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+import { HolidayUtil } from 'lunar-typescript'
 
 definePageMeta({
-  title: '节日大全',
-  description: '每年的节日信息，当前日期和每个节日的间隔时长'
+  title: '法定节假',
+  description: '法定假日指国家规定的放假和调休安排；\n来源于国务院办公厅发布的国办发明电文件。'
 })
 
 const year = ref(new Date())
@@ -53,116 +60,102 @@ const holidays = computed(() => {
   return getHolidays(solarYear)
 })
 
-const nowTime = dayjs().startOf('day')
-function getHolidays (solarYear: number) {
-  const yearDays = SolarUtil.getDaysOfYear(solarYear)
+const START = 2002
+const END = 2025
+function getDisabledDate (date: Date) {
+  const fullYear = date.getFullYear()
+  return fullYear < START || fullYear > END
+}
 
-  const start = Solar.fromYmd(solarYear, 1, 1)
-  const holidayTree: Record<string, {
-    month: string;
-    monthEn: string;
-    children: {
-      day: string;
-      cnDay: string;
-      name: string;
-      distance: number;
-    }[]
-  }> = {}
+const isNoThisYear = computed(() => {
+  return year.value.getFullYear() !== new Date().getFullYear()
+})
+function selectYear (type: 'prev' | 'next' | 'today') {
+  const date = new Date(year.value)
 
-  for (let i = 0; i < yearDays; i++) {
-    const solarInstance = start.next(i)
-    const lunarInstance = solarInstance.getLunar()
-
-    const festivals = [
-      ...solarInstance.getFestivals(),
-      ...lunarInstance.getFestivals(),
-      ...solarInstance.getOtherFestivals(),
-      ...lunarInstance.getOtherFestivals()
-    ]
-
-    if (festivals.length > 0) {
-      const day = solarInstance.toString()
-      const dayjsInstance = dayjs(day)
-      const month = dayjsInstance.format('M')
-      const monthEn = dayjsInstance.format('MMM')
-
-      festivals.forEach((item) => {
-        const row = {
-          day: dayjsInstance.format('MM-DD'),
-          cnDay: `${lunarInstance.getMonthInChinese()}月${lunarInstance.getDayInChinese()}`,
-          name: item,
-          distance: dayjsInstance.diff(nowTime, 'd')
-        }
-
-        if (holidayTree[monthEn]) {
-          holidayTree[monthEn].children.push(row)
-        } else {
-          holidayTree[monthEn] = {
-            month,
-            monthEn,
-            children: [row]
-          }
-        }
-      })
-    }
+  if (type === 'prev') {
+    date.setFullYear(date.getFullYear() - 1)
+  } else if (type === 'next') {
+    date.setFullYear(date.getFullYear() + 1)
+  } else {
+    date.setFullYear(new Date().getFullYear())
   }
 
-  return Object.values(holidayTree)
+  year.value = date
+}
+
+function getHolidays (solarYear: number) {
+  const holidays = HolidayUtil.getHolidays(solarYear)
+  const result: Record<string, any> = {}
+
+  holidays.forEach((holiday) => {
+    const name = holiday.getName()
+    const target = holiday.getTarget()
+    const isWork = holiday.isWork()
+    const day = holiday.getDay()
+
+    result[name] = result[name] || {}
+
+    if (isWork) {
+      result[name].work = [...(result[name]?.work || []), day]
+    }
+
+    const distance = dayjs(target).diff(dayjs().startOf('day'), 'day')
+
+    if (!isWork && dayjs(target).year() === solarYear) {
+      result[name] = {
+        name,
+        start: result[name]?.start || day,
+        end: day,
+        distance
+      }
+    }
+  })
+
+  return Object.values(result)
+}
+
+function getLength (start: string, end: string) {
+  const startDay = dayjs(start)
+  const endDay = dayjs(end)
+
+  return endDay.diff(startDay, 'day') + 1
+}
+
+function getBalance (start: string, end: string) {
+  const startDay = dayjs(start)
+  const endDay = dayjs(end)
+  const today = dayjs()
+
+  if (today.isBefore(startDay)) {
+    return getLength(start, end)
+  }
+
+  if (today.isAfter(endDay)) {
+    return 0
+  }
+
+  return endDay.diff(today, 'day') + 1
 }
 </script>
 
 <style lang="scss" scoped>
-.holiday {
-  &-month {
+.section {
+  &-header {
     display: flex;
-    align-items: center;
-    font-family: var(--el-font-family);
-
-    &__num {
-      margin-right: 8px;
-      color: var(--el-text-color-primary);
-      font-size: 60px;
-    }
-
-    &__unit {
-      color: var(--el-text-color-regular);
-      font-size: 13px;
-
-      &.en {
-        color: var(--el-text-color-placeholder);
-        font-size: 30px;
-      }
-    }
-  }
-
-  &-date {
-    display: inline-flex;
     gap: 6px;
-    align-items: baseline;
-    padding-left: 60px;
-    font-size: 16px;
-    line-height: 1.7;
+    align-items: center;
 
-    @media (width < 768px) {
-      padding-left: 0;
-    }
-
-    &__name {
-      color: var(--el-text-color-primary);
-    }
-
-    &__day {
-      color: var(--el-text-color-secondary);
+    &__today {
+      width: 24px;
+      height: 24px;
+      color: #ffffff;
       font-size: 14px;
-    }
-
-    &__distance {
-      color: var(--el-text-color-regular);
-
-      .bold {
-        margin: 0 4px;
-        font-weight: bold;
-      }
+      line-height: 24px;
+      text-align: center;
+      background: var(--el-color-primary);
+      border-radius: var(--el-border-radius-base);
+      cursor: pointer;
     }
   }
 }
